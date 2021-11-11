@@ -1,0 +1,38 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  DebugServices.c
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  dnssd_clientlib.c
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientlib.c(182): warning C4028: formal parameter 1 different from declaration
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientlib.c(182): warning C4028: formal parameter 2 different from declaration
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientlib.c(182): warning C4028: formal parameter 3 different from declaration
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientlib.c(182): warning C4028: formal parameter 4 different from declaration
+  dnssd_clientstub.c
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(349): warning C4013: '_vscprintf' undefined; assuming extern returning int
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(351): warning C4013: 'vsprintf' undefined; assuming extern returning int
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(342): warning C4100: 'priority': unreferenced formal parameter
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(437): warning C4013: 'win32_strerror' undefined; assuming extern returning int
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(437): warning C4047: ':': 'int' differs in levels of indirection from 'char [1]'
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(463): warning C4047: ':': 'int' differs in levels of indirection from 'char [1]'
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(479): warning C4244: 'function': conversion from 'SOCKET' to 'int', possible loss of data
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(1060): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+  dnssd_ipc.c
+  GenLinkedList.c
+  dllmain.c
+e:\src\arduino\mdns-responder-master\mdnswindows\dll\dllmain.c(93): warning C4013: 'free' undefined; assuming extern returning int
+e:\src\arduino\mdns-responder-master\mdnswindows\dll\dllmain.c(98): warning C4013: 'malloc' undefined; assuming extern returning int
+e:\src\arduino\mdns-responder-master\mdnswindows\dll\dllmain.c(98): warning C4312: 'type cast': conversion from 'int' to 'ENUM_SERVICE_STATUS *' of greater size
+  Generating Code...
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(1130): warning C4701: potentially uninitialized local variable 'port' used
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(1824): warning C4701: potentially uninitialized local variable 'addr' used
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(1824): warning C4701: potentially uninitialized local variable 'internalPort' used
+e:\src\arduino\mdns-responder-master\mdnsshared\dnssd_clientstub.c(1824): warning C4701: potentially uninitialized local variable 'externalPort' used
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1202,5): warning MSB8012: TargetPath(E:\src\arduino\mdns-responder-master\mDNSWindows\DLL\x64\Release\DLL.dll) does not match the Linker's OutputFile property value (E:\src\arduino\mdns-responder-master\mDNSWindows\DLL\x64\Release\dnssd.dll). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(1204,5): warning MSB8012: TargetName(DLL) does not match the Linker's OutputFile property value (dnssd). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+     Creating library x64\Release\dnssd.lib and object x64\Release\dnssd.exp
+dnssd_clientstub.obj : error LNK2019: unresolved external symbol _vscprintf referenced in function syslog
+dnssd_clientstub.obj : error LNK2019: unresolved external symbol vsprintf referenced in function syslog
+x64\Release\dnssd.dll : fatal error LNK1120: 2 unresolved externals

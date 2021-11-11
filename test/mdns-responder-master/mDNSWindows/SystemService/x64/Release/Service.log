@@ -1,0 +1,115 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  uds_daemon.c
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1020): warning C4121: '<unnamed-tag>': alignment of a member was sensitive to packing
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1044): warning C4121: '<unnamed-tag>': alignment of a member was sensitive to packing
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1123): warning C4013: 'win32_strerror' undefined; assuming extern returning int
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1204): warning C4267: '=': conversion from 'size_t' to 'mDNSu32', possible loss of data
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1208): warning C4267: '=': conversion from 'size_t' to 'uint32_t', possible loss of data
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1320): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1321): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1323): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1324): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1325): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1326): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1327): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1328): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1446): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1748): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1773): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1796): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1797): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1798): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1799): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1800): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1862): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1863): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1864): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1865): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1909): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1965): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(1974): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2080): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2115): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2182): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2193): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2154): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2210): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2211): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2216): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2217): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2218): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2219): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2235): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2240): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2630): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2631): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2632): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2714): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2715): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2719): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2720): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2852): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2853): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2858): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2859): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(2860): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3019): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3020): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3024): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3025): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3026): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3165): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3169): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3235): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3237): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3254): warning C4245: 'function': conversion from 'int' to 'mDNSu32', signed/unsigned mismatch
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3256): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3261): warning C4204: nonstandard extension used: non-constant aggregate initializer
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3284): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3336): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3337): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3339): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3349): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3374): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3339): warning C4244: 'initializing': conversion from 'uint32_t' to 'mDNSu8', possible loss of data
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3408): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3409): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3414): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3419): warning C4366: The result of the unary '&' operator may be unaligned
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3691): warning C4057: 'function': 'u_long *' differs in indirection to slightly different base types from 'int *'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3688): warning C4102: 'got_errfd': unreferenced label
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3725): warning C4189: 'opt': local variable is initialized but not referenced
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3876): warning C4090: 'function': different 'const' qualifiers
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3954): error C2059: syntax error: '['
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3957): error C2065: 'fp': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3957): warning C4047: '!=': 'int' differs in levels of indirection from 'void *'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3959): error C2065: 'fp': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3959): warning C4047: 'function': 'FILE *const ' differs in levels of indirection from 'int'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3959): warning C4024: 'fprintf': different types for formal and actual parameter 1
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3960): error C2065: 'fp': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3960): warning C4047: 'function': 'FILE *' differs in levels of indirection from 'int'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3960): warning C4024: 'fclose': different types for formal and actual parameter 1
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3964): error C2059: syntax error: 'if'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(3970): error C2059: syntax error: 'else'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4043): error C2143: syntax error: missing ')' before '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4043): error C2143: syntax error: missing '{' before '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4043): error C2059: syntax error: '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4044): error C2059: syntax error: ')'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4047): error C2143: syntax error: missing ')' before '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4047): error C2143: syntax error: missing '{' before '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4047): error C2059: syntax error: '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4048): error C2143: syntax error: missing ')' before '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4048): error C2143: syntax error: missing '{' before '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4048): error C2059: syntax error: '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4049): error C2143: syntax error: missing ')' before 'constant'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4049): error C2143: syntax error: missing '{' before 'constant'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4049): error C2059: syntax error: 'constant'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4051): error C2143: syntax error: missing ')' before '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4051): error C2143: syntax error: missing '{' before '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4051): error C2059: syntax error: '&'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4051): error C2059: syntax error: ')'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4052): error C2059: syntax error: 'return'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4054): error C2143: syntax error: missing '{' before ':'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4054): error C2059: syntax error: ':'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4057): error C2059: syntax error: 'return'
+e:\src\arduino\mdns-responder-master\mdnsshared\uds_daemon.c(4058): error C2059: syntax error: '}'

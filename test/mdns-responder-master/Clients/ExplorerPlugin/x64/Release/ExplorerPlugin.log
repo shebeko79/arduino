@@ -1,0 +1,364 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  DebugServices.c
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  loclibrary.c
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  Generating Code...
+  WinServices.cpp
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C2146: syntax error: missing ';' before identifier 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2065: 'uint32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2146: syntax error: missing ')' before identifier 'inLeft'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C2146: syntax error: missing ';' before identifier 'UTF8StringToStringObject'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C2146: syntax error: missing ';' before identifier 'StringObjectToUTF8String'
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C2146: syntax error: missing ';' before identifier 'DebugOutputType'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(40): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(40): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(40): error C2146: syntax error: missing ';' before identifier 'UTF8StringToStringObject'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(41): error C2143: syntax error: missing ';' before '{'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(41): error C2447: '{': missing function header (old-style formal list?)
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(89): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(89): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(89): error C2146: syntax error: missing ';' before identifier 'StringObjectToUTF8String'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(90): error C2143: syntax error: missing ';' before '{'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(90): error C2447: '{': missing function header (old-style formal list?)
+  About.cpp
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C2146: syntax error: missing ';' before identifier 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2065: 'uint32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2146: syntax error: missing ')' before identifier 'inLeft'
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C2146: syntax error: missing ';' before identifier 'DebugOutputType'
+  ClassFactory.cpp
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C2146: syntax error: missing ';' before identifier 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2065: 'uint32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2146: syntax error: missing ')' before identifier 'inLeft'
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C2146: syntax error: missing ';' before identifier 'DebugOutputType'
+e:\src\arduino\mdns-responder-master\mdnsshared\dns_sd.h(123): error C2371: 'uint32_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): note: see declaration of 'uint32_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(23): error C2371: 'uint32_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): note: see declaration of 'uint32_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(117): warning C4005: 'INT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(817): note: see previous definition of 'INT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(118): warning C4005: 'INT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(821): note: see previous definition of 'INT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(119): warning C4005: 'INT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(825): note: see previous definition of 'INT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(120): warning C4005: 'INT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(830): note: see previous definition of 'INT64_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(122): warning C4005: 'UINT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(837): note: see previous definition of 'UINT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(123): warning C4005: 'UINT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(841): note: see previous definition of 'UINT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(124): warning C4005: 'UINT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(845): note: see previous definition of 'UINT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(125): warning C4005: 'UINT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(850): note: see previous definition of 'UINT64_C'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(152): error C3646: 'SetData': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(152): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(153): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C3646: 'StartResolve': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C2238: unexpected token(s) preceding ';'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C3646: 'SetupWindow': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C2238: unexpected token(s) preceding ';'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C3646: 'GoToURL': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C2238: unexpected token(s) preceding ';'
+  ExplorerBar.cpp
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C2146: syntax error: missing ';' before identifier 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2065: 'uint32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2146: syntax error: missing ')' before identifier 'inLeft'
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C2146: syntax error: missing ';' before identifier 'DebugOutputType'
+e:\src\arduino\mdns-responder-master\mdnsshared\dns_sd.h(123): error C2371: 'uint32_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): note: see declaration of 'uint32_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(23): error C2371: 'uint32_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): note: see declaration of 'uint32_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(117): warning C4005: 'INT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(817): note: see previous definition of 'INT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(118): warning C4005: 'INT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(821): note: see previous definition of 'INT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(119): warning C4005: 'INT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(825): note: see previous definition of 'INT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(120): warning C4005: 'INT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(830): note: see previous definition of 'INT64_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(122): warning C4005: 'UINT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(837): note: see previous definition of 'UINT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(123): warning C4005: 'UINT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(841): note: see previous definition of 'UINT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(124): warning C4005: 'UINT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(845): note: see previous definition of 'UINT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(125): warning C4005: 'UINT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(850): note: see previous definition of 'UINT64_C'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(152): error C3646: 'SetData': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(152): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(153): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C3646: 'StartResolve': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C2238: unexpected token(s) preceding ';'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C3646: 'SetupWindow': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C2238: unexpected token(s) preceding ';'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C3646: 'GoToURL': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C2238: unexpected token(s) preceding ';'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(452): error C3861: 'SetupWindow': identifier not found
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(637): error C2039: 'SetupWindow': is not a member of 'ExplorerBar'
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(50): note: see declaration of 'ExplorerBar'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(637): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(637): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(637): error C2146: syntax error: missing ';' before identifier 'SetupWindow'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(638): error C2143: syntax error: missing ';' before '{'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(638): error C2447: '{': missing function header (old-style formal list?)
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(666): error C2039: 'GoToURL': is not a member of 'ExplorerBar'
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(50): note: see declaration of 'ExplorerBar'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(666): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(666): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(666): error C2146: syntax error: missing ';' before identifier 'GoToURL'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(667): error C2143: syntax error: missing ';' before '{'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.cpp(667): error C2447: '{': missing function header (old-style formal list?)
+  ExplorerBarWindow.cpp
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C2146: syntax error: missing ';' before identifier 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2065: 'uint32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2146: syntax error: missing ')' before identifier 'inLeft'
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C2146: syntax error: missing ';' before identifier 'DebugOutputType'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C2146: syntax error: missing ';' before identifier 'UTF8StringToStringObject'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C2146: syntax error: missing ';' before identifier 'StringObjectToUTF8String'
+e:\src\arduino\mdns-responder-master\mdnsshared\dns_sd.h(123): error C2371: 'uint32_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): note: see declaration of 'uint32_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(23): error C2371: 'uint32_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): note: see declaration of 'uint32_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(117): warning C4005: 'INT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(817): note: see previous definition of 'INT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(118): warning C4005: 'INT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(821): note: see previous definition of 'INT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(119): warning C4005: 'INT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(825): note: see previous definition of 'INT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(120): warning C4005: 'INT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(830): note: see previous definition of 'INT64_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(122): warning C4005: 'UINT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(837): note: see previous definition of 'UINT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(123): warning C4005: 'UINT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(841): note: see previous definition of 'UINT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(124): warning C4005: 'UINT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(845): note: see previous definition of 'UINT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(125): warning C4005: 'UINT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(850): note: see previous definition of 'UINT64_C'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(152): error C3646: 'SetData': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(152): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(153): error C2334: unexpected token(s) preceding '{'; skipping apparent function body
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C3646: 'StartResolve': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(268): error C2238: unexpected token(s) preceding ';'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C3646: 'SetupWindow': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(120): error C2238: unexpected token(s) preceding ';'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C3646: 'GoToURL': unknown override specifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C2059: syntax error: '('
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(121): error C2238: unexpected token(s) preceding ';'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(223): error C2146: syntax error: missing ';' before identifier 'err'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(223): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(228): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(229): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(251): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(252): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(254): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(255): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(276): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(278): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(290): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(293): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(352): error C2146: syntax error: missing ';' before identifier 'err'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(352): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(368): error C2039: 'GoToURL': is not a member of 'ExplorerBar'
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(50): note: see declaration of 'ExplorerBar'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(375): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(375): error C3861: 'StartResolve': identifier not found
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(376): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(454): error C2146: syntax error: missing ';' before identifier 'err'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(454): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(474): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(476): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(476): error C3861: 'UTF8StringToStringObject': identifier not found
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(480): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(483): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(486): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(607): error C2039: 'StartResolve': is not a member of 'ExplorerBarWindow'
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(226): note: see declaration of 'ExplorerBarWindow'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(607): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(607): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(607): error C2146: syntax error: missing ';' before identifier 'StartResolve'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(608): error C2143: syntax error: missing ';' before '{'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(608): error C2447: '{': missing function header (old-style formal list?)
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(663): error C2146: syntax error: missing ';' before identifier 'err'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(663): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(690): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(692): error C3861: 'UTF8StringToStringObject': identifier not found
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(710): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(710): error C2039: 'SetData': is not a member of 'TextRecord'
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.h(122): note: see declaration of 'TextRecord'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(783): warning C4840: non-portable use of class 'ATL::CStringT<wchar_t,StrTraitMFC<wchar_t,ATL::ChTraitsCRT<wchar_t>>>' as an argument to a variadic function
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(783): note: 'ATL::CStringT<wchar_t,StrTraitMFC<wchar_t,ATL::ChTraitsCRT<wchar_t>>>::CStringT' is non-trivial
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\cstringt.h(1026): note: see declaration of 'ATL::CStringT<wchar_t,StrTraitMFC<wchar_t,ATL::ChTraitsCRT<wchar_t>>>::CStringT'
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(783): note: the constructor and destructor will not be called; a bitwise copy of the class will be passed as the argument
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxstr.h(103): note: see declaration of 'ATL::CStringT<wchar_t,StrTraitMFC<wchar_t,ATL::ChTraitsCRT<wchar_t>>>'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(786): warning C4840: non-portable use of class 'ATL::CStringT<wchar_t,StrTraitMFC<wchar_t,ATL::ChTraitsCRT<wchar_t>>>' as an argument to a variadic function
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(786): note: 'ATL::CStringT<wchar_t,StrTraitMFC<wchar_t,ATL::ChTraitsCRT<wchar_t>>>::CStringT' is non-trivial
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\cstringt.h(1026): note: see declaration of 'ATL::CStringT<wchar_t,StrTraitMFC<wchar_t,ATL::ChTraitsCRT<wchar_t>>>::CStringT'
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(786): note: the constructor and destructor will not be called; a bitwise copy of the class will be passed as the argument
+  c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxstr.h(103): note: see declaration of 'ATL::CStringT<wchar_t,StrTraitMFC<wchar_t,ATL::ChTraitsCRT<wchar_t>>>'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbarwindow.cpp(799): error C2039: 'GoToURL': is not a member of 'ExplorerBar'
+  e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerbar.h(50): note: see declaration of 'ExplorerBar'
+  ExplorerPlugin.cpp
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C2146: syntax error: missing ';' before identifier 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2065: 'uint32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2146: syntax error: missing ')' before identifier 'inLeft'
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C2146: syntax error: missing ';' before identifier 'DebugOutputType'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(99): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(99): error C2370: 'OSStatus': redefinition; different storage class
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(99): error C2146: syntax error: missing ';' before identifier 'RegisterServer'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(100): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(100): error C2370: 'OSStatus': redefinition; different storage class
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(100): error C2146: syntax error: missing ';' before identifier 'RegisterCOMCategory'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(101): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(101): error C2370: 'OSStatus': redefinition; different storage class
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(101): error C2146: syntax error: missing ';' before identifier 'UnregisterServer'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(102): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(102): error C2370: 'OSStatus': redefinition; different storage class
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(102): error C2146: syntax error: missing ';' before identifier 'MyRegDeleteKey'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(175): error C2146: syntax error: missing ';' before identifier 'err'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(175): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(188): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(189): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(189): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(189): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(189): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(193): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(193): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(193): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(193): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(198): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(199): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(199): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(199): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(199): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(203): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(203): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(203): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(203): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(294): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(294): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(294): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(297): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(297): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(297): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(303): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(303): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(303): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(323): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(323): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(323): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(326): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(326): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(326): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(342): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(342): error C2370: 'OSStatus': redefinition; different storage class
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(342): error C2146: syntax error: missing ';' before identifier 'RegisterServer'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(343): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(353): error C2146: syntax error: missing ';' before identifier 'err'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(353): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(374): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(375): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(375): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(375): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(375): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(376): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(391): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(391): error C2146: syntax error: missing ')' before identifier 'GetLastError'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(392): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(392): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(392): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(392): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(398): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(399): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(399): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(399): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(399): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(402): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(404): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(404): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(404): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(404): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(414): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(415): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(415): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(415): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(415): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(419): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(425): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(426): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(426): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(426): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(426): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(471): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(410): warning C4996: 'GetVersionExW': was declared deprecated
+  c:\program files (x86)\windows kits\8.1\include\um\sysinfoapi.h(442): note: see declaration of 'GetVersionExW'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(478): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(478): error C2370: 'OSStatus': redefinition; different storage class
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(478): error C2146: syntax error: missing ';' before identifier 'RegisterCOMCategory'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(479): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(513): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(513): error C2370: 'OSStatus': redefinition; different storage class
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(513): error C2146: syntax error: missing ';' before identifier 'UnregisterServer'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(514): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(515): error C2146: syntax error: missing ';' before identifier 'err'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(515): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(524): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(525): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(525): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(525): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(525): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(526): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(548): error C2065: 'err': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(549): error C2065: 'int_least32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(549): error C2146: syntax error: missing ';' before identifier 'localErr'
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(549): error C2065: 'localErr': undeclared identifier
+e:\src\arduino\mdns-responder-master\clients\explorerplugin\explorerplugin.cpp(549): fatal error C1003: error count exceeds 100; stopping compilation
+  LoginDialog.cpp
+  StdAfx.cpp
+  Generating Code...

@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{7898121b-48eb-4a8e-9352-fbf2ae684e24}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{f27caa34-67d1-4ee4-90cd-cb3e66a8f6d7}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{a3e95d6a-f9dd-42c3-ad3c-3747a96c68d4}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;jpg;jpeg;jpe;manifest</Extensions>
+    </Filter>
+    <Filter Include="Support">
+      <UniqueIdentifier>{50e63a51-08e0-4ff5-b0a7-3af810d4ceae}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="About.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FirstPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FourthPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PrinterSetupWizardApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PrinterSetupWizardSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ThirdPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mDNSShared\DebugServices.c">
+      <Filter>Support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mDNSWindows\loclibrary.c">
+      <Filter>Support</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Support</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\mDNSWindows\WinServices.cpp">
+      <Filter>Support</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="About.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FirstPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FourthPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrinterSetupWizardApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrinterSetupWizardSheet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource_exe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdPage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mDNSShared\CommonServices.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mDNSShared\DebugServices.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mDNSShared\dns_sd.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mDNSWindows\isocode.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mDNSWindows\loclibrary.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\mDNSWindows\WinServices.h">
+      <Filter>Support</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\about.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\banner_icon.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Info.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\NetworkPrinter.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\Print.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\watermark.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PrinterSetupWizard.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\PrinterSetupWizard.manifest">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

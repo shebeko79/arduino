@@ -1,0 +1,59 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  DebugServices.c
+  Secret.c
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  Generating Code...
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  WinServices.cpp
+  _WIN32_WINNT not defined. Defaulting to _WIN32_WINNT_MAXVER (see WinSDKVer.h)
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): error C2146: syntax error: missing ';' before identifier 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2065: 'uint32_t': undeclared identifier
+e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1226): error C2146: syntax error: missing ')' before identifier 'inLeft'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(47): error C2146: syntax error: missing ';' before identifier 'UTF8StringToStringObject'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.h(48): error C2146: syntax error: missing ';' before identifier 'StringObjectToUTF8String'
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnsshared\debugservices.h(188): error C2146: syntax error: missing ';' before identifier 'DebugOutputType'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(40): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(40): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(40): error C2146: syntax error: missing ';' before identifier 'UTF8StringToStringObject'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(41): error C2143: syntax error: missing ';' before '{'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(41): error C2447: '{': missing function header (old-style formal list?)
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(89): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(89): error C2086: 'int OSStatus': redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(1044): note: see declaration of 'OSStatus'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(89): error C2146: syntax error: missing ';' before identifier 'StringObjectToUTF8String'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(90): error C2143: syntax error: missing ';' before '{'
+e:\src\arduino\mdns-responder-master\mdnswindows\winservices.cpp(90): error C2447: '{': missing function header (old-style formal list?)
+  ConfigDialog.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  ConfigPropertySheet.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  ControlPanel.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  FirstPage.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  FourthPage.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  SecondPage.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  SharedSecret.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  stdafx.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  ThirdPage.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\atlmfc\include\afxv_w32.h(40): fatal error C1189: #error:  MFC does not support WINVER less than 0x0501.  Please change the definition of WINVER in your project properties or precompiled header.
+  Generating Code...

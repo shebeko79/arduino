@@ -1,0 +1,97 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  64 bit Processing .\DLLX.idl
+  DLLX.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\oaidl.idl
+  oaidl.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\objidl.idl
+  objidl.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\unknwn.idl
+  unknwn.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\shared\wtypes.idl
+  wtypes.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\shared\wtypesbase.idl
+  wtypesbase.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\shared\basetsd.h
+  basetsd.h
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\shared\guiddef.h
+  guiddef.h
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\ocidl.idl
+  ocidl.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\oleidl.idl
+  oleidl.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\servprov.idl
+  servprov.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\urlmon.idl
+  urlmon.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\msxml.idl
+  msxml.idl
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\oaidl.acf
+  oaidl.acf
+  64 bit Processing C:\Program Files (x86)\Windows Kits\8.1\Include\um\ocidl.acf
+  ocidl.acf
+  DebugServices.c
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  dlldatax.c
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  DLLX_i.c
+  Generating Code...
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  DLLX.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Common.props(144,5): warning MSB4211: The property "WindowsTargetPlatformVersion" is being set to a value for the first time, but it was already consumed at "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.WindowsSDK.props (29,5)".
+  DNSSDEventManager.cpp
+  DNSSDRecord.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(36): error C2371: 'int_fast16_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(798): note: see declaration of 'int_fast16_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(40): error C2371: 'uint_fast16_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(803): note: see declaration of 'uint_fast16_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(48): warning C4005: 'INT8_MIN': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(767): note: see previous definition of 'INT8_MIN'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(117): warning C4005: 'INT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(817): note: see previous definition of 'INT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(118): warning C4005: 'INT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(821): note: see previous definition of 'INT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(119): warning C4005: 'INT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(825): note: see previous definition of 'INT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(120): warning C4005: 'INT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(830): note: see previous definition of 'INT64_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(122): warning C4005: 'UINT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(837): note: see previous definition of 'UINT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(123): warning C4005: 'UINT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(841): note: see previous definition of 'UINT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(124): warning C4005: 'UINT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(845): note: see previous definition of 'UINT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(125): warning C4005: 'UINT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(850): note: see previous definition of 'UINT64_C'
+  DNSSDService.cpp
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(36): error C2371: 'int_fast16_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(798): note: see declaration of 'int_fast16_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(40): error C2371: 'uint_fast16_t': redefinition; different basic types
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(803): note: see declaration of 'uint_fast16_t'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(48): warning C4005: 'INT8_MIN': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(767): note: see previous definition of 'INT8_MIN'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(117): warning C4005: 'INT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(817): note: see previous definition of 'INT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(118): warning C4005: 'INT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(821): note: see previous definition of 'INT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(119): warning C4005: 'INT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(825): note: see previous definition of 'INT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(120): warning C4005: 'INT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(830): note: see previous definition of 'INT64_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(122): warning C4005: 'UINT8_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(837): note: see previous definition of 'UINT8_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(123): warning C4005: 'UINT16_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(841): note: see previous definition of 'UINT16_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(124): warning C4005: 'UINT32_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(845): note: see previous definition of 'UINT32_C'
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.13.26128\include\stdint.h(125): warning C4005: 'UINT64_C': macro redefinition
+  e:\src\arduino\mdns-responder-master\mdnsshared\commonservices.h(850): note: see previous definition of 'UINT64_C'
+  StringServices.cpp
+  TXTRecord.cpp
+  Generating Code...
