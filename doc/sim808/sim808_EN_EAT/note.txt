@@ -1,0 +1,7 @@
+note:
+1.please follow the user guide:SIMCom_SIM800H_EAT_RVCT_Installation_User Manual_V1.01.pdf which is in foler environment_RVCT to install the environment of sim800H EAT.
+2.please install the usb driver before you upgrading the firmware.
+3.simcom provide detail EAT function description and demo code(uart,gpio,adc,spi,audio,flash,fs,iic,interrupt,key,system,timer)for customer which are in the path: EAT code\SIM800H_EAT_app_131108\demo and  EAT code\SIM800H_EAT_app_140114\Doc 
+4.before you compile the you EAT code, please follow the document:SIMCom_SIM800H_EAT_User Manual_V1.01.pdf to config user.mak file and makefile file.
+
+5. the application note for embedded AT function description is in the path: sim800H_EN_EAT\EAT code\SIM800H_EAT_app_140516\Doc
