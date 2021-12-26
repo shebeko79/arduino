@@ -85,7 +85,7 @@ String receiveTelegramAnswer()
   return ret;
 }
 
-void sendTelegramMessage(String message)
+void sendTelegramMessage(String message,bool silent = false)
 {
   if(!client.connected())
 	client.setCACert(rootCACertificate);
@@ -97,10 +97,18 @@ void sendTelegramMessage(String message)
   }
 
   message = urlencode(message);
-
-  client.print(String("GET /" TELEGRAM_BOT "/sendMessage?chat_id=-1001249602233&text=") + message +" HTTP/1.1\r\n" +
-               "Host: " + telegramHost + "\r\n" +
-               "Connection: close\r\n\r\n");
+  
+  String clStr = "GET /" TELEGRAM_BOT "/sendMessage?chat_id=-1001249602233&text=";
+  clStr += message;
+  
+  if(silent)
+	  clStr +=String("&disable_notification=true");
+  
+  clStr += String(" HTTP/1.1\r\n")+
+           "Host: " + telegramHost + "\r\n"
+           "Connection: close\r\n\r\n";
+		   
+  client.print(clStr);
 }
 
 

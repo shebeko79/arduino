@@ -76,17 +76,15 @@ void setup()
 
   currentSample = 0;
 
-  WiFi.mode(WIFI_STA);
-
-  syncTime();
-  sendSensorNotification("power_on");
-  commandUpdate();
-
-
   tempSensor.begin();
 
+  syncTime();
+  
   startTime = time(nullptr);
   lastLightTick = startTime;
+
+  sendState("power_on",false,true);
+  commandUpdate();
 }
 
 void offEngine()
@@ -180,12 +178,18 @@ void checkDoorLoop()
     if(doorIsOpened)
     {
       if(light<=closeLight)
+      {
         closeDoor();
+        sendState("doorclose",false,true);
+      }
     }
     else
     {
       if(light>=openLight)
+      {
         openDoor();
+        sendState("dooropen",false,true);
+      }
     }
   }
 
@@ -193,13 +197,19 @@ void checkDoorLoop()
   {
     if(door2IsOpened)
     {
-      if(light<=closeLight && temp < door2CloseTemp)
+      if(light<=closeLight/* && temp < door2CloseTemp*/)
+      {
         closeDoor2();
+        sendState("door2close",false,true);
+      }
     }
     else
     {
       if(light>=openLight)
+      {
         openDoor2();
+        sendState("door2open",false,true);
+      }
     }
   }
 }
@@ -218,60 +228,70 @@ void loop()
     Serial.print("updateFailsCount=");
     Serial.println(updateFailsCount);
     wifiOff();
-    delay(500);
+    delay(1000);
   }
 }  
 
-void sendAccept(const String& cmd)
+void sendState(const String& stateString,bool isAccept, bool isSilent)
 {
     tempSensor.requestTemperatures();
     double temp = tempSensor.getTempCByIndex(0);
 
     int light = calcAvgLight();
 
-    sendSensorNotification("accept:"+cmd+":temp="+String(temp)+" light="+String(light)
-           +" doorIsOpened="+doorIsOpened+" doorIsAuto=" +doorIsAuto
-           +" door2IsOpened="+door2IsOpened+" door2IsAuto=" +door2IsAuto);
+    String str;
+    if(isAccept)
+      str = "accept:";
+
+    str+=stateString
+     +":temp="+String(temp)+" light="+String(light)
+     +String(" doorIsOpened=")+doorIsOpened+" doorIsAuto=" +doorIsAuto
+     +" door2IsOpened="+door2IsOpened+" door2IsAuto=" +door2IsAuto
+     +" wiFiFails=" +String(updateFailsCount);
+    
+    sendSensorNotification(str,0, isSilent);
 }
 
 void processOtherCommand(const String& cmd)
 {
+  const bool isSilent = true;
+  
   if(cmd == "state")
   {
-    sendAccept(cmd);
+    sendState(cmd,true,isSilent);
   }
   else if(cmd == "dooropen")
   {
     doorIsAuto = false;
     openDoor();
-    sendAccept(cmd);
+    sendState(cmd,true,isSilent);
   }
   else if(cmd == "doorclose")
   {
     doorIsAuto = false;
     closeDoor();
-    sendAccept(cmd);
+    sendState(cmd,true,isSilent);
   }
   else if(cmd == "doorauto")
   {
     doorIsAuto = true;
-    sendAccept(cmd);
+    sendState(cmd,true,isSilent);
   }
   else if(cmd == "door2open")
   {
     door2IsAuto = false;
     openDoor2();
-    sendAccept(cmd);
+    sendState(cmd,true,isSilent);
   }
   else if(cmd == "door2close")
   {
     door2IsAuto = false;
     closeDoor2();
-    sendAccept(cmd);
+    sendState(cmd,true,isSilent);
   }
   else if(cmd == "door2auto")
   {
     door2IsAuto = true;
-    sendAccept(cmd);
+    sendState(cmd,true,isSilent);
   }
 }

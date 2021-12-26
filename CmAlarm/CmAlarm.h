@@ -35,8 +35,6 @@ bool wifiOn()
   if(WiFi.getMode() == WIFI_STA && WiFi.isConnected())
 	  return true;
   
-  WiFi.mode(WIFI_STA);
-  
   addWifiPoints();
 
   for(int i = 0; i<50 && WiFiMulti.run() != WL_CONNECTED ; i++)
@@ -66,8 +64,7 @@ void wifiOff()
   if(WiFi.getMode() == WIFI_OFF)
 	  return;
   
-  WiFi.disconnect();
-  WiFi.mode(WIFI_OFF);
+  WiFi.disconnect(true,true);
   for(int i = 0; i<50 && WiFi.status() != WL_DISCONNECTED ; i++)
   {
     delay(500);
@@ -120,7 +117,7 @@ String time2string(time_t t)
 }
 
 
-void sendSensorNotification(const String& message,time_t t = 0)
+void sendSensorNotification(const String& message,time_t t = 0, bool silent = false)
 {
 	if(!wifiOn())
 	  return;
@@ -130,22 +127,22 @@ void sendSensorNotification(const String& message,time_t t = 0)
 	
 	String s = String(alarm_name)+":"+time2string(t)+":"+message;
 	Serial.println(s);
-	sendTelegramMessage(s);
+	sendTelegramMessage(s, silent);
 	
 	String answer = receiveTelegramAnswer();
 	Serial.println(answer);
 }
 
-void sendSensorNotificationIfEnabled(const String& message,time_t t = 0)
+void sendSensorNotificationIfEnabled(const String& message,time_t t = 0, bool silent = false)
 {
 	if(notificationIsOn)
-		sendSensorNotification(message,t);
+		sendSensorNotification(message,t,silent);
 }
 
 
-void sendCommandAccept(const String& cmd)
+void sendCommandAccept(const String& cmd,bool isSilent)
 {
-	sendSensorNotification("accept:"+cmd);
+	sendSensorNotification("accept:"+cmd,0, isSilent);
 }
 
 void processOtherCommand(const String& cmd);
@@ -159,13 +156,13 @@ void processCommand(const String& cmd)
 	{
 		notificationIsOn = true;
 		writeEEPROMConfig();
-		sendCommandAccept(cmd);
+		sendCommandAccept(cmd,false);
 	}
 	else if(cmd == "off")
 	{
 		notificationIsOn = false;
 		writeEEPROMConfig();
-		sendCommandAccept(cmd);
+		sendCommandAccept(cmd,false);
 	}
 	else 
 		processOtherCommand(cmd);
