@@ -3,7 +3,7 @@
 #include <DallasTemperature.h>
 
 
-OneWire oneWire(D2);
+OneWire oneWire(18);
 DallasTemperature sensors(&oneWire);
 
 void setup(void)
