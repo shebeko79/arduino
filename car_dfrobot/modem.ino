@@ -51,8 +51,8 @@ void modemSendCommand(const char* command, bool show_debug)
 {
   modemSkipGarbidge();
 
-  if(show_debug)
-    Debug.println(command);
+//  if(show_debug)
+//    Debug.println(command);
 
   Modem.print(command);
   Modem.write(13);
@@ -156,7 +156,7 @@ bool isendUdp(const String& message, char* buf, unsigned long buf_len)
 
   readAnswer(buf,buf_len,10000);
 
-  Debug.println(buf);
+//  Debug.println(buf);
 
   return true;
 }
