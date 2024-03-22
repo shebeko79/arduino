@@ -1,12 +1,16 @@
+//Pulmonary function tests
 #define TOUCH_MODULES_CST_SELF        //Use CST816 by default
 
 #include "Arduino.h"
-#include "TFT_eSPI.h" /* Please use the TFT library provided in the library. */
+#include "TFT_eSPI.h"
 #include "TouchLib.h"
 #include "Wire.h"
 #include "pin_config.h"
+#include "NotoSansBold15.h"
 
 TFT_eSPI tft = TFT_eSPI();
+TFT_eSprite sprite = TFT_eSprite(&tft);
+
 TouchLib touch(Wire, PIN_IIC_SDA, PIN_IIC_SCL, CTS820_SLAVE_ADDRESS, PIN_TOUCH_RES);
 
 hw_timer_t *Timer0_Cfg = nullptr;
@@ -18,15 +22,19 @@ unsigned long last_time = 0;
 int last_tacho_state = LOW;
 
 #define TICK_MS 100
-#define TEST_MS 10000
-constexpr unsigned ticks_count = TEST_MS/TICK_MS;
+constexpr unsigned test_seconds=8;
+constexpr unsigned ticks_count = test_seconds*1000/TICK_MS;
 int32_t ticks[ticks_count];
 unsigned tick_pos=0;
 
-int16_t scren_height = 2;
-int16_t scren_width = 2;
+int16_t screen_height = 2;
+int16_t screen_width = 2;
+
+unsigned long last_testing_ms=0;
 
 void startTest();
+void drawReady();
+void drawTesting();
 
 void IRAM_ATTR Timer0_ISR()
 {
@@ -52,25 +60,21 @@ void setup()
   Serial.begin(115200);
   Serial.println("");
 
-  tft.begin();
+  tft.init();
+  tft.invertDisplay(1);
+  tft.setRotation(1);
 
-  tft.setRotation(3);
-  tft.setSwapBytes(true);
-
-#if ESP_IDF_VERSION < ESP_IDF_VERSION_VAL(5,0,0)
   ledcSetup(0, 2000, 8);
   ledcAttachPin(PIN_LCD_BL, 0);
   ledcWrite(0, 255);
-#else
-  ledcAttach(PIN_LCD_BL, 200, 8);
-  ledcWrite(PIN_LCD_BL, 255);
-#endif
 
-  scren_height = tft.height();
-  scren_width = tft.width();
+  screen_height = tft.height();
+  screen_width = tft.width();
 
-  tft.fillScreen(TFT_BLACK);
-  tft.setTextColor(TFT_RED, TFT_BLACK);
+  sprite.createSprite(screen_width, screen_height);
+  sprite.setSwapBytes(true);
+
+  drawReady();
 
   Wire.begin(PIN_IIC_SDA, PIN_IIC_SCL);
   if (!touch.init())
@@ -84,19 +88,71 @@ void setup()
 
   Timer0_Cfg = timerBegin(0, ESP.getCpuFreqMHz(), true);
   timerAttachInterrupt(Timer0_Cfg, &Timer0_ISR, true);
-  timerAlarmWrite(Timer0_Cfg, 500, true);
+  timerAlarmWrite(Timer0_Cfg, 200, true);
   timerAlarmEnable(Timer0_Cfg);
 }
 
 void drawResults()
 {
-  tft.fillScreen(TFT_BLACK);
+  sprite.fillSprite(TFT_BLACK);
 
-  for(unsigned i=0;i<tick_pos;i++)
+  int32_t x_pad = screen_width / (test_seconds + 2);
+  int32_t x_multiply = x_pad*test_seconds;
+
+  constexpr int32_t y_pad = 16;
+  constexpr int32_t y_grid_count = 4;
+  constexpr int32_t y_grid_size = 32;
+
+  for(int32_t i = 0; i<=test_seconds;i++)
   {
-    int32_t h = ticks[i]*2;
-    tft.drawLine(i,scren_height,i,scren_height - h,TFT_RED);
+    int32_t x = (i+1)*x_pad;
+    int32_t y = y_grid_count*y_grid_size+y_pad;
+    sprite.drawLine(x,screen_height - y_pad,x,screen_height - y,TFT_BLUE);
   }
+
+  for(int32_t i = 0; i<=y_grid_count;i++)
+  {
+    int32_t y = i*y_grid_size + y_pad;
+    sprite.drawLine(x_pad,screen_height - y,screen_width-x_pad,screen_height - y,TFT_BLUE);
+  }
+
+  for(unsigned i=1;i<ticks_count;i++)
+  {
+    int x1 = x_multiply*(i-1)/ticks_count + x_pad;
+    int x2 = x_multiply*i/ticks_count + x_pad;
+    
+    int32_t y1 = ticks[i-1]*2 + y_pad;
+    int32_t y2 = ticks[i]*2 + y_pad;
+
+    sprite.drawLine(x1,screen_height - y1,x2,screen_height - y2,TFT_RED);
+  }
+
+  sprite.setTextColor(TFT_WHITE, TFT_BLACK);
+  sprite.loadFont(NotoSansBold15);
+  sprite.setTextDatum(TR_DATUM);
+  sprite.drawString("Results", screen_width, 0);
+
+  sprite.pushSprite(0, 0);
+}
+
+void drawReady()
+{
+  sprite.fillSprite(TFT_BLACK);
+  sprite.setTextColor(TFT_GREEN, TFT_BLACK);
+  sprite.loadFont(NotoSansBold15);
+  sprite.setTextDatum(MC_DATUM);
+  sprite.drawString("PRESS", screen_width/2, screen_height/2);
+  sprite.pushSprite(0, 0);
+}
+
+void drawTesting()
+{
+  sprite.fillSprite(TFT_BLACK);
+  sprite.setTextColor(TFT_RED, TFT_BLACK);
+  sprite.loadFont(NotoSansBold15);
+  sprite.setTextDatum(MC_DATUM);
+  sprite.drawString("Testing...", screen_width/2, screen_height/2);
+  sprite.pushSprite(0, 0);
 }
 
 void startTest()
@@ -104,8 +160,8 @@ void startTest()
     tick_pos=0;
     last_time = millis();
     tick_count = 0;
-    tft.fillScreen(TFT_BLACK);
-    tft.drawString("321...", 0, 0, 7);
+
+    drawTesting();
 }
 
 void fillTicks()
@@ -121,8 +177,8 @@ void fillTicks()
   int32_t tick = tick_count;
   tick_count = 0;
 
-  Serial.print(" tick=");
-  Serial.println(tick);
+//  Serial.print(" tick=");
+//  Serial.println(tick);
 
   unsigned affected_intervals = diff_ms/TICK_MS;
 
@@ -133,10 +189,10 @@ void fillTicks()
     int32_t v = (tick - last_tick)*i/affected_intervals + last_tick;
     ticks[tick_pos] = v;
   
-    Serial.print("[");
-    Serial.print(tick_pos);
-    Serial.print("]=");
-    Serial.println(v);
+//    Serial.print("[");
+//    Serial.print(tick_pos);
+//    Serial.print("]=");
+//    Serial.println(v);
   }
 }
 
@@ -149,11 +205,28 @@ void loop()
     if(tick_pos >= ticks_count)
     {
       drawResults();
+      last_testing_ms = millis();
     }
 
     return;
   }
   
   if(touch.read())
-    startTest();
+  {
+    bool inside_start_button = false;
+    int mi = touch.getPointNum();
+    for(int i=0;i<mi;i++)
+    {
+      TP_Point t = touch.getPoint(i);
+      inside_start_button = inside_start_button || (
+        //Screen is rotated
+        t.y>screen_width/4 && t.y<screen_width/4*3 &&
+        t.x>screen_height/4 && t.x<screen_height/4*3);
+    }
+
+    if(inside_start_button && millis()-last_testing_ms>3000)
+    {
+      startTest();
+    }
+  }
 }
