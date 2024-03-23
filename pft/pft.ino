@@ -14,18 +14,18 @@ TFT_eSprite sprite = TFT_eSprite(&tft);
 TouchLib touch(Wire, PIN_IIC_SDA, PIN_IIC_SCL, CTS820_SLAVE_ADDRESS, PIN_TOUCH_RES);
 
 hw_timer_t *Timer0_Cfg = nullptr;
-
-int32_t tick_count = 0;
-unsigned long last_time = 0;
+bool timerEnabled = false;
 
 #define TACHO_PIN 1
 int last_tacho_state = LOW;
 
-#define TICK_MS 100
+constexpr unsigned timer_us=200;
+constexpr unsigned timers_per_interval=200;
 constexpr unsigned test_seconds=8;
-constexpr unsigned ticks_count = test_seconds*1000/TICK_MS;
-int32_t ticks[ticks_count];
-unsigned tick_pos=0;
+
+constexpr unsigned ticks_count = test_seconds*1000000/timer_us/ timers_per_interval;
+volatile int32_t ticks[ticks_count];
+volatile int32_t timer_cycle=0;
 
 int16_t screen_height = 2;
 int16_t screen_width = 2;
@@ -36,16 +36,26 @@ void startTest();
 void drawReady();
 void drawTesting();
 
+unsigned cycle2interval(int32_t c)
+{
+  return c / timers_per_interval;
+}
+
 void IRAM_ATTR Timer0_ISR()
 {
-  int tacho_state = digitalRead(TACHO_PIN);
+  ++timer_cycle;
   
-  if(!last_tacho_state && tacho_state)
-  {
-    ++tick_count;
-  }
+  int tacho_state = digitalRead(TACHO_PIN);
 
+  const bool becomeActive = !last_tacho_state && tacho_state;
   last_tacho_state = tacho_state;
+  
+  if(!becomeActive)
+    return;
+
+  unsigned pos = cycle2interval(timer_cycle);
+  if(pos<ticks_count)
+    ++ticks[pos];
 }
 
 void setup()
@@ -58,7 +68,6 @@ void setup()
   digitalWrite(PIN_POWER_ON, HIGH);
 
   Serial.begin(115200);
-  Serial.println("");
 
   tft.init();
   tft.invertDisplay(1);
@@ -84,24 +93,47 @@ void setup()
   
   last_tacho_state = digitalRead(TACHO_PIN);
 
-  tick_pos = ticks_count;
-
-  Timer0_Cfg = timerBegin(0, ESP.getCpuFreqMHz(), true);
+  Timer0_Cfg = timerBegin(0, 80, true);
   timerAttachInterrupt(Timer0_Cfg, &Timer0_ISR, true);
-  timerAlarmWrite(Timer0_Cfg, 200, true);
-  timerAlarmEnable(Timer0_Cfg);
+  timerAlarmWrite(Timer0_Cfg, timer_us, true);
 }
 
 void drawResults()
 {
   sprite.fillSprite(TFT_BLACK);
+  sprite.setTextColor(TFT_WHITE, TFT_BLACK);
+  sprite.loadFont(NotoSansBold15);
 
   int32_t x_pad = screen_width / (test_seconds + 2);
-  int32_t x_multiply = x_pad*test_seconds;
 
   constexpr int32_t y_pad = 16;
   constexpr int32_t y_grid_count = 4;
   constexpr int32_t y_grid_size = 32;
+
+  unsigned start_pos = 0;
+  unsigned end_pos = ticks_count;
+  
+  for(unsigned i=0;i<ticks_count-4;i++)
+  {
+    if(ticks[i]!=0 && ticks[i+1]!=0 && ticks[i+2]!=0 && ticks[i+3]!=0)
+    {
+      start_pos = i;
+      break;
+    }
+  }
+
+  if(start_pos>0)
+  for(unsigned i=start_pos;i<ticks_count-4;i++)
+  {
+    if(ticks[i]==0 && ticks[i+1]==0 && ticks[i+2]==0 && ticks[i+3]==0)
+    {
+      end_pos = i;
+      break;
+    }
+  }
+
+  int32_t x_multiply = x_pad*test_seconds;
+  int32_t scale = int(x_multiply/(end_pos-start_pos));
 
   for(int32_t i = 0; i<=test_seconds;i++)
   {
@@ -116,19 +148,28 @@ void drawResults()
     sprite.drawLine(x_pad,screen_height - y,screen_width-x_pad,screen_height - y,TFT_BLUE);
   }
 
-  for(unsigned i=1;i<ticks_count;i++)
+  sprite.setTextDatum(TC_DATUM);
+  for(int32_t i = 0; i<=test_seconds;i++)
   {
-    int x1 = x_multiply*(i-1)/ticks_count + x_pad;
-    int x2 = x_multiply*i/ticks_count + x_pad;
+    int32_t x = (i*scale+1)*x_pad;
+    if(i*scale>test_seconds)
+      break;
+
+    String str(i);
+    sprite.drawString(str, x, screen_height - (y_pad+1));
+  }
+
+  for(unsigned i=start_pos+1;i<end_pos;i++)
+  {
+    int x1 = x_multiply*(i-1-start_pos)/ticks_count*scale + x_pad;
+    int x2 = x_multiply*(i-start_pos)/ticks_count*scale + x_pad;
     
-    int32_t y1 = ticks[i-1]*2 + y_pad;
-    int32_t y2 = ticks[i]*2 + y_pad;
+    int32_t y1 = ticks[i-1]*4 + y_pad;
+    int32_t y2 = ticks[i]*4 + y_pad;
 
     sprite.drawLine(x1,screen_height - y1,x2,screen_height - y2,TFT_RED);
   }
 
-  sprite.setTextColor(TFT_WHITE, TFT_BLACK);
-  sprite.loadFont(NotoSansBold15);
   sprite.setTextDatum(TR_DATUM);
   sprite.drawString("Results", screen_width, 0);
 
@@ -157,58 +198,25 @@ void drawTesting()
 
 void startTest()
 {
-    tick_pos=0;
-    last_time = millis();
-    tick_count = 0;
+  drawTesting();
 
-    drawTesting();
-}
+  for(unsigned i=0 ; i<ticks_count; i++)
+    ticks[i] = 0;
 
-void fillTicks()
-{
-  unsigned long ms = millis();
-  unsigned long diff_ms = ms - last_time;
-
-  if(diff_ms < TICK_MS)
-    return;
-
-  last_time = ms;
-
-  int32_t tick = tick_count;
-  tick_count = 0;
-
-//  Serial.print(" tick=");
-//  Serial.println(tick);
-
-  unsigned affected_intervals = diff_ms/TICK_MS;
-
-  int32_t last_tick = (tick_pos>0)? ticks[tick_pos-1] : 0;
-
-  for(unsigned i=1;tick_pos<ticks_count && i<=affected_intervals ; ++tick_pos,++i)
-  {
-    int32_t v = (tick - last_tick)*i/affected_intervals + last_tick;
-    ticks[tick_pos] = v;
-  
-//    Serial.print("[");
-//    Serial.print(tick_pos);
-//    Serial.print("]=");
-//    Serial.println(v);
-  }
+  timerEnabled = true;
+  timer_cycle = 0;
+  timerAlarmEnable(Timer0_Cfg);
 }
 
 void loop()
 {
-  if(tick_pos < ticks_count)
+  if(cycle2interval(timer_cycle) >= ticks_count && timerEnabled)
   {
-    fillTicks();
+    timerAlarmDisable(Timer0_Cfg);
     
-    if(tick_pos >= ticks_count)
-    {
-      drawResults();
-      last_testing_ms = millis();
-    }
-
-    return;
+    drawResults();
+    last_testing_ms = millis();
+    timerEnabled = false;
   }
   
   if(touch.read())
