@@ -7,6 +7,7 @@
 #include "Wire.h"
 #include "pin_config.h"
 #include "NotoSansBold15.h"
+#include <esp_adc_cal.h>
 
 TFT_eSPI tft = TFT_eSPI();
 TFT_eSprite sprite = TFT_eSprite(&tft);
@@ -60,6 +61,16 @@ void IRAM_ATTR Timer0_ISR()
 
 void setup()
 {
+  gpio_hold_dis((gpio_num_t)PIN_TOUCH_RES);
+  
+  pinMode(PIN_POWER_ON, OUTPUT);
+  digitalWrite(PIN_POWER_ON, HIGH);
+  
+  pinMode(PIN_TOUCH_RES, OUTPUT);
+  digitalWrite(PIN_TOUCH_RES, LOW);
+  delay(500);
+  digitalWrite(PIN_TOUCH_RES, HIGH);
+
   Serial.begin(115200);
   
   pinMode(TACHO_PIN, INPUT);
@@ -96,6 +107,30 @@ void setup()
   Timer0_Cfg = timerBegin(0, 80, true);
   timerAttachInterrupt(Timer0_Cfg, &Timer0_ISR, true);
   timerAlarmWrite(Timer0_Cfg, timer_us, true);
+}
+
+void drawPower()
+{
+    esp_adc_cal_characteristics_t adc_chars;
+    esp_adc_cal_value_t val_type = esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_11, ADC_WIDTH_BIT_12, 1100, &adc_chars);
+    uint32_t raw = analogRead(PIN_BAT_VOLT);
+    uint32_t v1 = esp_adc_cal_raw_to_voltage(raw, &adc_chars) * 2;
+    
+    String str;
+
+    if(v1>4300)
+      str="USB";
+    else
+    {
+      long p=map(v1, 2700, 4200, 0, 100);
+      str=String(p);
+      str+="%";
+    }
+    
+    sprite.setTextDatum(TR_DATUM);
+    sprite.setTextColor(TFT_WHITE, TFT_BLACK);
+    sprite.drawString(str, screen_width, 0);
+    Serial.println(v1);
 }
 
 void drawResults()
@@ -170,8 +205,10 @@ void drawResults()
     sprite.drawLine(x1,screen_height - y1,x2,screen_height - y2,TFT_RED);
   }
 
-  sprite.setTextDatum(TR_DATUM);
-  sprite.drawString("Results", screen_width, 0);
+  sprite.setTextDatum(TC_DATUM);
+  sprite.drawString("Results", screen_width/2, 0);
+
+  drawPower();
 
   sprite.pushSprite(0, 0);
 }
@@ -183,6 +220,7 @@ void drawReady()
   sprite.loadFont(NotoSansBold15);
   sprite.setTextDatum(MC_DATUM);
   sprite.drawString("PRESS", screen_width/2, screen_height/2);
+  drawPower();
   sprite.pushSprite(0, 0);
 }
 
@@ -193,6 +231,7 @@ void drawTesting()
   sprite.loadFont(NotoSansBold15);
   sprite.setTextDatum(MC_DATUM);
   sprite.drawString("Testing...", screen_width/2, screen_height/2);
+  drawPower();
   sprite.pushSprite(0, 0);
 }
 
@@ -221,6 +260,14 @@ void loop()
   
   if(touch.read())
   {
+/*    
+    touch.enableSleep();
+    delay(2000);
+    digitalWrite(PIN_POWER_ON, LOW);
+    gpio_hold_en((gpio_num_t)PIN_TOUCH_RES);
+    esp_sleep_enable_ext0_wakeup((gpio_num_t)PIN_TOUCH_INT, 0);
+    esp_deep_sleep_start();
+*/
     bool inside_start_button = false;
     int mi = touch.getPointNum();
     for(int i=0;i<mi;i++)
