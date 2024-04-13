@@ -18,7 +18,6 @@ hw_timer_t *Timer0_Cfg = nullptr;
 bool timerEnabled = false;
 
 #define TACHO_PIN 1
-int last_tacho_state = LOW;
 
 constexpr unsigned timer_us=200;
 constexpr unsigned timers_per_interval=200;
@@ -49,15 +48,10 @@ unsigned cycle2interval(int32_t c)
 void IRAM_ATTR Timer0_ISR()
 {
   ++timer_cycle;
-  
-  int tacho_state = digitalRead(TACHO_PIN);
+}
 
-  const bool becomeActive = !last_tacho_state && tacho_state;
-  last_tacho_state = tacho_state;
-  
-  if(!becomeActive)
-    return;
-
+void IRAM_ATTR pin_isr()
+{
   unsigned pos = cycle2interval(timer_cycle);
   if(pos<ticks_count)
     ++ticks[pos];
@@ -106,8 +100,6 @@ void setup()
       Serial.println("Touch IC not found");
   }
   
-  last_tacho_state = digitalRead(TACHO_PIN);
-
   Timer0_Cfg = timerBegin(0, 80, true);
   timerAttachInterrupt(Timer0_Cfg, &Timer0_ISR, true);
   timerAlarmWrite(Timer0_Cfg, timer_us, true);
@@ -178,6 +170,9 @@ void drawResults()
   int32_t x_multiply = x_pad*test_seconds;
   int32_t scale = int(x_multiply/(results_end_pos-results_start_pos));
 
+  if(scale>8)
+    scale = 8;
+
   for(int32_t i = 0; i<=test_seconds;i++)
   {
     int32_t x = (i+1)*x_pad;
@@ -207,8 +202,8 @@ void drawResults()
     int x1 = x_multiply*(i-1-results_start_pos)/ticks_count*scale + x_pad;
     int x2 = x_multiply*(i-results_start_pos)/ticks_count*scale + x_pad;
     
-    int32_t y1 = ticks[i-1]*4 + y_pad;
-    int32_t y2 = ticks[i]*4 + y_pad;
+    int32_t y1 = ticks[i-1] + y_pad;
+    int32_t y2 = ticks[i] + y_pad;
 
     sprite.drawLine(x1,screen_height - y1,x2,screen_height - y2,TFT_RED);
   }
@@ -277,12 +272,15 @@ void startTest()
   timer_cycle = 0;
   timerAlarmEnable(Timer0_Cfg);
   show_result_cycle = 0;
+
+  attachInterrupt(digitalPinToInterrupt(TACHO_PIN), pin_isr, RISING);
 }
 
 void loop()
 {
   if(cycle2interval(timer_cycle) >= ticks_count && timerEnabled)
   {
+    detachInterrupt(digitalPinToInterrupt(TACHO_PIN));
     timerAlarmDisable(Timer0_Cfg);
 
     calculateEffectiveRange();    
