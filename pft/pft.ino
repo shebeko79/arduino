@@ -31,7 +31,11 @@ volatile int32_t timer_cycle=0;
 int16_t screen_height = 2;
 int16_t screen_width = 2;
 
-unsigned long last_testing_ms=0;
+unsigned results_start_pos = 0;
+unsigned results_end_pos = ticks_count;
+
+unsigned show_result_cycle = 0;
+unsigned long last_result_ms=0;
 
 void startTest();
 void drawReady();
@@ -133,6 +137,31 @@ void drawPower()
     Serial.println(v1);
 }
 
+void calculateEffectiveRange()
+{
+  results_start_pos = 0;
+  results_end_pos = ticks_count;
+  
+  for(unsigned i=0;i<ticks_count-4;i++)
+  {
+    if(ticks[i]!=0 && ticks[i+1]!=0 && ticks[i+2]!=0 && ticks[i+3]!=0)
+    {
+      results_start_pos = i;
+      break;
+    }
+  }
+
+  if(results_start_pos>0)
+  for(unsigned i=results_start_pos;i<ticks_count-4;i++)
+  {
+    if(ticks[i]==0 && ticks[i+1]==0 && ticks[i+2]==0 && ticks[i+3]==0)
+    {
+      results_end_pos = i;
+      break;
+    }
+  }
+}
+
 void drawResults()
 {
   sprite.fillSprite(TFT_BLACK);
@@ -145,30 +174,9 @@ void drawResults()
   constexpr int32_t y_grid_count = 4;
   constexpr int32_t y_grid_size = 32;
 
-  unsigned start_pos = 0;
-  unsigned end_pos = ticks_count;
-  
-  for(unsigned i=0;i<ticks_count-4;i++)
-  {
-    if(ticks[i]!=0 && ticks[i+1]!=0 && ticks[i+2]!=0 && ticks[i+3]!=0)
-    {
-      start_pos = i;
-      break;
-    }
-  }
-
-  if(start_pos>0)
-  for(unsigned i=start_pos;i<ticks_count-4;i++)
-  {
-    if(ticks[i]==0 && ticks[i+1]==0 && ticks[i+2]==0 && ticks[i+3]==0)
-    {
-      end_pos = i;
-      break;
-    }
-  }
 
   int32_t x_multiply = x_pad*test_seconds;
-  int32_t scale = int(x_multiply/(end_pos-start_pos));
+  int32_t scale = int(x_multiply/(results_end_pos-results_start_pos));
 
   for(int32_t i = 0; i<=test_seconds;i++)
   {
@@ -194,10 +202,10 @@ void drawResults()
     sprite.drawString(str, x, screen_height - (y_pad+1));
   }
 
-  for(unsigned i=start_pos+1;i<end_pos;i++)
+  for(unsigned i=results_start_pos+1;i<results_end_pos;i++)
   {
-    int x1 = x_multiply*(i-1-start_pos)/ticks_count*scale + x_pad;
-    int x2 = x_multiply*(i-start_pos)/ticks_count*scale + x_pad;
+    int x1 = x_multiply*(i-1-results_start_pos)/ticks_count*scale + x_pad;
+    int x2 = x_multiply*(i-results_start_pos)/ticks_count*scale + x_pad;
     
     int32_t y1 = ticks[i-1]*4 + y_pad;
     int32_t y2 = ticks[i]*4 + y_pad;
@@ -207,6 +215,29 @@ void drawResults()
 
   sprite.setTextDatum(TC_DATUM);
   sprite.drawString("Results", screen_width/2, 0);
+
+  drawPower();
+
+  sprite.pushSprite(0, 0);
+}
+
+void drawResultsNumber()
+{
+  sprite.fillSprite(TFT_BLACK);
+  sprite.setTextColor(TFT_WHITE, TFT_BLACK);
+  sprite.loadFont(NotoSansBold15);
+
+  int32_t tickSum = 0;
+
+  for(unsigned i=results_start_pos;i<results_end_pos;i++)
+  {
+    tickSum += ticks[i];
+  }
+
+  String str(tickSum);
+
+  sprite.setTextDatum(CC_DATUM);
+  sprite.drawString(str, screen_width/2, screen_height/2);
 
   drawPower();
 
@@ -245,6 +276,7 @@ void startTest()
   timerEnabled = true;
   timer_cycle = 0;
   timerAlarmEnable(Timer0_Cfg);
+  show_result_cycle = 0;
 }
 
 void loop()
@@ -252,22 +284,37 @@ void loop()
   if(cycle2interval(timer_cycle) >= ticks_count && timerEnabled)
   {
     timerAlarmDisable(Timer0_Cfg);
-    
+
+    calculateEffectiveRange();    
     drawResults();
-    last_testing_ms = millis();
+    last_result_ms = millis();
+    show_result_cycle = 1;
     timerEnabled = false;
+  }
+
+  if(show_result_cycle>0 && (millis()-last_result_ms)>10000)
+  {
+    if((show_result_cycle % 2) == 0)
+      drawResults();
+    else
+      drawResultsNumber();
+    
+    show_result_cycle++;
+    last_result_ms = millis();
+
+    if(show_result_cycle>8)
+    {
+      touch.enableSleep();
+      delay(2000);
+      digitalWrite(PIN_POWER_ON, LOW);
+      gpio_hold_en((gpio_num_t)PIN_TOUCH_RES);
+      esp_sleep_enable_ext0_wakeup((gpio_num_t)PIN_TOUCH_INT, 0);
+      esp_deep_sleep_start();
+    }
   }
   
   if(touch.read())
   {
-/*    
-    touch.enableSleep();
-    delay(2000);
-    digitalWrite(PIN_POWER_ON, LOW);
-    gpio_hold_en((gpio_num_t)PIN_TOUCH_RES);
-    esp_sleep_enable_ext0_wakeup((gpio_num_t)PIN_TOUCH_INT, 0);
-    esp_deep_sleep_start();
-*/
     bool inside_start_button = false;
     int mi = touch.getPointNum();
     for(int i=0;i<mi;i++)
@@ -279,7 +326,7 @@ void loop()
         t.x>screen_height/4 && t.x<screen_height/4*3);
     }
 
-    if(inside_start_button && millis()-last_testing_ms>3000)
+    if(inside_start_button && (last_result_ms==0 || show_result_cycle>1))
     {
       startTest();
     }
