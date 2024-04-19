@@ -208,6 +208,20 @@ void drawResults()
     sprite.drawLine(x1,screen_height - y1,x2,screen_height - y2,TFT_RED);
   }
 
+  int32_t last_value = 0;
+  for(unsigned i=results_start_pos+1;i<results_end_pos;i++)
+  {
+    int x1 = x_multiply*(i-1-results_start_pos)/ticks_count*scale + x_pad;
+    int x2 = x_multiply*(i-results_start_pos)/ticks_count*scale + x_pad;
+    
+    int32_t y1 = (last_value)/8 + y_pad;
+    int32_t y2 = (last_value + ticks[i])/8 + y_pad;
+
+    sprite.drawLine(x1,screen_height - y1,x2,screen_height - y2,TFT_YELLOW);
+
+    last_value+=ticks[i];
+  }
+
   sprite.setTextDatum(TC_DATUM);
   sprite.drawString("Results", screen_width/2, 0);
 
@@ -223,16 +237,27 @@ void drawResultsNumber()
   sprite.loadFont(NotoSansBold15);
 
   int32_t tickSum = 0;
+  int32_t oneSecSum = 0;
+  
+  constexpr unsigned one_sec_ticks_num = ticks_count/test_seconds;
 
   for(unsigned i=results_start_pos;i<results_end_pos;i++)
   {
     tickSum += ticks[i];
+
+    if(i-results_start_pos<one_sec_ticks_num)
+      oneSecSum += ticks[i];
   }
 
-  String str(tickSum);
-
   sprite.setTextDatum(CC_DATUM);
-  sprite.drawString(str, screen_width/2, screen_height/2);
+  sprite.print("FVC=");
+  sprite.println(tickSum);
+  sprite.print("FEV1=");
+  sprite.println(oneSecSum);
+  sprite.print("FEV1/FVC=");
+  sprite.print(((float)oneSecSum)/(float)tickSum*100);
+  sprite.println("%");
+//  sprite.drawString(str, screen_width/2, screen_height/2);
 
   drawPower();
 
