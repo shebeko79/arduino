@@ -18,3 +18,9 @@ Or you open in [Blender](https://www.blender.org/) pikfluometer.blend if you nee
 
 ## Software
 Use Arduino to compile pft.ino and upload firmware
+
+## References
+* [Pulmonary Function Testing (PFT) made simple](https://medicine.uiowa.edu/iowaprotocols/pulmonary-function-testing-pft-made-simple)
+* [Understanding Spirometry - Normal, Obstructive vs Restrictive](https://www.youtube.com/watch?v=YwcNbVnHNAo)
+* [MedCram - Medical Lectures Explained CLEARLY](https://www.youtube.com/watch?v=EmRgAGLEY8Y)
+* [Spirometry Interpretation | Lung Function Tests | OSCE Guide | UKMLA | CPSA](https://www.youtube.com/watch?v=qW8ujyrLZxk)
