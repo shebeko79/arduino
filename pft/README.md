@@ -3,6 +3,8 @@ This project is about personal PFT device.
 For now, device measures rafly expiratory volume and FEV1/FVC.
 Displays chart and numbers on a built-in screen which gives me ideas how bad my asthma currently is.
 
+[![Video description](https://img.youtube.com/vi/IuvzS7e6ljY/0.jpg)](https://www.youtube.com/watch?v=IuvzS7e6ljY)
+
 ## Hardware
 1. [LILYGO® T-Display-S3 Touch Edition ESP32-S3](https://www.aliexpress.com/item/1005004928000937.html)
 2. [Waveshare 9523 distance sensor](https://botland.store/distance-sensors/4459-distance-sensor-reflective-33v5v-30mm-waveshare-9523-5904422373986.html)
