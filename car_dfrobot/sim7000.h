@@ -1,11 +1,13 @@
 #include <SoftwareSerial.h>
 #include <DFRobot_SIM7000.h>
 
+#define Debug Serial
+bool gpsInited = false;
 
 SoftwareSerial Modem(8, 7);
 DFRobot_SIM7000 sim7000(&Modem);
 
-int sendUdpFailsCount = 0;
+int sendPacketFailsCount = 0;
 
 bool modemSendOkCommand(const char* command, const unsigned long max_timeout = 1000);
 void modemSendCommand(const char* command, bool show_debug=true);
@@ -133,7 +135,7 @@ bool modemInit()
   return true;
 }
 
-bool isendUdp(const String& message, char* buf, unsigned long buf_len)
+bool isendPacket(const String& message, char* buf, unsigned long buf_len)
 {
   if(!modemSendOkCommand("AT+CIPSTART=\"UDP\",\"31.214.157.79\",\"3203\""))
     return false;
@@ -161,10 +163,10 @@ bool isendUdp(const String& message, char* buf, unsigned long buf_len)
   return true;
 }
 
-bool sendUdp(const String& message, char* buf, unsigned long buf_len)
+bool sendPacket(const String& message, char* buf, unsigned long buf_len)
 {
   Debug.println(message);
-  sendUdpFailsCount++;
+  sendPacketFailsCount++;
   
 //  if(modemEnsureAnswer("\r\n\r\n"))
 //    return false;
@@ -188,7 +190,7 @@ bool sendUdp(const String& message, char* buf, unsigned long buf_len)
     delay(1000);
   }
 
-  bool ret=isendUdp(message,buf,buf_len);
+  bool ret=isendPacket(message,buf,buf_len);
   
   modemSendCommand("AT+CIPCLOSE");
   
@@ -199,7 +201,7 @@ bool sendUdp(const String& message, char* buf, unsigned long buf_len)
     return false;
   }
   
-  sendUdpFailsCount--;
+  sendPacketFailsCount--;
 
   return true;
 }

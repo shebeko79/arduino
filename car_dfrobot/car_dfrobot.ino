@@ -2,8 +2,7 @@
 #include <EEPROM.h>
 #include <SoftwareSerial.h>
 #include <avr/wdt.h>
-
-#define Debug Serial
+#include "sim7000.h"
 
 
 #define DEG_TO_RAD 0.017453292519943295769236907684886
@@ -18,7 +17,6 @@ enum ModemState
 };
 
 ModemState modemState = ms_not_inited;
-bool gpsInited = false;
 
 unsigned long last_get_gps = 0;
 
@@ -29,7 +27,7 @@ double lastTrackLat =0.0;
 double lastTrackLon =0.0;
 
 extern bool notificationIsOn;
-extern int sendUdpFailsCount;
+extern int sendPacketFailsCount;
 
 extern SoftwareSerial Modem;
 
@@ -60,9 +58,9 @@ void setup()
 
 void loop()
 {
-  if(sendUdpFailsCount>10)
+  if(sendPacketFailsCount>10)
   {
-    sendUdpFailsCount = 0;
+    sendPacketFailsCount = 0;
     modemState = ms_restart;
     modemPowerSwitch();
   }

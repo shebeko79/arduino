@@ -12,7 +12,7 @@ void sendTelegramMessage(String message)
   message=urlencode(message);
   telegram_request+= message;
 
-  sendUdp(telegram_request, modem_answer,sizeof(modem_answer));
+  sendPacket(telegram_request, modem_answer,sizeof(modem_answer));
 }
 
 void sendLocation(double lat, double lon, bool do_update)
@@ -31,7 +31,7 @@ void sendLocation(double lat, double lon, bool do_update)
     telegram_request+= "&message_id=";
     telegram_request+= String(locationMessageId);
 
-    sendUdp(telegram_request, modem_answer,sizeof(modem_answer));
+    sendPacket(telegram_request, modem_answer,sizeof(modem_answer));
     
     pStr = strstr(modem_answer, "\"ok\":false");
 
@@ -45,7 +45,7 @@ void sendLocation(double lat, double lon, bool do_update)
   telegram_request+= "&longitude=";
   telegram_request+= String(lon,6);
   telegram_request+= "&live_period=1800";
-  sendUdp(telegram_request, modem_answer,sizeof(modem_answer));
+  sendPacket(telegram_request, modem_answer,sizeof(modem_answer));
 
   pStr = strstr(modem_answer, idStr);
   if(pStr != nullptr)
