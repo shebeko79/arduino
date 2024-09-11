@@ -8,7 +8,7 @@ String telegram_request;
 void sendTelegramMessage(String message)
 {
   telegram_request=botStr;
-  telegram_request+= "sendMessage?chat_id=-1001249602233&text=";
+  telegram_request+= "sendMessage?chat_id="CHAT_ID"&text=";
   message=urlencode(message);
   telegram_request+= message;
 
@@ -24,7 +24,7 @@ void sendLocation(double lat, double lon, bool do_update)
   if(do_update && locationMessageId!= 0)
   {
     telegram_request=botStr;
-    telegram_request+="editMessageLiveLocation?chat_id=-1001249602233&latitude=";
+    telegram_request+="editMessageLiveLocation?chat_id="CHAT_ID"&latitude=";
     telegram_request+= String(lat,6);
     telegram_request+= "&longitude=";
     telegram_request+= String(lon,6);
@@ -40,7 +40,7 @@ void sendLocation(double lat, double lon, bool do_update)
   }
 
   telegram_request=botStr;
-  telegram_request+="sendLocation?chat_id=-1001249602233&latitude=";
+  telegram_request+="sendLocation?chat_id="CHAT_ID"&latitude=";
   telegram_request+= String(lat,6);
   telegram_request+= "&longitude=";
   telegram_request+= String(lon,6);
