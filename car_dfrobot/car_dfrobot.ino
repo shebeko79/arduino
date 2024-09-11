@@ -2,7 +2,8 @@
 #include <EEPROM.h>
 #include <SoftwareSerial.h>
 #include <avr/wdt.h>
-#include "sim7000.h"
+//#include "sim7000.h"
+#include "sim7070.h"
 
 
 #define DEG_TO_RAD 0.017453292519943295769236907684886
