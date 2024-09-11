@@ -50,3 +50,51 @@ AT+HTTPPARA="CID","1"
 AT+HTTPPARA="URL","http://www.google.com"
 AT+HTTPACTION=0
 AT+HTTPREAD
+
+//new
+AT+CGDCONT=1,"IP","iot"
+AT+CNMP=51
+AT+CMNB=3
+AT+CGACT=1,1
+AT+CGPADDR
+
+AT+CNACT?
+AT+CGNAPN #Detect APN
+AT+CNCFG=0,1,"iot"
+AT+CNACT=0,2
+
+AT+CACID=0
+AT+CAOPEN=0,0,"UDP","31.214.157.79","3203"
+AT+CASEND=0,3
+bla
+AT+CACLOSE=0
+
+AT+CFSINIT
+AT+CFSWFILE=3,godaddy.crt,0,1756, 10000
+# Put content of crt here
+AT+CFSTERM
+AT+CSSLCFG="convert",2,"godaddy.crt"
+AT+CFSDFILE=3,"godaddy.crt"
+
+AT+CSSLCFG="sslversion",1,3
+AT+CSSLCFG="ignorertctime",1,1
+AT+CSSLCFG="sni",1,"api.telegram.org"
+AT+SHSSL=1,"godaddy.crt"
+AT+SHCONF="URL","https://api.telegram.org"
+AT+SHCONF="BODYLEN",1024
+AT+SHCONF="HEADERLEN",350
+AT+SHCONN
+AT+SHSTATE?
+AT+SHCHEAD
+AT+SHAHEAD="User-Agent","curl/7.47.0"
+AT+SHAHEAD="Cache-control","no-cache"
+AT+SHAHEAD="Connection","keep-alive"
+AT+SHAHEAD="Accept","*/*"
+
+AT+SHREQ="/boXXXX/getUpdates",1
+AT+SHREAD=0, 23
+AT+SHDISC
+
+AT+CCLK?
+AT+CCLK="24/09/10,20:47:00+01"
+
