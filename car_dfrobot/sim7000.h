@@ -58,7 +58,6 @@ void modemSendCommand(const char* command, bool show_debug)
 
   Modem.print(command);
   Modem.write(13);
-//  Modem.write(10);
 }
 
 bool modemEnsureAnswer(const char* pattern, const unsigned long max_timeout = 1000)
@@ -168,9 +167,6 @@ bool sendPacket(const String& message, char* buf, unsigned long buf_len)
   Debug.println(message);
   sendPacketFailsCount++;
   
-//  if(modemEnsureAnswer("\r\n\r\n"))
-//    return false;
-
   modemSendCommand("AT+CIPSHUT");
 
   if(!modemEnsureAnswer("\r\nSHUT OK\r\n",2000))
