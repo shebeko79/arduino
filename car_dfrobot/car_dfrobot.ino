@@ -8,7 +8,8 @@
 
 #define DEG_TO_RAD 0.017453292519943295769236907684886
 
-const char* alarm_name = "car";
+//const char* alarm_name = "car";
+const char* alarm_name = "new_car";
 
 enum ModemState
 {

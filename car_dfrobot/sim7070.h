@@ -28,7 +28,7 @@ void readAnswer(char* in_buf, unsigned long buf_len, const unsigned long max_tim
     while(Modem.available() && buf_len>1)
     {
       *buf=Modem.read();
-//      Debug.write(*buf);
+      //Debug.write(*buf);
       ++buf;
       --buf_len;
     }
@@ -46,7 +46,7 @@ void modemSkipGarbidge()
     while(Modem.available())
     {
       int ch = Modem.read();
-//      Debug.write(ch);
+      //Debug.write(ch);
     }
   }
 }
@@ -87,7 +87,7 @@ bool modemEnsureAnswer(const char* pattern, const unsigned long max_timeout = 10
     }
 
     int ch = Modem.read();
-    Debug.write(ch);
+    //Debug.write(ch);
     if(ch != (int)pattern[i])
     {
       return false;
@@ -146,6 +146,9 @@ bool modemInit()
   if(!modemEnsureAnswer("\r\nOK\r\n"))
     return false;
 
+  modemSendCommand(F("AT+SHDISC"));
+  readAnswer(modem_answer,sizeof(modem_answer));
+
   modemSendCommand(F("AT+CNACT=0,0"));
   readAnswer(modem_answer,sizeof(modem_answer));
 
@@ -173,8 +176,27 @@ bool modemInit()
 
   if(!modemSendOkCommand(F("AT+CNACT=0,2"),6000))
     return false;
-  delay(5000);
-  modemSkipGarbidge();
+
+  //Don't check result. Hopes context will be active later
+  modemEnsureAnswer(F("\r\n+APP PDP: 0,ACTIVE\r\n"));
+
+  if(!modemSendOkCommand(F("AT+CSSLCFG=\"sslversion\",1,3")))
+    return false;
+
+  if(!modemSendOkCommand(F("AT+CSSLCFG=\"ignorertctime\",1,1")))
+    return false;
+
+  if(!modemSendOkCommand(F("AT+SHSSL=1,\"godaddy.crt\"")))
+    return false;
+
+  if(!modemSendOkCommand(F("AT+SHCONF=\"URL\",\"https://api.telegram.org\"")))
+    return false;
+    
+  if(!modemSendOkCommand(F("AT+SHCONF=\"BODYLEN\",1024")))
+    return false;
+    
+  if(!modemSendOkCommand(F("AT+SHCONF=\"HEADERLEN\",350")))
+    return false;
 
   return true;
 }
@@ -182,9 +204,6 @@ bool modemInit()
 bool isendPacket(const String& message, char* buf, unsigned long buf_len)
 {
   if(!modemSendOkCommand(F("AT+SHCHEAD")))
-    return false;
-
-  if(!modemSendOkCommand(F("AT+SHAHEAD=\"Connection\",\"keep-alive\"")))
     return false;
 
   Modem.print("AT+SHREQ=\"/");
@@ -232,10 +251,10 @@ bool isendPacket(const String& message, char* buf, unsigned long buf_len)
   Debug.println("ens()2");
   delay(1000);
 
-  //readAnswer(buf,data_len,60000);
-  //Debug.println("");
-  //Debug.print("buf=");
-  //Debug.println(buf);
+  readAnswer(buf,data_len,5000);
+  Debug.println("");
+  Debug.print("buf=");
+  Debug.println(buf);
 
   modemSkipGarbidge();
 
@@ -249,47 +268,26 @@ bool sendPacket(const String& message, char* buf, unsigned long buf_len)
   Debug.println(message);
   sendPacketFailsCount++;
   
-  modemSendCommand(F("AT+SHSTATE?"));
-
-  if(!modemEnsureAnswer("\r\n+SHSTATE: "))
-    return false;
-
-  readAnswer(modem_answer,modem_answer);
-  Debug.println(modem_answer);
-  //Establish HTTPS connection
-  if(modem_answer[0] != '1')
+  modemSendCommand(F("AT+SHDISC"));
+  readAnswer(modem_answer,sizeof(modem_answer));
+    
+  //Yes, AT+SHCONN and AT+CGNSPWR=1 can't work at the same time
+  if(gpsInited)
   {
-    modemSendCommand(F("AT+CNACT?"));
-    readAnswer(modem_answer,sizeof(modem_answer));
-
-    if(!modemSendOkCommand(F("AT+CSSLCFG=\"sslversion\",1,3")))
-      return false;
-
-    if(!modemSendOkCommand(F("AT+CSSLCFG=\"ignorertctime\",1,1")))
-      return false;
-
-    if(!modemSendOkCommand(F("AT+SHSSL=1,\"godaddy.crt\"")))
-      return false;
-
-    if(!modemSendOkCommand(F("AT+SHCONF=\"URL\",\"https://api.telegram.org\"")))
-      return false;
-
-    if(!modemSendOkCommand(F("AT+SHCONF=\"BODYLEN\",1024")))
-      return false;
-
-    if(!modemSendOkCommand(F("AT+SHCONF=\"HEADERLEN\",350")))
-      return false;
-
-    if(!modemSendOkCommand(F("AT+SHCONN"),120000))
-    {
-      modemSendCommand(F("AT+CNACT=0,0"));
-      readAnswer(modem_answer,sizeof(modem_answer));
-      return false;
-    }
+    modemSendOkCommand(F("AT+CGNSPWR=0"));
+    gpsInited=false;
+  }
+    
+  if(!modemSendOkCommand(F("AT+SHCONN"),120000))
+  {
+    return false;
   }
 
   bool ret=isendPacket(message,buf,buf_len);
   
+  modemSendCommand(F("AT+SHDISC"));
+  readAnswer(modem_answer,sizeof(modem_answer));
+
   if(!ret || *buf==0)
   {
     return false;
