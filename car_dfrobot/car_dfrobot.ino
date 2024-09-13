@@ -71,10 +71,10 @@ void loop()
   {
     if(!modemInit())
       return;
-      
-    if(modemState == ms_not_inited)
-      sendSensorNotification("power_on");
-    else
+
+    sendSensorNotification("power_on");
+
+    if(modemState != ms_not_inited)
       sendSensorNotification("restart");
     
     modemState = ms_inited;

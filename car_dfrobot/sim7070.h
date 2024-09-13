@@ -1,4 +1,3 @@
-#include <SoftwareSerial.h>
 #include <DFRobot_SIM7000.h>
 
 #define Debug Serial
@@ -15,7 +14,7 @@ void modemSendCommand(const char* command, bool show_debug=true);
 void modemSendCommand(const __FlashStringHelper *flashStr, bool show_debug=true);
 void readAnswer(char* buf, unsigned long buf_len, const unsigned long max_timeout = 1000);
 
-static char modem_answer[400];
+static char modem_answer[200];
 
 void readAnswer(char* in_buf, unsigned long buf_len, const unsigned long max_timeout)
 {
@@ -218,53 +217,50 @@ bool isendPacket(const String& message, char* buf, unsigned long buf_len)
     return false;
 
   readAnswer(modem_answer,sizeof(modem_answer));
-  Debug.print("shreq=");
-  Debug.println(modem_answer);
 
   const char* comaPos = strchr(modem_answer,',');
   if(comaPos == nullptr)
     return false;
 
   int data_len = atoi(comaPos+1);
-  Debug.print("data_len=");
-  Debug.println(data_len);
 
   if(data_len>=buf_len)
     data_len=buf_len-1;
 
-  String str(F("AT+SHREAD=0,"));
-  str+=String(data_len);
-  modemSendCommand(str.c_str());
+  for(int i=0;i<data_len;i+=16)
+  {
+    int sz=16;
+    if(data_len-i<sz)
+      sz=data_len-i;
+      
+    String str(F("AT+SHREAD="));
+    str+=String(i);
+    str+=",";
+    str+=String(sz);
+    modemSendCommand(str.c_str(), false);
+    
+    if(!modemEnsureAnswer("\r\nOK\r\n",2000))
+      return false;
+      
+    String shread_answ(F("\r\n+SHREAD: "));
+    shread_answ+=String(sz);
+    shread_answ+="\r\n";
+    
+    if(!modemEnsureAnswer(shread_answ.c_str()))
+      return false;
+    
+    readAnswer(buf+i,sz+1);
+  }
 
-  if(!modemEnsureAnswer("\r\nOK\r\n",2000))
-    return false;
-
-  String shread_answ(F("\r\n+SHREAD: "));
-  shread_answ+=String(data_len);
-  shread_answ+="\r\n";
-  
-  Debug.println("ens()1");
-
-  if(!modemEnsureAnswer(shread_answ.c_str()))
-    return false;
-
-  Debug.println("ens()2");
-  delay(1000);
-
-  readAnswer(buf,data_len,5000);
-  Debug.println("");
-  Debug.print("buf=");
+  Debug.print("recv=");
   Debug.println(buf);
-
-  modemSkipGarbidge();
-
-  Debug.println("ens()3");
 
   return true;
 }
 
 bool sendPacket(const String& message, char* buf, unsigned long buf_len)
 {
+  Debug.print("send=");
   Debug.println(message);
   sendPacketFailsCount++;
   

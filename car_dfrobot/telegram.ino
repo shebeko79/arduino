@@ -5,6 +5,8 @@ int telegramUpdateId = 0;
 int locationMessageId = 0;
 String telegram_request;
 
+static char telegram_answer[400];
+
 void sendTelegramMessage(String message)
 {
   telegram_request=botStr;
@@ -12,7 +14,7 @@ void sendTelegramMessage(String message)
   message=urlencode(message);
   telegram_request+= message;
 
-  sendPacket(telegram_request, modem_answer,sizeof(modem_answer));
+  sendPacket(telegram_request, telegram_answer,sizeof(telegram_answer));
 }
 
 void sendLocation(double lat, double lon, bool do_update)
@@ -31,9 +33,9 @@ void sendLocation(double lat, double lon, bool do_update)
     telegram_request+= "&message_id=";
     telegram_request+= String(locationMessageId);
 
-    sendPacket(telegram_request, modem_answer,sizeof(modem_answer));
+    sendPacket(telegram_request, telegram_answer,sizeof(telegram_answer));
     
-    pStr = strstr(modem_answer, "\"ok\":false");
+    pStr = strstr(telegram_answer, "\"ok\":false");
 
     if(pStr == nullptr)
       return;
@@ -45,9 +47,9 @@ void sendLocation(double lat, double lon, bool do_update)
   telegram_request+= "&longitude=";
   telegram_request+= String(lon,6);
   telegram_request+= "&live_period=1800";
-  sendPacket(telegram_request, modem_answer,sizeof(modem_answer));
+  sendPacket(telegram_request, telegram_answer,sizeof(telegram_answer));
 
-  pStr = strstr(modem_answer, idStr);
+  pStr = strstr(telegram_answer, idStr);
   if(pStr != nullptr)
   {
     pStr +=sizeof(idStr) - 1;
