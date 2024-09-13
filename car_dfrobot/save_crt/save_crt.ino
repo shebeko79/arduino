@@ -56,7 +56,7 @@ void sendModem(String str)
 }
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(19200);
   mySerial.begin(19200);
   sim7000.turnON();
 
@@ -92,9 +92,9 @@ void setup() {
   readModem();
   sendModem("AT+CFSTERM");
   readModem();
-  
+*/  
 }
-*/
+
 void loop()
 {
   mySerial.listen();
