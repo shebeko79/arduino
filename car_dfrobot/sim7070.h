@@ -9,8 +9,10 @@ DFRobot_SIM7000 sim7000(&Modem);
 
 int sendPacketFailsCount = 0;
 
+bool modemSendOkCommand(const __FlashStringHelper *flashStr, const unsigned long max_timeout = 1000);
 bool modemSendOkCommand(const char* command, const unsigned long max_timeout = 1000);
 void modemSendCommand(const char* command, bool show_debug=true);
+void modemSendCommand(const __FlashStringHelper *flashStr, bool show_debug=true);
 void readAnswer(char* buf, unsigned long buf_len, const unsigned long max_timeout = 1000);
 
 static char modem_answer[400];
@@ -49,16 +51,22 @@ void modemSkipGarbidge()
   }
 }
 
+void modemSendCommand(const __FlashStringHelper *flashStr, bool show_debug)
+{
+  String str(flashStr);
+  modemSendCommand(str.c_str(),show_debug);
+}
+
+
 void modemSendCommand(const char* command, bool show_debug)
 {
   modemSkipGarbidge();
 
-//  if(show_debug)
-//    Debug.println(command);
+  if(show_debug)
+    Debug.println(command);
 
   Modem.print(command);
   Modem.write(13);
-//  Modem.write(10);
 }
 
 bool modemEnsureAnswer(const char* pattern, const unsigned long max_timeout = 1000)
@@ -79,7 +87,7 @@ bool modemEnsureAnswer(const char* pattern, const unsigned long max_timeout = 10
     }
 
     int ch = Modem.read();
-//    Debug.write(ch);
+    Debug.write(ch);
     if(ch != (int)pattern[i])
     {
       return false;
@@ -89,6 +97,19 @@ bool modemEnsureAnswer(const char* pattern, const unsigned long max_timeout = 10
   }
 
   return true;
+}
+
+bool modemEnsureAnswer(const __FlashStringHelper *flashStr, const unsigned long max_timeout = 1000)
+{
+  String str(flashStr);
+  return modemEnsureAnswer(str.c_str(), max_timeout);
+}
+
+
+bool modemSendOkCommand(const __FlashStringHelper *flashStr, const unsigned long max_timeout)
+{
+  String str(flashStr);
+  return modemSendOkCommand(str.c_str(),max_timeout);
 }
 
 bool modemSendOkCommand(const char* command, const unsigned long max_timeout)
@@ -112,24 +133,47 @@ bool modemInit()
   if((modem_on_count%5)==0)
     modemPowerSwitch();
   
-  if(!modemSendOkCommand("ATE0"))
+  if(!modemSendOkCommand(F("ATE0")))
     return false;
 
   delay(5000);
 
-  modemSendCommand("AT+CPIN?");
+  modemSendCommand(F("AT+CPIN?"));
 
-  if(!modemEnsureAnswer("\r\n+CPIN: READY\r\n"))
+  if(!modemEnsureAnswer(F("\r\n+CPIN: READY\r\n")))
     return false;
   
   if(!modemEnsureAnswer("\r\nOK\r\n"))
     return false;
 
-  if(!modemSendOkCommand("AT+CGACT=1,1"))
+  modemSendCommand(F("AT+CNACT=0,0"));
+  readAnswer(modem_answer,sizeof(modem_answer));
+
+  modemSendCommand(F("AT+CGNAPN"));
+
+  if(!modemEnsureAnswer(F("\r\n+CGNAPN: 1,\""),6000))
+    return false;
+    
+  readAnswer(modem_answer,sizeof(modem_answer));
+  char* end_qoute = strchr(modem_answer,'"');
+
+  String cmd(F("AT+CNCFG=0,1,\""));
+  if(end_qoute == nullptr)
+  {
+    cmd+="internet\"";
+  }
+  else
+  {
+    end_qoute[1]=0;
+    cmd+=modem_answer;
+  }
+
+  if(!modemSendOkCommand(cmd.c_str()))
     return false;
 
-  modemSendCommand("AT+CSTT=\"internet\"");
-  delay(1000);
+  if(!modemSendOkCommand(F("AT+CNACT=0,2"),6000))
+    return false;
+  delay(5000);
   modemSkipGarbidge();
 
   return true;
@@ -137,28 +181,65 @@ bool modemInit()
 
 bool isendPacket(const String& message, char* buf, unsigned long buf_len)
 {
-  if(!modemSendOkCommand("AT+CIPSTART=\"UDP\",\"31.214.157.79\",\"3203\""))
+  if(!modemSendOkCommand(F("AT+SHCHEAD")))
     return false;
 
-  if(!modemEnsureAnswer("\r\nCONNECT OK\r\n"))
+  if(!modemSendOkCommand(F("AT+SHAHEAD=\"Connection\",\"keep-alive\"")))
     return false;
 
-  Modem.print("AT+CIPSEND=");
-  Modem.print(message.length());
-  Modem.write(13);
-  Modem.write(10);
-
-  if(!modemEnsureAnswer("\r\n> "))
-    return false;
-
+  Modem.print("AT+SHREQ=\"/");
   Modem.print(message);
+  Modem.print("\",1");
+  Modem.write(13);
 
-  if(!modemEnsureAnswer("\r\nSEND OK\r\n"))
+  if(!modemEnsureAnswer("\r\nOK\r\n",10000))
     return false;
 
-  readAnswer(buf,buf_len,10000);
+  if(!modemEnsureAnswer(F("\r\n+SHREQ: \"GET\","),30000))
+    return false;
 
-//  Debug.println(buf);
+  readAnswer(modem_answer,sizeof(modem_answer));
+  Debug.print("shreq=");
+  Debug.println(modem_answer);
+
+  const char* comaPos = strchr(modem_answer,',');
+  if(comaPos == nullptr)
+    return false;
+
+  int data_len = atoi(comaPos+1);
+  Debug.print("data_len=");
+  Debug.println(data_len);
+
+  if(data_len>=buf_len)
+    data_len=buf_len-1;
+
+  String str(F("AT+SHREAD=0,"));
+  str+=String(data_len);
+  modemSendCommand(str.c_str());
+
+  if(!modemEnsureAnswer("\r\nOK\r\n",2000))
+    return false;
+
+  String shread_answ(F("\r\n+SHREAD: "));
+  shread_answ+=String(data_len);
+  shread_answ+="\r\n";
+  
+  Debug.println("ens()1");
+
+  if(!modemEnsureAnswer(shread_answ.c_str()))
+    return false;
+
+  Debug.println("ens()2");
+  delay(1000);
+
+  //readAnswer(buf,data_len,60000);
+  //Debug.println("");
+  //Debug.print("buf=");
+  //Debug.println(buf);
+
+  modemSkipGarbidge();
+
+  Debug.println("ens()3");
 
   return true;
 }
@@ -168,35 +249,48 @@ bool sendPacket(const String& message, char* buf, unsigned long buf_len)
   Debug.println(message);
   sendPacketFailsCount++;
   
-//  if(modemEnsureAnswer("\r\n\r\n"))
-//    return false;
+  modemSendCommand(F("AT+SHSTATE?"));
 
-  modemSendCommand("AT+CIPSHUT");
-
-  if(!modemEnsureAnswer("\r\nSHUT OK\r\n",2000))
+  if(!modemEnsureAnswer("\r\n+SHSTATE: "))
     return false;
 
-  for(int i =0;i<3;i++)
+  readAnswer(modem_answer,modem_answer);
+  Debug.println(modem_answer);
+  //Establish HTTPS connection
+  if(modem_answer[0] != '1')
   {
-    if(!modemSendOkCommand("AT+CIPSTATUS"))
-      return false;
-      
+    modemSendCommand(F("AT+CNACT?"));
     readAnswer(modem_answer,sizeof(modem_answer));
-    
-    if(strstr(modem_answer,"STATE: IP STATUS") == nullptr ||
-       strstr(modem_answer,"STATE: UDP CLOSED") == nullptr)
-       break;
 
-    delay(1000);
+    if(!modemSendOkCommand(F("AT+CSSLCFG=\"sslversion\",1,3")))
+      return false;
+
+    if(!modemSendOkCommand(F("AT+CSSLCFG=\"ignorertctime\",1,1")))
+      return false;
+
+    if(!modemSendOkCommand(F("AT+SHSSL=1,\"godaddy.crt\"")))
+      return false;
+
+    if(!modemSendOkCommand(F("AT+SHCONF=\"URL\",\"https://api.telegram.org\"")))
+      return false;
+
+    if(!modemSendOkCommand(F("AT+SHCONF=\"BODYLEN\",1024")))
+      return false;
+
+    if(!modemSendOkCommand(F("AT+SHCONF=\"HEADERLEN\",350")))
+      return false;
+
+    if(!modemSendOkCommand(F("AT+SHCONN"),120000))
+    {
+      modemSendCommand(F("AT+CNACT=0,0"));
+      readAnswer(modem_answer,sizeof(modem_answer));
+      return false;
+    }
   }
 
   bool ret=isendPacket(message,buf,buf_len);
   
-  modemSendCommand("AT+CIPCLOSE");
-  
-  bool retCloseOk = modemEnsureAnswer("\r\nCLOSE OK\r\n");
-
-  if(!ret || !retCloseOk || *buf==0)
+  if(!ret || *buf==0)
   {
     return false;
   }
@@ -208,12 +302,12 @@ bool sendPacket(const String& message, char* buf, unsigned long buf_len)
 
 bool initGps()
 {
-  return modemSendOkCommand("AT+CGNSPWR=1");
+  return modemSendOkCommand(F("AT+CGNSPWR=1"));
 }
 
 bool getGps(bool& fixed, double& lon, double& lat, double& alt, String& utc_time, double& speed, double& course)
 {
-  modemSendCommand("AT+CGNSINF",false);
+  modemSendCommand(F("AT+CGNSINF"),false);
   readAnswer(modem_answer,sizeof(modem_answer));
 
   fixed = strstr(modem_answer,"+CGNSINF: 1,1")!=nullptr;
