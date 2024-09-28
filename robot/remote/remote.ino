@@ -7,6 +7,7 @@ const char *bluetooth_pin = "1234";
 
 #define VRX_PIN  32
 #define VRY_PIN  33
+#define BUTTON_PIN  35
 #define LED 22
 
 int central_minx=0;
@@ -28,6 +29,8 @@ BluetoothSerial SerialBT;
 void setup() 
 {
   Serial.begin(115200);
+
+  pinMode(BUTTON_PIN ,INPUT_PULLUP);
 
   analogSetAttenuation(ADC_11db);
 
@@ -200,10 +203,43 @@ void processJoystick()
   SerialBT.print(str);
 }
 
+void processButton()
+{
+  if(!SerialBT.connected())
+  {
+    return;
+  }
+
+  if(digitalRead(BUTTON_PIN) != LOW)
+    return;
+
+  // read X and Y analog values
+  int x = analogRead(VRX_PIN);
+  int y = analogRead(VRY_PIN);
+
+  int vx = convert(x,central_minx,central_maxx);
+  int vy = convert(y,central_miny,central_maxy);
+
+  if(vx!=0 || vy!=0)
+    return;
+
+  //Serial.print("vx=");
+  //Serial.print(vx);
+  //Serial.print(" vy=");
+  //Serial.println(vy);
+
+  String str = "cmd:"REMOTE_NAME":block:0\r";
+
+  Serial.println(str);
+  SerialBT.print(str);
+  delay(1000);
+}
+
 void loop()
 {
   connectBT();
   readBT();
   processJoystick();
+  processButton();
   delay(50);
 }

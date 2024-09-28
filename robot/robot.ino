@@ -1,11 +1,12 @@
+//Board ESP32-WROOM-DA Module
 #include "motor.h"
-#include <WiFi.h>
-#include <WiFiMulti.h>
-#include <WiFiUdp.h>
+//#include <WiFi.h>
+//#include <WiFiMulti.h>
+//#include <WiFiUdp.h>
 #include <BluetoothSerial.h>
 
-static const int FAIL_SAFE_DELAY = 30000;
-const String device_name("rccar");
+static const int FAIL_SAFE_DELAY = 2000;
+#define DEVICE_NAME "rccar"
 static const int portNumber = 1500;
 
 const char *bluetooth_pin = "1234";
@@ -18,117 +19,39 @@ int cur_left_engine = 0;
 int dst_right_engine = 0;
 int cur_right_engine = 0;
 unsigned long last_ms = 0;
+uint8_t sbuf[256];
+bool auto_cmd_blocked = false;
 
 char incomingUdpPacket[256];
-
 bool processCommand(const char* buf);
 
 BluetoothSerial SerialBT;
+#define SerialAuto Serial2
 
 void setup() 
 {
   Serial.begin(115200);
+  SerialAuto.begin(115200);
 
-  SerialBT.begin(device_name); //Bluetooth device name
+  SerialBT.begin(DEVICE_NAME); //Bluetooth device name
   SerialBT.setPin(bluetooth_pin);
 
   leftWheel.init();
   rightWheel.init();
 }
 
-void monitorWiFi()
+template<typename T>
+void processStream(T& stream, const char* caption,bool blocked)
 {
-/*  
-  if (wifiMulti.run() != WL_CONNECTED)
-  {
-    if (connectioWasAlive == true)
-    {
-      connectioWasAlive = false;
-      Serial.print("Looking for WiFi ");
-    }
-    delay(500);
-  }
-  else if (connectioWasAlive == false)
-  {
-    connectioWasAlive = true;
-    Serial.printf(" connected to %s\n", WiFi.SSID().c_str());
-    
-    IPAddress ip = WiFi.localIP();
-    Serial.println(ip);
-    
-    NBNS.begin(device_name.c_str());
-
-    udpServer.begin(portNumber);
-
-    server.begin();
-    server.setNoDelay(true);
-      
-    pinMode(LED_BUILTIN, OUTPUT);
-    digitalWrite(LED_BUILTIN, LOW);
-  }
-*/  
-}
-
-void connectClient()
-{
-/*  
-  if(!server.hasClient())
+  if (!stream.available())
     return;
 
-  if(client.connected())
-    client.stop();
-
-  client = server.available();
-*/  
-}
-
-void replyIp()
-{
-/*  
-  int packetSize = udpServer.parsePacket();
-  if(packetSize <= 0)
-    return;
-    
-  Serial.print("replyIp(): ip=");
-  Serial.print(udpServer.remoteIP());
-  Serial.print(" port=");
-  Serial.println(udpServer.remotePort());
-  
-  int len = udpServer.read(incomingUdpPacket, sizeof(incomingUdpPacket)-1);
-  if (len <= 0)
-    return;
-    
-  incomingUdpPacket[len] = 0;
-  Serial.printf("UDP packet contents: %s\n", incomingUdpPacket);
-
-  if(device_name != incomingUdpPacket)
-    return;
-
-  //send back a reply, to the IP address and port we got the packet from
-  udpServer.beginPacket(udpServer.remoteIP(), udpServer.remotePort());
-  udpServer.print(WiFi.localIP());
-  udpServer.endPacket();  
-
-  Serial.println("replyIp()2");
-*/  
-}
-
-void processClient()
-{
-/*  
-  if(!client.connected())
-    return;
-
-  if(!client.available())
-    return;
-
-  static uint8_t sbuf[256];
 
   unsigned long timeout = millis() + 1000;
 
   for(int i = 0 ; timeout>millis();)
   {
-    int len = client.available();
+    int len = stream.available();
     
     if(len == 0)
     {
@@ -139,7 +62,7 @@ void processClient()
     if(i + len>sizeof(sbuf)-1)
       len = sizeof(sbuf)-1 - i;
     
-    client.readBytes(sbuf + i, len);
+    stream.readBytes(sbuf + i, len);
     
     sbuf[i+len] = 0;
     i+=len;
@@ -148,60 +71,25 @@ void processClient()
       break;
   }
 
-//  Serial.println((const char*)sbuf);
+  if(!blocked)
+  {
+    Serial.print(caption);
+    Serial.print(": ");
+    Serial.println((const char*)sbuf);
+  }
 
   char* cur = (char*)sbuf;
   for(char* next = strchr(cur, '\r'); next!=nullptr;)
   {
     *next = 0;
-    processCommand(cur);
 
-    cur=next+1;
-    next= strchr(cur, '\r');
-  }
-*/  
-}
-
-void processBT()
-{
-  if (!SerialBT.available())
-    return;
-
-  static uint8_t sbuf[256];
-
-  unsigned long timeout = millis() + 1000;
-
-  for(int i = 0 ; timeout>millis();)
-  {
-    int len = SerialBT.available();
-    
-    if(len == 0)
+    if(blocked)
     {
-      delay(100);
-      continue;
+      stream.print("reject:cmd:"DEVICE_NAME":drive\r");
     }
-    
-    if(i + len>sizeof(sbuf)-1)
-      len = sizeof(sbuf)-1 - i;
-    
-    SerialBT.readBytes(sbuf + i, len);
-    
-    sbuf[i+len] = 0;
-    i+=len;
-
-    if(strchr((const char*)sbuf,'\r') != nullptr)
-      break;
-  }
-
-  Serial.println((const char*)sbuf);
-
-  char* cur = (char*)sbuf;
-  for(char* next = strchr(cur, '\r'); next!=nullptr;)
-  {
-    *next = 0;
-    if(processCommand(cur))
+    else if(processCommand(cur))
     {
-      SerialBT.print("accept:cmd:rccar:drive\r");
+      stream.print("accept:cmd:"DEVICE_NAME":drive\r");
     }
 
     cur=next+1;
@@ -209,13 +97,9 @@ void processBT()
   }
 }
 
-bool processCommand(const char* buf)
+bool processDriveCommand(const char* buf)
 {
-  buf = strstr(buf, "cmd:rccar:drive:");
-  if(!buf)
-    return false;
-
-  buf += sizeof("cmd:rccar:drive:")-1;
+  buf += sizeof("cmd:"DEVICE_NAME":drive:")-1;
   
   int left_val=atol(buf);
   if(left_val<-255 || left_val>255)
@@ -234,6 +118,28 @@ bool processCommand(const char* buf)
   last_ms = millis();
 
   return true;
+}
+
+bool processBlockCommand(const char* buf)
+{
+  buf += sizeof("cmd:"DEVICE_NAME":block:")-1;
+
+  auto_cmd_blocked=atol(buf)!=0;
+
+  return true;
+}
+
+bool processCommand(const char* buf)
+{
+  const char* pattern = strstr(buf, "cmd:"DEVICE_NAME":drive:");
+  if(pattern)
+    return processDriveCommand(pattern);
+
+  pattern = strstr(buf, "cmd:"DEVICE_NAME":block:");
+  if(pattern)
+    return processBlockCommand(pattern);
+
+  return false;
 }
 
 void failSafe()
@@ -285,11 +191,24 @@ void apply(DcMotor& dc, int dst,int& cur)
 
 void loop()
 {
-  monitorWiFi();
-  replyIp();
-  connectClient();
-  processClient();
-  processBT();
+  unsigned long prev_last_ms = last_ms;
+  int prev_dst_left_engine = dst_left_engine;
+  int prev_dst_right_engine = dst_right_engine;
+
+  processStream(SerialBT,"BT",false);
+  
+  if(!auto_cmd_blocked && last_ms != prev_last_ms)
+  {
+    if(abs(dst_left_engine)>10 || abs(dst_right_engine)>10)
+      auto_cmd_blocked = true;
+    else
+    {
+      dst_left_engine = prev_dst_left_engine;
+      dst_right_engine = prev_dst_right_engine;
+    }
+  }
+  
+  processStream(SerialAuto,"S2",auto_cmd_blocked);
   failSafe();
   apply(leftWheel,dst_left_engine,cur_left_engine);
   apply(rightWheel,dst_right_engine,cur_right_engine);
