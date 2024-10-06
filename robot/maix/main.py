@@ -1,8 +1,10 @@
 from maix import camera, image, display, app, touchscreen
 import tracker
 import states
+import track_utils
+from track_utils import CAM_SIZE
 
-CAM_SIZE = [640, 480]
+
 cam: camera.Camera = None
 disp: display.Display = None
 touch: touchscreen.TouchScreen = None
@@ -45,8 +47,8 @@ def main_cycle():
 
         disp_img = st.draw_screen(img, [disp.width(), disp.height()])
         if start_point:
-            disp_img.draw_rect(start_point[0], start_point[1], touch_pt[0] - start_point[0],
-                               touch_pt[1] - start_point[1],
+            rc = track_utils.make_rect(start_point, touch_pt)
+            disp_img.draw_rect(rc[0], rc[1], rc[2] - rc[0], rc[3] - rc[1],
                                states.BaseState.rectangle_color, 3)
 
         disp.show(disp_img)
@@ -68,8 +70,9 @@ def main_cycle():
                 y1 = int(start_point[1] * CAM_SIZE[1] / disp.height())
                 x2 = int(touch_pt[0] * CAM_SIZE[0] / disp.width())
                 y2 = int(touch_pt[1] * CAM_SIZE[1] / disp.height())
+                rc = track_utils.make_rect([x1, y1], [x2, y2])
 
-                st.on_rectangle(img, [x1, y1, x2, y2])
+                st.on_rectangle(img, rc)
                 start_point = None
 
         prev_touched = touched
