@@ -17,6 +17,9 @@ class TrackObject:
     def track(self, img: image.Image):
         self.r = self.model.track(img)
 
+    def is_locked(self):
+        return self.r.score > 0.93
+
 
 def add_tracker(img, rc):
     tr = TrackObject(img, rc)
@@ -29,12 +32,32 @@ def get_camera_format():
 
 
 def draw_trackers(img: image.Image):
-    for i in range(0,len(objects)):
-        o = object[i]
-        r = o.r;
+    iw = img.width()
+    ih = img.height()
+    hi_cl = image.Color.from_rgb(255, 0, 0)
+    gray_cl = image.Color.from_rgb(127, 127, 127)
 
-        img.draw_rect(r.x, r.y, r.w, r.h, image.Color.from_rgb(255, 0, 0), 4)
+    for i in range(0, len(objects)):
+        o: TrackObject = objects[i]
+        r = o.r
+
+        x = int(r.x * iw / o.img_size[0])
+        y = int(r.y * ih / o.img_size[1])
+        w = int(r.w * iw / o.img_size[0])
+        h = int(r.h * ih / o.img_size[1])
+
+        if o.is_locked():
+            cl = hi_cl
+        else:
+            cl = gray_cl
+
+        img.draw_rect(x, y, w, h, cl)
 
         cap = f"{i}"
         font_size = image.string_size(cap)
-        img.draw_string(r.x, r.y - font_size[1] - 2, cap, image.Color.from_rgb(255, 0, 0), 1.5)
+        img.draw_string(x, y - font_size[1] - 2, cap, cl)
+
+
+def track(img: image.Image):
+    for o in objects:
+        o.track(img)
