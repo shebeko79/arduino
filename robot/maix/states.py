@@ -1,4 +1,6 @@
 from maix import image
+
+import algos
 import tracker
 
 
@@ -118,7 +120,7 @@ class MainState(BaseState):
 
     def enter(self):
         self.buttons = [Button("Points", PointsState.state_name),
-                        Button("Track", "track_init", len(tracker.objects) > 0)]
+                        Button("Track", TrackInitState.state_name, len(tracker.objects) > 0)]
 
 
 class PointsState(BaseState):
@@ -141,6 +143,9 @@ class AddPointState(BaseState):
         self.buttons = []
 
     def on_rectangle(self, cam_img: image.Image, rc):
+        if rc[2]-rc[0] == 0 or rc[3] - rc[1] == 0:
+            return
+
         tracker.add_tracker(cam_img, rc)
         set_state(PointsState.state_name)
 
@@ -154,8 +159,48 @@ class DeleteLastPointState(BaseState):
         set_state(PointsState.state_name)
 
 
+class TrackInitState(BaseState):
+    state_name = "track_init"
+
+    def __init__(self):
+        super().__init__()
+        self.accept_click = True
+
+    @staticmethod
+    def move_to(tr):
+        alg = algos.MoveToAlgo(tr)
+        algos.set_algo(alg)
+        set_state(TrackState.state_name)
+
+    def enter(self):
+        self.buttons = [Button("Back", MainState.state_name)]
+        if len(tracker.objects) == 1:
+            self.move_to(tracker.objects[0])
+
+    def on_click(self, pt):
+        tr = tracker.hit_test(pt)
+        if tr:
+            self.move_to(tr)
+
+
+class TrackState(BaseState):
+    state_name = "track"
+
+    def __init__(self):
+        super().__init__()
+        self.accept_point = True
+
+    def enter(self):
+        self.buttons = [Button("Stop", MainState.state_name)]
+
+    def leave(self):
+        algos.set_algo(None)
+
+
 def init():
     add_state(MainState())
     add_state(PointsState())
     add_state(AddPointState())
     add_state(DeleteLastPointState())
+    add_state(TrackInitState())
+    add_state(TrackState())

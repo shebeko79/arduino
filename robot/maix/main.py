@@ -1,4 +1,6 @@
 from maix import camera, image, display, app, touchscreen
+import mover
+import algos
 import tracker
 import states
 import track_utils
@@ -24,6 +26,8 @@ def main_init():
 
     image.load_font("sans", "/maixapp/share/font/sans.ttf", size=32)
 
+    mover.init()
+
     states.init()
     states.set_state(states.MainState.state_name)
 
@@ -40,6 +44,8 @@ def main_cycle():
         img = cam.read()
 
         tracker.track(img)
+        algos.process()
+        mover.process()
 
         touch_status = touch.read()
         touched = touch_status[2]
@@ -59,7 +65,9 @@ def main_cycle():
                 st.on_click_button(btn)
             else:
                 if st.accept_click:
-                    st.on_click(touch_pt)
+                    x = int(touch_pt[0] * CAM_SIZE[0] / disp.width())
+                    y = int(touch_pt[1] * CAM_SIZE[1] / disp.height())
+                    st.on_click([x, y])
 
                 if st.accept_rectangle:
                     start_point = touch_pt
