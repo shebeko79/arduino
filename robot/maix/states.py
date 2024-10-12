@@ -2,6 +2,7 @@ from maix import image
 
 import algos
 import tracker
+import mover
 
 
 class Button:
@@ -127,7 +128,8 @@ class MainState(BaseState):
 
     def enter(self):
         self.buttons = [Button("Points", PointsState.state_name),
-                        Button("Track", TrackInitState.state_name, len(tracker.objects) > 0)]
+                        Button("Track", TrackInitState.state_name, len(tracker.objects) > 0),
+                        Button("Move", MoveState.state_name)]
 
 
 class PointsState(BaseState):
@@ -195,13 +197,40 @@ class TrackState(BaseState):
 
     def __init__(self):
         super().__init__()
-        self.accept_point = True
 
     def enter(self):
         self.buttons = [Button("Stop", MainState.state_name)]
 
     def leave(self):
         algos.set_algo(None)
+
+
+class MoveState(BaseState):
+    state_name = "move"
+
+    def __init__(self):
+        super().__init__()
+
+    def enter(self):
+        self.buttons = [Button("Left"), Button("Forward"), Button("Backward"), Button("Right"), Button("Stop"),
+                        Button("Back", MainState.state_name)]
+
+    def leave(self):
+        mover.stop()
+
+    def on_click_button(self, btn: Button):
+        if btn.state_name:
+            set_state(btn.state_name)
+        elif btn.caption == "Left":
+            mover.move(0, -1)
+        elif btn.caption == "Right":
+            mover.move(0, 1)
+        elif btn.caption == "Forward":
+            mover.move(1, 0)
+        elif btn.caption == "Backward":
+            mover.move(-1, 0)
+        elif btn.caption == "Stop":
+            mover.stop()
 
 
 def init():
@@ -211,3 +240,4 @@ def init():
     add_state(DeleteLastPointState())
     add_state(TrackInitState())
     add_state(TrackState())
+    add_state(MoveState())
