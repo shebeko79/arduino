@@ -5,6 +5,7 @@ import tracker
 import states
 import track_utils
 from track_utils import CAM_SIZE
+import http_server
 
 
 cam: camera.Camera = None
@@ -31,6 +32,8 @@ def main_init():
     states.init()
     states.set_state(states.MainState.state_name)
 
+    http_server.init()
+
 
 def main_cycle():
     global prev_touched
@@ -46,6 +49,8 @@ def main_cycle():
         tracker.track(img)
         algos.process()
         mover.process()
+        http_server.set_img(img)
+        http_server.set_state()
 
         touch_status = touch.read()
         touched = touch_status[2]

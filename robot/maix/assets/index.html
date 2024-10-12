@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Robot</title>
+</head>
+<script>
+function reloadImg()
+{
+  var timestamp = new Date().getTime();
+  var image = document.getElementById("cam_img");
+  image.src="/img?t=" + timestamp;
+}
+
+</script>
+<body>
+    <img id="cam_img" src="/img" width="640" height="480" onload="setTimeout(reloadImg, 1000)"/>
+</body>
+</html>

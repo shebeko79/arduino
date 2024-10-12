@@ -1,6 +1,7 @@
 from maix import camera, time, app, image
 from flask import Flask, request, send_file
 import io
+import threading
 
 app = Flask(__name__)
 
@@ -25,5 +26,16 @@ def img():
 
     return send_file(fp,mimetype="image/jpeg")
 
-if __name__ == "__main__":
+def thread_task(lock):
     app.run(host="0.0.0.0", port=8000)
+
+if __name__ == "__main__":
+    lock = threading.Lock()
+    t1 = threading.Thread(target=thread_task, args=(lock,))
+    t1.start()
+
+    while True:
+        print("tick")
+        time.sleep_ms(1000)
+
+    t1.join()
