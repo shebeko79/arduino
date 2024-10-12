@@ -13,11 +13,23 @@
             background-color: lightgray;
             color: gray;
         }
+        #image-container {
+            position: relative;
+            display: inline-block;
+        }
+        #rect {
+            position: absolute;
+            border: 2px dashed rgba(255, 0, 0, 0.7);
+            pointer-events: none;
+        }
     </style>
 </head>
 <script>
 let currentStateName = '';
 let acceptClick = false;
+let acceptRectangle = false;
+let isSelecting = false;
+let startX, startY, endX, endY;
 
 function reloadImg() {
     var timestamp = new Date().getTime();
@@ -31,6 +43,7 @@ function fetchState() {
         .then(data => {
             currentStateName = data.state_name;
             acceptClick = data.accept_click;
+            acceptRectangle = data.accept_rectangle;
             updateButtons(data.buttons);
         })
         .catch(error => console.error('Error fetching state:', error));
@@ -115,16 +128,87 @@ function handleImageClick(event) {
     }
 }
 
+function startRectangleSelection(event) {
+    if (acceptRectangle) {
+        isSelecting = true;
+        const rect = event.target.getBoundingClientRect();
+        startX = event.clientX - rect.left;
+        startY = event.clientY - rect.top;
+
+        const rectangle = document.getElementById("rect");
+        rectangle.style.left = startX + "px";
+        rectangle.style.top = startY + "px";
+        rectangle.style.width = "0px";
+        rectangle.style.height = "0px";
+    }
+}
+
+function updateRectangle(event) {
+    if (isSelecting) {
+        const rect = event.target.getBoundingClientRect();
+        endX = event.clientX - rect.left;
+        endY = event.clientY - rect.top;
+
+        const rectangle = document.getElementById("rect");
+        rectangle.style.width = Math.abs(endX - startX) + "px";
+        rectangle.style.height = Math.abs(endY - startY) + "px";
+        rectangle.style.left = Math.min(startX, endX) + "px";
+        rectangle.style.top = Math.min(startY, endY) + "px";
+    }
+}
+
+function endRectangleSelection() {
+    if (isSelecting) {
+        isSelecting = false;
+        const payload = {
+            state_name: currentStateName,
+            x1: Math.min(startX, endX),
+            y1: Math.min(startY, endY),
+            x2: Math.max(startX, endX),
+            y2: Math.max(startY, endY)
+        };
+
+        fetch('/sel_rect', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert(`Rectangle selected: [(${payload.x1}, ${payload.y1}), (${payload.x2}, ${payload.y2})]`);
+        })
+        .catch(error => console.error('Error sending rectangle request:', error));
+
+        const rectangle = document.getElementById("rect");
+        rectangle.style.width = "0px";
+        rectangle.style.height = "0px";
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     fetchState();
     setInterval(fetchState, 1000);
-    
+
     const image = document.getElementById("cam_img");
     image.addEventListener("click", handleImageClick);
+    image.addEventListener("mousedown", startRectangleSelection);
+    image.addEventListener("mousemove", updateRectangle);
+    image.addEventListener("mouseup", endRectangleSelection);
 });
 </script>
 <body>
-    <img id="cam_img" src="/img" width="640" height="480" onload="setTimeout(reloadImg, 1000)"/>
+    <div id="image-container">
+        <img id="cam_img" src="/img" width="640" height="480" onload="setTimeout(reloadImg, 1000)"/>
+        <div id="rect"></div>
+    </div>
     <div id="button-container" class="button-container"></div>
 </body>
 </html>
