@@ -49,7 +49,11 @@ def main_cycle():
         tracker.track(img)
         algos.process()
         mover.process()
-        http_server.set_img(img)
+
+        http_img = img.copy()
+        tracker.draw_trackers(http_img)
+
+        http_server.set_img(http_img)
         http_server.set_state()
 
         touch_status = touch.read()
@@ -89,6 +93,8 @@ def main_cycle():
                 start_point = None
 
         prev_touched = touched
+
+        http_server.process_request()
 
 
 if __name__ == "__main__":

@@ -18,9 +18,10 @@
             display: inline-block;
         }
         #rect {
-            position: absolute;
-            border: 2px dashed rgba(255, 0, 0, 0.7);
-            pointer-events: none;
+           position: absolute;
+           border: 2px dashed rgba(255, 0, 0, 0.7);
+           pointer-events: none;
+           visibility: hidden;
         }
     </style>
 </head>
@@ -88,10 +89,6 @@ function sendClickRequest(caption) {
         }
         return response.json();
     })
-    .then(data => {
-        console.log('Success:', data);
-        alert(caption + ' button clicked!');
-    })
     .catch(error => console.error('Error sending click request:', error));
 }
 
@@ -120,15 +117,12 @@ function handleImageClick(event) {
             }
             return response.json();
         })
-        .then(data => {
-            console.log('Success:', data);
-            alert(`Point clicked at (${x}, ${y})`);
-        })
         .catch(error => console.error('Error sending click point request:', error));
     }
 }
 
 function startRectangleSelection(event) {
+    event.preventDefault();
     if (acceptRectangle) {
         isSelecting = true;
         const rect = event.target.getBoundingClientRect();
@@ -136,6 +130,7 @@ function startRectangleSelection(event) {
         startY = event.clientY - rect.top;
 
         const rectangle = document.getElementById("rect");
+		rectangle.style.visibility = "visible";
         rectangle.style.left = startX + "px";
         rectangle.style.top = startY + "px";
         rectangle.style.width = "0px";
@@ -160,34 +155,34 @@ function updateRectangle(event) {
 function endRectangleSelection() {
     if (isSelecting) {
         isSelecting = false;
-        const payload = {
-            state_name: currentStateName,
-            x1: Math.min(startX, endX),
-            y1: Math.min(startY, endY),
-            x2: Math.max(startX, endX),
-            y2: Math.max(startY, endY)
-        };
+		if(startX!=endX && startY!=endY)
+		{
+			const payload = {
+				state_name: currentStateName,
+				x1: Math.min(startX, endX),
+				y1: Math.min(startY, endY),
+				x2: Math.max(startX, endX),
+				y2: Math.max(startY, endY)
+			};
 
-        fetch('/sel_rect', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Success:', data);
-            alert(`Rectangle selected: [(${payload.x1}, ${payload.y1}), (${payload.x2}, ${payload.y2})]`);
-        })
-        .catch(error => console.error('Error sending rectangle request:', error));
+			fetch('/sel_rect', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(payload)
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				return response.json();
+			})
+			.catch(error => console.error('Error sending rectangle request:', error));
+		}
 
         const rectangle = document.getElementById("rect");
+		rectangle.style.visibility = "hidden";
         rectangle.style.width = "0px";
         rectangle.style.height = "0px";
     }

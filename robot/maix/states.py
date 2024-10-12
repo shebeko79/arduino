@@ -65,6 +65,13 @@ class BaseState:
                 return btn
         return None
 
+    def button_by_name(self, caption):
+        for btn in self.buttons:
+            if btn.caption == caption:
+                return btn
+
+        return None
+
     def draw_buttons(self, img: image.Image):
         indent = 8
         enabled_cl = image.Color.from_rgb(255, 255, 255)
