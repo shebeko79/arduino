@@ -17,6 +17,7 @@
 </head>
 <script>
 let currentStateName = '';
+let acceptClick = false;
 
 function reloadImg() {
     var timestamp = new Date().getTime();
@@ -29,6 +30,7 @@ function fetchState() {
         .then(response => response.json())
         .then(data => {
             currentStateName = data.state_name;
+            acceptClick = data.accept_click;
             updateButtons(data.buttons);
         })
         .catch(error => console.error('Error fetching state:', error));
@@ -80,9 +82,45 @@ function sendClickRequest(caption) {
     .catch(error => console.error('Error sending click request:', error));
 }
 
+function handleImageClick(event) {
+    if (acceptClick) {
+        const rect = event.target.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const payload = {
+            state_name: currentStateName,
+            x: x,
+            y: y
+        };
+
+        fetch('/click_point', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert(`Point clicked at (${x}, ${y})`);
+        })
+        .catch(error => console.error('Error sending click point request:', error));
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     fetchState();
     setInterval(fetchState, 1000);
+    
+    const image = document.getElementById("cam_img");
+    image.addEventListener("click", handleImageClick);
 });
 </script>
 <body>
