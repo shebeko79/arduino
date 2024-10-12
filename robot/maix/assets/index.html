@@ -16,6 +16,8 @@
     </style>
 </head>
 <script>
+let currentStateName = '';
+
 function reloadImg() {
     var timestamp = new Date().getTime();
     var image = document.getElementById("cam_img");
@@ -26,6 +28,7 @@ function fetchState() {
     fetch('/state')
         .then(response => response.json())
         .then(data => {
+            currentStateName = data.state_name;
             updateButtons(data.buttons);
         })
         .catch(error => console.error('Error fetching state:', error));
@@ -33,7 +36,7 @@ function fetchState() {
 
 function updateButtons(buttons) {
     var buttonContainer = document.getElementById("button-container");
-    buttonContainer.innerHTML = ''; // Clear existing buttons
+    buttonContainer.innerHTML = '';
 
     buttons.forEach(button => {
         var btn = document.createElement("button");
@@ -41,20 +44,45 @@ function updateButtons(buttons) {
 
         if (button.enabled) {
             btn.onclick = function() {
-                alert(button.caption + ' button clicked!');
-                // Add more functionality here if needed
+                sendClickRequest(button.caption);
             };
         } else {
-            btn.disabled = true; // Disable the button
+            btn.disabled = true;
         }
 
         buttonContainer.appendChild(btn);
     });
 }
 
+function sendClickRequest(caption) {
+    const payload = {
+        state_name: currentStateName,
+        caption: caption
+    };
+
+    fetch('/click', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        alert(caption + ' button clicked!');
+    })
+    .catch(error => console.error('Error sending click request:', error));
+}
+
 document.addEventListener("DOMContentLoaded", function() {
-    fetchState(); // Fetch initial state
-    setInterval(fetchState, 1000); // Fetch state every 5 seconds
+    fetchState();
+    setInterval(fetchState, 1000);
 });
 </script>
 <body>
