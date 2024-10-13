@@ -100,7 +100,7 @@ def process_request():
 
 @server.route("/", methods=["GET", "POST"])
 def root():
-    file = open("assets/index.html", 'r')
+    file = open(track_utils.BASE_PATH+"/assets/index.html", 'r')
     file_content = file.read()
     return file_content
 

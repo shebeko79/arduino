@@ -1,5 +1,6 @@
 
 CAM_SIZE = [640, 480]
+BASE_PATH = "/root/robot"
 
 
 def make_rect(pt1, pt2):
