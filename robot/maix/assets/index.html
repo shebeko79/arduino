@@ -92,11 +92,30 @@ function sendClickRequest(caption) {
     .catch(error => console.error('Error sending click request:', error));
 }
 
+function getCoordinates(event) {
+    const rect = event.target.getBoundingClientRect();
+    let clientX, clientY;
+
+    // Handle both mouse and touch events
+    if (event.touches && event.touches.length > 0) {
+        clientX = event.touches[0].clientX;
+        clientY = event.touches[0].clientY;
+    } else {
+        clientX = event.clientX;
+        clientY = event.clientY;
+    }
+
+    return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+    };
+}
+
 function handleImageClick(event) {
     if (acceptClick) {
-        const rect = event.target.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        const coords = getCoordinates(event);
+        const x = coords.x;
+        const y = coords.y;
 
         const payload = {
             state_name: currentStateName,
@@ -119,25 +138,6 @@ function handleImageClick(event) {
         })
         .catch(error => console.error('Error sending click point request:', error));
     }
-}
-
-function getCoordinates(event) {
-    const rect = event.target.getBoundingClientRect();
-    let clientX, clientY;
-
-    // Handle both mouse and touch events
-    if (event.touches && event.touches.length > 0) {
-        clientX = event.touches[0].clientX;
-        clientY = event.touches[0].clientY;
-    } else {
-        clientX = event.clientX;
-        clientY = event.clientY;
-    }
-
-    return {
-        x: clientX - rect.left,
-        y: clientY - rect.top
-    };
 }
 
 function startRectangleSelection(event) {
@@ -173,7 +173,7 @@ function updateRectangle(event) {
     }
 }
 
-function endRectangleSelection(event) {
+function endRectangleSelection() {
     if (isSelecting) {
         isSelecting = false;
 
@@ -222,6 +222,7 @@ document.addEventListener("DOMContentLoaded", function() {
     image.addEventListener("mouseup", endRectangleSelection);
 
     // Touch Events
+    image.addEventListener("touchstart", handleImageClick); // For click point on touch
     image.addEventListener("touchstart", startRectangleSelection);
     image.addEventListener("touchmove", updateRectangle);
     image.addEventListener("touchend", endRectangleSelection);
