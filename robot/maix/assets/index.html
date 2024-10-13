@@ -3,29 +3,48 @@
 <head>
     <title>Robot</title>
     <style>
-        .button-container {
-            margin-top: 20px;
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
         }
-        .button-container button {
-            margin: 5px;
+
+        #container {
+            display: flex;
+            align-items: flex-start;
+            padding: 8px 4px;
         }
-        .button-container button:disabled {
-            background-color: lightgray;
-            color: gray;
-        }
+
         #image-container {
             position: relative;
             display: inline-block;
         }
+
         #rect {
-           position: absolute;
-           border: 2px dashed rgba(255, 0, 0, 0.7);
-           pointer-events: none;
-           visibility: hidden;
+            position: absolute;
+            border: 2px dashed rgba(255, 0, 0, 0.7);
+            pointer-events: none;
+            visibility: hidden;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Stack buttons vertically */
+            margin-left: 20px; /* Space between image and buttons */
+        }
+
+        .button-container button {
+            margin-bottom: 10px; /* Space between buttons */
+            padding: 10px 20px; /* Increase button size */
+            font-size: 16px; /* Adjust text size */
+        }
+
+        .button-container button:disabled {
+            background-color: lightgray;
+            color: gray;
         }
     </style>
-</head>
-<script>
+</head><script>
 let currentStateName = '';
 let acceptClick = false;
 let acceptRectangle = false;
@@ -229,10 +248,12 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 <body>
-    <div id="image-container">
-        <img id="cam_img" src="/img" width="640" height="480" onload="setTimeout(reloadImg, 1000)"/>
-        <div id="rect"></div>
+    <div id="container">
+        <div id="image-container">
+            <img id="cam_img" src="/img" width="640" height="480" onload="setTimeout(reloadImg, 1000)"/>
+            <div id="rect"></div>
+        </div>
+        <div id="button-container" class="button-container"></div>
     </div>
-    <div id="button-container" class="button-container"></div>
 </body>
 </html>
