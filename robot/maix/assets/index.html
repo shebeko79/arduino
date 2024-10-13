@@ -121,16 +121,36 @@ function handleImageClick(event) {
     }
 }
 
+function getCoordinates(event) {
+    const rect = event.target.getBoundingClientRect();
+    let clientX, clientY;
+
+    // Handle both mouse and touch events
+    if (event.touches && event.touches.length > 0) {
+        clientX = event.touches[0].clientX;
+        clientY = event.touches[0].clientY;
+    } else {
+        clientX = event.clientX;
+        clientY = event.clientY;
+    }
+
+    return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+    };
+}
+
 function startRectangleSelection(event) {
     event.preventDefault();
     if (acceptRectangle) {
         isSelecting = true;
-        const rect = event.target.getBoundingClientRect();
-        startX = event.clientX - rect.left;
-        startY = event.clientY - rect.top;
+        const coords = getCoordinates(event);
+
+        startX = coords.x;
+        startY = coords.y;
 
         const rectangle = document.getElementById("rect");
-		rectangle.style.visibility = "visible";
+        rectangle.style.visibility = "visible";
         rectangle.style.left = startX + "px";
         rectangle.style.top = startY + "px";
         rectangle.style.width = "0px";
@@ -140,9 +160,10 @@ function startRectangleSelection(event) {
 
 function updateRectangle(event) {
     if (isSelecting) {
-        const rect = event.target.getBoundingClientRect();
-        endX = event.clientX - rect.left;
-        endY = event.clientY - rect.top;
+        const coords = getCoordinates(event);
+
+        endX = coords.x;
+        endY = coords.y;
 
         const rectangle = document.getElementById("rect");
         rectangle.style.width = Math.abs(endX - startX) + "px";
@@ -152,37 +173,37 @@ function updateRectangle(event) {
     }
 }
 
-function endRectangleSelection() {
+function endRectangleSelection(event) {
     if (isSelecting) {
         isSelecting = false;
-		if(startX!=endX && startY!=endY)
-		{
-			const payload = {
-				state_name: currentStateName,
-				x1: Math.min(startX, endX),
-				y1: Math.min(startY, endY),
-				x2: Math.max(startX, endX),
-				y2: Math.max(startY, endY)
-			};
 
-			fetch('/sel_rect', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(payload)
-			})
-			.then(response => {
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				return response.json();
-			})
-			.catch(error => console.error('Error sending rectangle request:', error));
-		}
+        if (startX !== endX && startY !== endY) {
+            const payload = {
+                state_name: currentStateName,
+                x1: Math.min(startX, endX),
+                y1: Math.min(startY, endY),
+                x2: Math.max(startX, endX),
+                y2: Math.max(startY, endY)
+            };
+
+            fetch('/sel_rect', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .catch(error => console.error('Error sending rectangle request:', error));
+        }
 
         const rectangle = document.getElementById("rect");
-		rectangle.style.visibility = "hidden";
+        rectangle.style.visibility = "hidden";
         rectangle.style.width = "0px";
         rectangle.style.height = "0px";
     }
@@ -193,10 +214,17 @@ document.addEventListener("DOMContentLoaded", function() {
     setInterval(fetchState, 1000);
 
     const image = document.getElementById("cam_img");
+
+    // Mouse Events
     image.addEventListener("click", handleImageClick);
     image.addEventListener("mousedown", startRectangleSelection);
     image.addEventListener("mousemove", updateRectangle);
     image.addEventListener("mouseup", endRectangleSelection);
+
+    // Touch Events
+    image.addEventListener("touchstart", startRectangleSelection);
+    image.addEventListener("touchmove", updateRectangle);
+    image.addEventListener("touchend", endRectangleSelection);
 });
 </script>
 <body>

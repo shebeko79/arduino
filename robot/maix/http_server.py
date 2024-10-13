@@ -164,8 +164,8 @@ def click_point_handler():
 
     data = request.get_json()
     state_name = data.get('state_name')
-    x = data.get('x')
-    y = data.get('y')
+    x = int(data.get('x'))
+    y = int(data.get('y'))
 
     r = {'action': 'click_point', 'state_name': state_name, 'x': x, 'y': y}
 
@@ -182,12 +182,13 @@ def sel_rect_handler():
 
     data = request.get_json()
     state_name = data.get('state_name')
-    x1 = data.get('x1')
-    y1 = data.get('y1')
-    x2 = data.get('x2')
-    y2 = data.get('y2')
+    x1 = int(data.get('x1'))
+    y1 = int(data.get('y1'))
+    x2 = int(data.get('x2'))
+    y2 = int(data.get('y2'))
 
     r = {'action': 'sel_rect', 'state_name': state_name, 'x1': x1, 'y1': y1, 'x2': x2, 'y2': y2}
+    print(r)
 
     web_lock.acquire()
     delayed_request = r
