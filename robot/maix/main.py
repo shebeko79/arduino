@@ -4,7 +4,7 @@ import algos
 import tracker
 import states
 import track_utils
-import wifi
+#import wifi
 from track_utils import CAM_SIZE
 import http_server
 
@@ -22,7 +22,7 @@ def main_init():
     global disp
     global touch
 
-    wifi.init()
+    #wifi.init()
 
     cam = camera.Camera(CAM_SIZE[0], CAM_SIZE[1], tracker.get_camera_format())
     disp = display.Display()
