@@ -1,0 +1,42 @@
+#!/bin/sh
+
+DAEMON=python
+PIDFILE=/var/run/$DAEMON.pid
+DAEMON_ARGS="/root/robot/main.py"
+
+start() {
+	printf 'Starting %s: ' "$DAEMON"
+	if start-stop-daemon -S -q -b -p "$PIDFILE" -x "$DAEMON" -- $DAEMON_ARGS; then
+		echo "OK"
+	else
+		echo "FAIL"
+	fi
+}
+
+stop() {
+	printf 'Stopping %s: ' "$DAEMON"
+	if start-stop-daemon -K -q -p "$PIDFILE" -x "$DAEMON"; then
+		echo "OK"
+	else
+		echo "FAIL"
+	fi
+}
+
+restart() {
+	stop
+	start
+}
+
+case "$1" in
+	start|stop|restart)
+		"$1"
+		;;
+	reload)
+		restart
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart|reload}"
+		exit 1
+esac
+
+exit $?
