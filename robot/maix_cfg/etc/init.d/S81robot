@@ -1,12 +1,11 @@
 #!/bin/sh
 
 DAEMON=python
-PIDFILE=/var/run/$DAEMON.pid
 DAEMON_ARGS="/root/robot/main.py"
 
 start() {
-	printf 'Starting %s: ' "$DAEMON"
-	if start-stop-daemon -S -q -b -p "$PIDFILE" -x "$DAEMON" -- $DAEMON_ARGS; then
+	printf 'Starting %s: ' "$DAEMON_ARGS"
+	if start-stop-daemon -S -q -b -x "$DAEMON" -- $DAEMON_ARGS; then
 		echo "OK"
 	else
 		echo "FAIL"
@@ -14,12 +13,8 @@ start() {
 }
 
 stop() {
-	printf 'Stopping %s: ' "$DAEMON"
-	if start-stop-daemon -K -q -p "$PIDFILE" -x "$DAEMON"; then
-		echo "OK"
-	else
-		echo "FAIL"
-	fi
+	printf 'Stopping %s\n' "$DAEMON_ARGS"
+	kill `ps | grep python | grep robot | awk '{print $1}'`
 }
 
 restart() {

@@ -212,7 +212,7 @@ class MoveState(BaseState):
         super().__init__()
 
     def enter(self):
-        self.buttons = [Button("Forward"), Button("<<<"), Button(">>>"), Button("Reverse"), Button("Stop"),
+        self.buttons = [Button("D"), Button("<<"), Button(">>"), Button("R"), Button("Stop"),
                         Button("Back", MainState.state_name)]
 
     def leave(self):
@@ -221,13 +221,13 @@ class MoveState(BaseState):
     def on_click_button(self, btn: Button):
         if btn.state_name:
             set_state(btn.state_name)
-        elif btn.caption == "<<<":
+        elif btn.caption == "<<":
             mover.move(0, -1)
-        elif btn.caption == ">>>":
+        elif btn.caption == ">>":
             mover.move(0, 1)
-        elif btn.caption == "Forward":
+        elif btn.caption == "D":
             mover.move(1, 0)
-        elif btn.caption == "Reverse":
+        elif btn.caption == "R":
             mover.move(-1, 0)
         elif btn.caption == "Stop":
             mover.stop()
