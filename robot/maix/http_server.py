@@ -160,7 +160,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 def thread_task():
     global server
 
-    server_address = ("0.0.0.0", 8000)
+    server_address = ("0.0.0.0", 80)
     server = Server(server_address, RequestHandler)
     server.serve_forever()
 
@@ -243,7 +243,7 @@ def get_current_state():
 def switch_state(state_name, caption):
     st = states.current_state
     if st is None or state_name != st.state_name:
-        return
+        return get_current_state()
 
     btn = st.button_by_name(caption)
     if btn is not None and btn.enabled:
@@ -255,7 +255,7 @@ def switch_state(state_name, caption):
 def click_point(state_name, x, y):
     st = states.current_state
     if st is None or state_name != st.state_name:
-        return
+        return get_current_state()
 
     if st.accept_click:
         st.on_click([x, y])
@@ -266,7 +266,7 @@ def click_point(state_name, x, y):
 def sel_rect(state_name, x1, y1, x2, y2):
     st = states.current_state
     if st is None or state_name != st.state_name:
-        return
+        return get_current_state()
 
     if st.accept_rectangle and last_img:
         rc = track_utils.make_rect([x1, y1], [x2, y2])

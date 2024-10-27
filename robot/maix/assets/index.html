@@ -102,11 +102,12 @@ function sendClickRequest(caption) {
         },
         body: JSON.stringify(payload)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
+    .then(response => response.json())
+	.then(data => {
+            currentStateName = data.state_name;
+            acceptClick = data.accept_click;
+            acceptRectangle = data.accept_rectangle;
+            updateButtons(data.buttons);
     })
     .catch(error => console.error('Error sending click request:', error));
 }
@@ -149,12 +150,13 @@ function handleImageClick(event) {
             },
             body: JSON.stringify(payload)
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+		.then(response => response.json())
+		.then(data => {
+				currentStateName = data.state_name;
+				acceptClick = data.accept_click;
+				acceptRectangle = data.accept_rectangle;
+				updateButtons(data.buttons);
+		})
         .catch(error => console.error('Error sending click point request:', error));
     }
 }
@@ -212,12 +214,13 @@ function endRectangleSelection() {
                 },
                 body: JSON.stringify(payload)
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+			.then(response => response.json())
+			.then(data => {
+					currentStateName = data.state_name;
+					acceptClick = data.accept_click;
+					acceptRectangle = data.accept_rectangle;
+					updateButtons(data.buttons);
+			})
             .catch(error => console.error('Error sending rectangle request:', error));
         }
 
