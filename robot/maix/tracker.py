@@ -59,7 +59,7 @@ def draw_trackers(img: image.Image):
         else:
             cl = gray_cl
 
-        img.draw_rect(x, y, w, h, cl)
+        img.draw_rect(x, y, w, h, cl, 2)
 
         cap = f"{i}"
         font_size = image.string_size(cap)

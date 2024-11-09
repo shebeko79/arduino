@@ -157,6 +157,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             d = json.dumps(st)
         self.send_json(d)
 
+
 def thread_task():
     global server
 
