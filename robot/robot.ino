@@ -1,5 +1,5 @@
 //Board ESP32-WROOM-DA Module
-#include "motor.h"
+#include "motor_mdd3a.h"
 //#include <WiFi.h>
 //#include <WiFiMulti.h>
 //#include <WiFiUdp.h>
@@ -11,8 +11,8 @@ static const int portNumber = 1500;
 
 const char *bluetooth_pin = "1234";
 
-DcMotor leftWheel(27,14,0);
-DcMotor rightWheel(12,13,1);
+MotorMdd3a leftWheel(27,14,0);
+MotorMdd3a rightWheel(12,13,1);
 
 int dst_left_engine = 0;
 int cur_left_engine = 0;
@@ -151,7 +151,8 @@ void failSafe()
   }
 }
 
-void apply(DcMotor& dc, int dst,int& cur)
+template<typename Motor>
+void apply(Motor& dc, int dst,int& cur)
 {
   if(cur == dst)
     return;

@@ -1,11 +1,11 @@
 
-class DcMotor
+class MotorMdd3a
 {
 public:
   static const int MAX_PWM=255;
   enum State{st_stop,st_forward,st_backward};
   
-  DcMotor(int in1,int in2,int pwm_channel):
+  MotorMdd3a(int in1,int in2,int pwm_channel):
     IN1(in1),IN2(in2),PWM_CHANNEL(pwm_channel),m_state(st_stop){}
 
   void init()
