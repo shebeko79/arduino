@@ -1,20 +1,22 @@
+#pragma once
+#include <Arduino.h>
 
-class MotorMdd3a
+class MotorZsx11h
 {
 public:
   static const int MAX_PWM=255;
   enum State{st_stop,st_forward,st_backward};
   
-  MotorMdd3a(int in1,int in2,int pwm_channel):
-    IN1(in1),IN2(in2),PWM_CHANNEL(pwm_channel),m_state(st_stop){}
+  MotorZsx11h(int pwm,int dir,int pwm_channel,bool dir_forward):
+    PWM(pwm),DIR(dir),PWM_CHANNEL(pwm_channel),DIR_FORWARD(dir_forward), m_state(st_stop){}
 
   void init()
   {
-    pinMode(IN1, OUTPUT);
-    pinMode(IN2, OUTPUT);
-    
-    digitalWrite(IN1, LOW);
-    digitalWrite(IN2, LOW);
+    pinMode(PWM, OUTPUT);
+    digitalWrite(PWM, LOW);
+
+    pinMode(DIR, OUTPUT);
+    digitalWrite(DIR, DIR_FORWARD);
 
     ledcSetup(PWM_CHANNEL, 2000, 8);
     soft_stop();
@@ -22,11 +24,8 @@ public:
 
   void soft_stop()
   {
-    ledcDetachPin(IN1);
-    ledcDetachPin(IN2);
- 
-    digitalWrite(IN1, LOW);
-    digitalWrite(IN2, LOW);
+    ledcDetachPin(PWM);
+    digitalWrite(PWM, LOW);
     
     m_state = st_stop;
   }
@@ -36,7 +35,8 @@ public:
     if(m_state != st_forward)
     {
       soft_stop();
-      ledcAttachPin(IN2, PWM_CHANNEL);
+      digitalWrite(DIR, DIR_FORWARD);
+      ledcAttachPin(PWM, PWM_CHANNEL);
     }
     
     ledcWrite(PWM_CHANNEL, val);
@@ -48,16 +48,18 @@ public:
     if(m_state != st_backward)
     {
       soft_stop();
-      ledcAttachPin(IN1, PWM_CHANNEL);
+      digitalWrite(DIR, !DIR_FORWARD);
+      ledcAttachPin(PWM, PWM_CHANNEL);
     }
     
     ledcWrite(PWM_CHANNEL, val);
     m_state = st_backward;
   }
-    
+
 private:
-  const int IN1;
-  const int IN2;
+  const int PWM;
+  const int DIR;
   const int PWM_CHANNEL;
+  const int DIR_FORWARD;
   State m_state;
 };

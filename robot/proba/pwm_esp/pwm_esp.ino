@@ -7,8 +7,8 @@ int PWM_CHANNEL=0;
 int TACHO_PIN=14;
 
 int32_t ticks=0;
-int32_t printed_ticks=0;
 
+constexpr float ticks2speed=6.5*0.0254*M_PI/90.0;
 
 void IRAM_ATTR pin_isr()
 {
@@ -35,44 +35,42 @@ void setup()
   ledcWrite(PWM_CHANNEL, 20);
 }
 
-void print_ticks()
+void print_ticks(int pwm)
 {
-  if(printed_ticks == ticks)
-    return;
+  ticks=0;
+  delay(1000);
+  int tk=ticks;
 
-  printed_ticks = ticks;
-
-  Serial.print("tick=");
-  Serial.println(printed_ticks);
+  Serial.print("pwm=");
+  Serial.print(pwm);
+  Serial.print(" tick=");
+  Serial.println(tk);
 }
 
 void cycle()
 {
-  for(int i=0;i<255;i++)
+  for(int i=0;i<255;i+=5)
   {
     ledcWrite(PWM_CHANNEL, i);
-    delay(20);
+    print_ticks(i);
   }
 
   delay(5000);
 
-  for(int i=0;i<255;i++)
+  for(int i=0;i<255;i+=5)
   {
     ledcWrite(PWM_CHANNEL, 255-i);
-    delay(20);
+    print_ticks(255-i);
   }
 }
 
 void loop()
 {
-  print_ticks();
-  if(ticks>90*100)
-    ledcWrite(PWM_CHANNEL, 0);
-  
-  
+  Serial.println("dir=high");
   digitalWrite(DIR, HIGH);
-//  cycle();
+  cycle();
 
+  Serial.println("dir=low");
   digitalWrite(DIR, LOW);
-//  cycle();
+  cycle();
 }

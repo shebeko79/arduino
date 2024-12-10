@@ -1,8 +1,5 @@
 //Board ESP32-WROOM-DA Module
-#include "motor_zsx11h.h"
-//#include <WiFi.h>
-//#include <WiFiMulti.h>
-//#include <WiFiUdp.h>
+#include "motor_speed.h"
 #include <BluetoothSerial.h>
 
 static const int FAIL_SAFE_DELAY = 2000;
@@ -13,6 +10,9 @@ const char *bluetooth_pin = "1234";
 
 MotorZsx11h leftWheel(12,13,0,true);
 MotorZsx11h rightWheel(26,27,1,false);
+
+MotorSpeed leftSpeed(leftWheel);
+MotorSpeed rightSpeed(rightWheel);
 
 int dst_left_engine = 0;
 int cur_left_engine = 0;
@@ -28,6 +28,27 @@ bool processCommand(const char* buf);
 BluetoothSerial SerialBT;
 #define SerialAuto Serial2
 
+hw_timer_t *timer0 = nullptr;
+unsigned timer0_count=0;
+
+
+void IRAM_ATTR Timer0_ISR()
+{
+  ++timer0_count;
+  leftSpeed.timer_isr(timer0_count);
+  rightSpeed.timer_isr(timer0_count);
+}
+
+void IRAM_ATTR left_tick_isr()
+{
+  leftSpeed.speed_pin_isr();
+}
+
+void IRAM_ATTR right_tick_isr()
+{
+  rightSpeed.speed_pin_isr();
+}
+
 void setup() 
 {
   Serial.begin(115200);
@@ -38,6 +59,14 @@ void setup()
 
   leftWheel.init();
   rightWheel.init();
+
+  attachInterrupt(digitalPinToInterrupt(14), left_tick_isr, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(25), right_tick_isr, CHANGE);
+
+  timer0 = timerBegin(0, 80, true);
+  timerAttachInterrupt(timer0, &Timer0_ISR, true);
+  timerAlarmWrite(timer0, TIMER_MS*1000, true);
+  timerAlarmEnable(timer0);
 }
 
 template<typename T>
@@ -85,11 +114,11 @@ void processStream(T& stream, const char* caption,bool blocked)
 
     if(blocked)
     {
-      stream.print("reject:cmd:"DEVICE_NAME":drive\r");
+      stream.print("reject:cmd:" DEVICE_NAME ":drive\r");
     }
     else if(processCommand(cur))
     {
-      stream.print("accept:cmd:"DEVICE_NAME":drive\r");
+      stream.print("accept:cmd:" DEVICE_NAME ":drive\r");
     }
 
     cur=next+1;
@@ -99,7 +128,7 @@ void processStream(T& stream, const char* caption,bool blocked)
 
 bool processDriveCommand(const char* buf)
 {
-  buf += sizeof("cmd:"DEVICE_NAME":drive:")-1;
+  buf += sizeof("cmd:" DEVICE_NAME ":drive:")-1;
   
   int left_val=atol(buf);
   if(left_val<-255 || left_val>255)
@@ -122,7 +151,7 @@ bool processDriveCommand(const char* buf)
 
 bool processBlockCommand(const char* buf)
 {
-  buf += sizeof("cmd:"DEVICE_NAME":block:")-1;
+  buf += sizeof("cmd:" DEVICE_NAME ":block:")-1;
 
   auto_cmd_blocked=atol(buf)!=0;
 
@@ -131,11 +160,11 @@ bool processBlockCommand(const char* buf)
 
 bool processCommand(const char* buf)
 {
-  const char* pattern = strstr(buf, "cmd:"DEVICE_NAME":drive:");
+  const char* pattern = strstr(buf, "cmd:" DEVICE_NAME ":drive:");
   if(pattern)
     return processDriveCommand(pattern);
 
-  pattern = strstr(buf, "cmd:"DEVICE_NAME":block:");
+  pattern = strstr(buf, "cmd:" DEVICE_NAME ":block:");
   if(pattern)
     return processBlockCommand(pattern);
 
