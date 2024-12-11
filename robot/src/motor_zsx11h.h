@@ -5,20 +5,26 @@ class MotorZsx11h
 {
 public:
   static const int MAX_PWM=255;
-  enum State{st_stop,st_forward,st_backward};
+  enum State{st_off,st_forward,st_backward,st_brake};
   
-  MotorZsx11h(int pwm,int dir,int pwm_channel,bool dir_forward):
-    PWM(pwm),DIR(dir),PWM_CHANNEL(pwm_channel),DIR_FORWARD(dir_forward), m_state(st_stop){}
+  MotorZsx11h(int pwm,int dir,int pwm_channel, int stop,bool dir_forward):
+    PWM(pwm),DIR(dir),PWM_CHANNEL(pwm_channel),STOP(stop),
+    DIR_FORWARD(dir_forward), m_state(st_off)
+    {}
 
   void init()
   {
-    pinMode(PWM, OUTPUT);
+    pinMode(STOP, OUTPUT);
+    digitalWrite(STOP, HIGH);
+
+    ledcSetup(PWM_CHANNEL, 2000, 8);
+    ledcDetachPin(PWM);
     digitalWrite(PWM, LOW);
+    pinMode(PWM, OUTPUT);
 
     pinMode(DIR, OUTPUT);
     digitalWrite(DIR, DIR_FORWARD);
 
-    ledcSetup(PWM_CHANNEL, 2000, 8);
     soft_stop();
   }
 
@@ -26,8 +32,18 @@ public:
   {
     ledcDetachPin(PWM);
     digitalWrite(PWM, LOW);
+    digitalWrite(STOP, LOW);
     
-    m_state = st_stop;
+    m_state = st_off;
+  }
+
+  void brake()
+  {
+    ledcDetachPin(PWM);
+    digitalWrite(PWM, LOW);
+    digitalWrite(STOP, HIGH);
+    
+    m_state = st_brake;
   }
 
   void forward(int val=MAX_PWM)
@@ -35,6 +51,7 @@ public:
     if(m_state != st_forward)
     {
       soft_stop();
+      digitalWrite(STOP, LOW);
       digitalWrite(DIR, DIR_FORWARD);
       ledcAttachPin(PWM, PWM_CHANNEL);
     }
@@ -48,6 +65,7 @@ public:
     if(m_state != st_backward)
     {
       soft_stop();
+      digitalWrite(STOP, LOW);
       digitalWrite(DIR, !DIR_FORWARD);
       ledcAttachPin(PWM, PWM_CHANNEL);
     }
@@ -60,6 +78,8 @@ private:
   const int PWM;
   const int DIR;
   const int PWM_CHANNEL;
-  const int DIR_FORWARD;
+  const int STOP;
+
+  const bool DIR_FORWARD;
   State m_state;
 };

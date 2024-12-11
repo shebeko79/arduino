@@ -8,8 +8,8 @@ static const int portNumber = 1500;
 
 const char *bluetooth_pin = "1234";
 
-MotorZsx11h leftWheel(12,13,0,true);
-MotorZsx11h rightWheel(26,27,1,false);
+MotorZsx11h leftWheel(12,13,0,27,true);
+MotorZsx11h rightWheel(25,26,1,32,false);
 
 MotorSpeed leftSpeed(leftWheel);
 MotorSpeed rightSpeed(rightWheel);
@@ -61,7 +61,7 @@ void setup()
   rightWheel.init();
 
   attachInterrupt(digitalPinToInterrupt(14), left_tick_isr, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(25), right_tick_isr, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(33), right_tick_isr, CHANGE);
 
   timer0 = timerBegin(0, 80, true);
   timerAttachInterrupt(timer0, &Timer0_ISR, true);
