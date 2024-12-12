@@ -15,8 +15,8 @@ int central_maxx=0;
 int central_miny=0;
 int central_maxy=0;
 
-int last_vx = 0;
-int last_vy = 0;
+float last_vx = 0.0;
+float last_vy = 0.0;
 unsigned long last_send_time=0;
 
 
@@ -141,19 +141,19 @@ void readBT()
   //Serial.println((const char*)sbuf);
 }
 
-int convert(int val,int central_min,int central_max)
+float convert(int val,int central_min,int central_max)
 {
   if(val<central_min)
   {
-    return map(val,0,central_min-1,-255,-1);
+    return 1.0*(val-(central_min-1))/(central_min-1);
   }
 
   if(val>central_max)
   {
-    return map(val,central_max+1,4095,1,255);
+    return 1.0*(val-(central_max+1))/(4095-(central_max+1));
   }
 
-  return 0;
+  return 0.0;
 }
 
 void processJoystick()
@@ -167,12 +167,12 @@ void processJoystick()
   int x = analogRead(VRX_PIN);
   int y = analogRead(VRY_PIN);
 
-  int vx = convert(x,central_minx,central_maxx);
-  int vy = convert(y,central_miny,central_maxy);
+  float vx = convert(x,central_minx,central_maxx);
+  float vy = convert(y,central_miny,central_maxy);
 
   unsigned long cur_time=millis();
 
-  if(last_vx==vx && last_vy==vy && cur_time-last_send_time<1000)
+  if(last_vx==vx && last_vy==vy && cur_time-last_send_time<250)
     return;
 
   //Serial.print("vx=");
@@ -180,23 +180,12 @@ void processJoystick()
   //Serial.print(" vy=");
   //Serial.println(vy);
 
-  last_vx=vx;
-  last_vy=vy;
   last_send_time=cur_time;
 
-  int l=vy;
-  int r=vy;
-
-  l+=vx;
-  r-=vx;
-
-  l=constrain(l,-255,255);
-  r=constrain(r,-255,255);
-
   String str = "cmd:"REMOTE_NAME":drive:";
-  str+=String(l);
+  str+=String(vy);
   str+=";";
-  str+=String(r);
+  str+=String(vx);
   str+="\r";
 
   Serial.println(str);
@@ -217,10 +206,10 @@ void processButton()
   int x = analogRead(VRX_PIN);
   int y = analogRead(VRY_PIN);
 
-  int vx = convert(x,central_minx,central_maxx);
-  int vy = convert(y,central_miny,central_maxy);
+  float vx = convert(x,central_minx,central_maxx);
+  float vy = convert(y,central_miny,central_maxy);
 
-  if(vx!=0 || vy!=0)
+  if(vx!=0.0 || vy!=0.0)
     return;
 
   //Serial.print("vx=");
