@@ -6,11 +6,12 @@ constexpr float WHEEL_PERIMETER=M_PI*WHEEL_DIAMETER;
 constexpr float WHEEL_PULSES_PER_METER=WHEEL_PULSES_PER_ROTATION/WHEEL_PERIMETER;
  
 constexpr float MAX_SPEED = 4.0; //meters per second
+constexpr float OFF_SPEED = 0.01; //meters per second
 constexpr float MAX_ROT_DIFF = 0.2; //meters per second
 
-constexpr float PID_ki=0.0;
+constexpr float PID_ki=0.2;
 constexpr float PID_kp=1.0;
-constexpr float PID_kd=0.0;
+constexpr float PID_kd=0.7;
 
 constexpr float SPEED_TO_PWM=WHEEL_PULSES_PER_METER/3.0;
 

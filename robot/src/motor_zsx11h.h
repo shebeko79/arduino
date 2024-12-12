@@ -74,6 +74,8 @@ public:
     m_state = st_backward;
   }
 
+  inline State get_state() const{return m_state;}
+  
 private:
   const int PWM;
   const int DIR;

@@ -8,16 +8,9 @@ static const int portNumber = 1500;
 
 const char *bluetooth_pin = "1234";
 
-MotorZsx11h leftWheel(12,13,0,27,true);
-MotorZsx11h rightWheel(25,26,1,32,false);
+MotorSpeed leftWheel(MotorZsx11h(12,13,0,27,true));
+MotorSpeed rightWheel(MotorZsx11h(25,26,1,32,false));
 
-MotorSpeed leftSpeed(leftWheel);
-MotorSpeed rightSpeed(rightWheel);
-
-int dst_left_engine = 0;
-int cur_left_engine = 0;
-int dst_right_engine = 0;
-int cur_right_engine = 0;
 unsigned long last_ms = 0;
 uint8_t sbuf[256];
 bool auto_cmd_blocked = false;
@@ -35,18 +28,18 @@ unsigned timer0_count=0;
 void IRAM_ATTR Timer0_ISR()
 {
   ++timer0_count;
-  leftSpeed.timer_isr(timer0_count);
-  rightSpeed.timer_isr(timer0_count);
+  leftWheel.timer_isr(timer0_count);
+  rightWheel.timer_isr(timer0_count);
 }
 
 void IRAM_ATTR left_tick_isr()
 {
-  leftSpeed.speed_pin_isr();
+  leftWheel.speed_pin_isr();
 }
 
 void IRAM_ATTR right_tick_isr()
 {
-  rightSpeed.speed_pin_isr();
+  rightWheel.speed_pin_isr();
 }
 
 void setup() 
@@ -142,8 +135,10 @@ bool processDriveCommand(const char* buf)
   if(right_val<-255 || right_val>255)
     return false;
 
+#if 0
   dst_left_engine = left_val;
   dst_right_engine = right_val;
+#endif
   last_ms = millis();
 
   return true;
@@ -175,52 +170,14 @@ void failSafe()
 {
   if(last_ms + FAIL_SAFE_DELAY < millis())
   {
-    dst_left_engine = 0;
-    dst_right_engine = 0;
+    leftWheel.fail_safe();
+    rightWheel.fail_safe();
   }
-}
-
-template<typename Motor>
-void apply(Motor& dc, int dst,int& cur)
-{
-  if(cur == dst)
-    return;
-    
-  if(dst == 0)
-  {
-//Serial.println("apply()1 stop");
-    cur = 0;
-    dc.soft_stop();
-    return;
-  }
-    
-  if(cur !=0 &&  (dst>0) != (cur>0) )
-  {
-//Serial.println("apply()2 stop for reverse");
-    cur = 0;
-    dc.soft_stop();
-  }
-
-  int step;
-  if(dst>0)step=100;
-  else step=-100;
-
-  cur+=step;
-  if(abs(cur) > abs(dst))
-    cur = dst;
-
-
-//Serial.print("apply()5 dst=");
-//Serial.print(dst);
-//Serial.print(" cur=");
-//Serial.println(cur);
-
-  if(cur>0)dc.forward(cur);
-  else dc.backward(-cur);
 }
 
 void loop()
 {
+#if 0
   unsigned long prev_last_ms = last_ms;
   int prev_dst_left_engine = dst_left_engine;
   int prev_dst_right_engine = dst_right_engine;
@@ -237,10 +194,13 @@ void loop()
       dst_right_engine = prev_dst_right_engine;
     }
   }
+#endif  
   
   processStream(SerialAuto,"S2",auto_cmd_blocked);
+#if 0  
   failSafe();
-  apply(leftWheel,dst_left_engine,cur_left_engine);
-  apply(rightWheel,dst_right_engine,cur_right_engine);
+#endif  
+  leftWheel.apply();
+  rightWheel.apply();
   delay(50);
 }
