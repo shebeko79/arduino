@@ -2,7 +2,6 @@
 #include "motor_speed.h"
 #include <BluetoothSerial.h>
 
-static const int FAIL_SAFE_DELAY = 2000;
 #define DEVICE_NAME "rccar"
 static const int portNumber = 1500;
 
@@ -23,6 +22,15 @@ BluetoothSerial SerialBT;
 
 hw_timer_t *timer0 = nullptr;
 unsigned timer0_count=0;
+
+struct DriveRequest
+{
+  bool active = false;
+  float speed_ms = 0.0;
+  float rel_rotation = 0.0;
+};
+
+DriveRequest drive_request;
 
 
 void IRAM_ATTR Timer0_ISR()
@@ -123,22 +131,20 @@ bool processDriveCommand(const char* buf)
 {
   buf += sizeof("cmd:" DEVICE_NAME ":drive:")-1;
   
-  int left_val=atol(buf);
-  if(left_val<-255 || left_val>255)
-    return false;
+  float rel_speed=atof(buf);
+  rel_speed=constrain(rel_speed, -1.0, 1.0);
 
   const char* cdiv = strstr (buf,";");
   if(!cdiv)
     return false;
   
-  int right_val=atol(cdiv + 1);
-  if(right_val<-255 || right_val>255)
-    return false;
+  int rel_rotation=atof(cdiv + 1);
+  rel_rotation=constrain(rel_rotation, -1.0, 1.0);
 
-#if 0
-  dst_left_engine = left_val;
-  dst_right_engine = right_val;
-#endif
+  drive_request.active=true;
+  drive_request.speed_ms = rel_speed * MAX_SPEED;
+  drive_request.rel_rotation = rel_rotation;
+
   last_ms = millis();
 
   return true;
@@ -175,31 +181,45 @@ void failSafe()
   }
 }
 
+void applyDriveRequest(const DriveRequest& dr)
+{
+  if(!dr.active)
+    return;
+  
+  float lspeed = dr.speed_ms;
+  float rspeed = dr.speed_ms;
+
+  float diff = constrain(dr.rel_rotation,-1.0,1.0)*MAX_ROT_DIFF/2.0;
+  lspeed += diff;
+  rspeed -= diff;
+
+  lspeed = constrain(lspeed, -MAX_SPEED, MAX_SPEED);
+  rspeed = constrain(rspeed, -MAX_SPEED, MAX_SPEED);
+
+  leftWheel.set_speed(lspeed);
+  rightWheel.set_speed(rspeed);
+}
+
 void loop()
 {
-#if 0
-  unsigned long prev_last_ms = last_ms;
-  int prev_dst_left_engine = dst_left_engine;
-  int prev_dst_right_engine = dst_right_engine;
-
+  drive_request = DriveRequest();
   processStream(SerialBT,"BT",false);
   
-  if(!auto_cmd_blocked && last_ms != prev_last_ms)
+  if(!auto_cmd_blocked && drive_request.active)
   {
-    if(abs(dst_left_engine)>10 || abs(dst_right_engine)>10)
+    if(abs(drive_request.speed_ms)>OFF_SPEED || abs(drive_request.rel_rotation)>0.0)
+    {
       auto_cmd_blocked = true;
+    }
     else
     {
-      dst_left_engine = prev_dst_left_engine;
-      dst_right_engine = prev_dst_right_engine;
+      drive_request = DriveRequest();
     }
   }
-#endif  
   
   processStream(SerialAuto,"S2",auto_cmd_blocked);
-#if 0  
+  applyDriveRequest(drive_request);
   failSafe();
-#endif  
   leftWheel.apply();
   rightWheel.apply();
   delay(50);

@@ -13,7 +13,8 @@ public:
   enum BrakeState
   {
     bs_change_direction,
-    bs_speed_compensation
+    bs_speed_compensation,
+    bs_fail_safe
   };
   
 public:
@@ -172,6 +173,7 @@ public:
   {
     m_dst_speed = 0.0;
     m_motor.brake();
+    m_brake_state = bs_fail_safe;
     reset_pid();
   }
 

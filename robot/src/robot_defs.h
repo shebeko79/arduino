@@ -1,5 +1,7 @@
 #pragma once
 
+constexpr int FAIL_SAFE_DELAY = 500;
+
 constexpr float WHEEL_PULSES_PER_ROTATION=90.0;
 constexpr float WHEEL_DIAMETER=6.5*0.0254; //meters
 constexpr float WHEEL_PERIMETER=M_PI*WHEEL_DIAMETER;
