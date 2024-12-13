@@ -15,7 +15,9 @@ uint8_t sbuf[256];
 bool auto_cmd_blocked = false;
 
 char incomingUdpPacket[256];
-bool processCommand(const char* buf);
+
+template<typename T>
+void processCommand(T& stream, const char* buf,bool blocked);
 
 BluetoothSerial SerialBT;
 #define SerialAuto Serial2
@@ -114,15 +116,7 @@ void processStream(T& stream, const char* caption,bool blocked)
   for(char* next = strchr(cur, '\r'); next!=nullptr;)
   {
     *next = 0;
-
-    if(blocked)
-    {
-      stream.print("reject:cmd:" DEVICE_NAME ":drive\r");
-    }
-    else if(processCommand(cur))
-    {
-      stream.print("accept:cmd:" DEVICE_NAME ":drive\r");
-    }
+    processCommand(stream, cur, blocked);
 
     cur=next+1;
     next= strchr(cur, '\r');
@@ -131,8 +125,6 @@ void processStream(T& stream, const char* caption,bool blocked)
 
 bool processDriveCommand(const char* buf)
 {
-  buf += sizeof("cmd:" DEVICE_NAME ":drive:")-1;
-  
   float rel_speed=atof(buf);
   rel_speed=constrain(rel_speed, -1.0, 1.0);
 
@@ -154,8 +146,6 @@ bool processDriveCommand(const char* buf)
 
 bool processBlockCommand(const char* buf)
 {
-  buf += sizeof("cmd:" DEVICE_NAME ":block:")-1;
-
   auto_cmd_blocked=atol(buf)!=0;
 
   return true;
@@ -163,8 +153,6 @@ bool processBlockCommand(const char* buf)
 
 bool processRelMaxSpeedCommand(const char* buf)
 {
-  buf += sizeof("cmd:" DEVICE_NAME ":rel_max_speed:")-1;
-
   float speed = atof(buf);
   if(speed<=0.0 || speed>MAX_SPEED)
     return false;
@@ -174,21 +162,65 @@ bool processRelMaxSpeedCommand(const char* buf)
   return true;
 }
 
-bool processCommand(const char* buf)
+template<typename T>
+void answerCommand(T& stream, const String& cmd, const String& answer)
 {
-  const char* pattern = strstr(buf, "cmd:" DEVICE_NAME ":drive:");
-  if(pattern)
-    return processDriveCommand(pattern);
+    String str = answer+":cmd:" DEVICE_NAME ":" +cmd +"\r";
+    //Serial.println(str);
+    stream.print(str);
+}
 
-  pattern = strstr(buf, "cmd:" DEVICE_NAME ":block:");
-  if(pattern)
-    return processBlockCommand(pattern);
+template<typename T>
+void processCommand(T& stream, const char* buf,bool blocked)
+{
+  if(strncmp(buf,"cmd:" DEVICE_NAME ":",sizeof("cmd:" DEVICE_NAME ":")-1) !=0)
+    return;
+  
+  buf+=sizeof("cmd:" DEVICE_NAME ":")-1;
 
-  pattern = strstr(buf, "cmd:" DEVICE_NAME ":rel_max_speed:");
-  if(pattern)
-    return processRelMaxSpeedCommand(pattern);
+  char* semi=strchr(buf, ':');
+  if(semi ==0)
+    return;
 
-  return false;
+  *semi = 0;
+  
+  String cmd(buf);
+  buf=semi+1;
+
+  if(blocked)
+  {
+    answerCommand(stream,cmd,"reject");
+    return;
+  }
+
+  bool res = false;
+
+  if(cmd == "drive")
+  {
+    res = processDriveCommand(buf);
+  }
+  else if(cmd == "block")
+  {
+    res = processBlockCommand(buf);
+  }
+  else if(cmd == "rel_max_speed")
+  {
+    res = processRelMaxSpeedCommand(buf);
+  }
+  else
+  {
+    answerCommand(stream,cmd,"unknown");
+    return;
+  }
+
+  if(res)
+  {
+    answerCommand(stream,cmd,"accept");
+  }
+  else
+  {
+    answerCommand(stream,cmd,"invalid");
+  }
 }
 
 void failSafe()
