@@ -23,6 +23,8 @@ BluetoothSerial SerialBT;
 hw_timer_t *timer0 = nullptr;
 unsigned timer0_count=0;
 
+float relative_max_speed = RELATIVE_MAX_SPEED;
+
 struct DriveRequest
 {
   bool active = false;
@@ -142,7 +144,7 @@ bool processDriveCommand(const char* buf)
   rel_rotation=constrain(rel_rotation, -1.0, 1.0);
 
   drive_request.active=true;
-  drive_request.speed_ms = rel_speed * RELATIVE_MAX_SPEED;
+  drive_request.speed_ms = rel_speed * relative_max_speed;
   drive_request.rel_rotation = rel_rotation;
 
   last_ms = millis();
@@ -159,6 +161,19 @@ bool processBlockCommand(const char* buf)
   return true;
 }
 
+bool processRelMaxSpeedCommand(const char* buf)
+{
+  buf += sizeof("cmd:" DEVICE_NAME ":rel_max_speed:")-1;
+
+  float speed = atof(buf);
+  if(speed<=0.0 || speed>MAX_SPEED)
+    return false;
+  
+  relative_max_speed = speed;
+
+  return true;
+}
+
 bool processCommand(const char* buf)
 {
   const char* pattern = strstr(buf, "cmd:" DEVICE_NAME ":drive:");
@@ -168,6 +183,10 @@ bool processCommand(const char* buf)
   pattern = strstr(buf, "cmd:" DEVICE_NAME ":block:");
   if(pattern)
     return processBlockCommand(pattern);
+
+  pattern = strstr(buf, "cmd:" DEVICE_NAME ":rel_max_speed:");
+  if(pattern)
+    return processRelMaxSpeedCommand(pattern);
 
   return false;
 }
