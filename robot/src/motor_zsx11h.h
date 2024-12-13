@@ -17,7 +17,7 @@ public:
     pinMode(STOP, OUTPUT);
     digitalWrite(STOP, HIGH);
 
-    ledcSetup(PWM_CHANNEL, 2000, 8);
+    ledcSetup(PWM_CHANNEL, 20000, 8);
     ledcDetachPin(PWM);
     digitalWrite(PWM, LOW);
     pinMode(PWM, OUTPUT);

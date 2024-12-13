@@ -142,7 +142,7 @@ bool processDriveCommand(const char* buf)
   rel_rotation=constrain(rel_rotation, -1.0, 1.0);
 
   drive_request.active=true;
-  drive_request.speed_ms = rel_speed * MAX_SPEED;
+  drive_request.speed_ms = rel_speed * RELATIVE_MAX_SPEED;
   drive_request.rel_rotation = rel_rotation;
 
   last_ms = millis();
@@ -189,7 +189,7 @@ void applyDriveRequest(const DriveRequest& dr)
   float lspeed = dr.speed_ms;
   float rspeed = dr.speed_ms;
 
-  float diff = constrain(dr.rel_rotation,-1.0,1.0)*MAX_ROT_DIFF/2.0;
+  float diff = constrain(dr.rel_rotation,-1.0,1.0)*RELATIVE_MAX_ROT/2.0;
   lspeed += diff;
   rspeed -= diff;
 
@@ -222,5 +222,7 @@ void loop()
   failSafe();
   leftWheel.apply();
   rightWheel.apply();
+  leftWheel.dump_state("L");
+  rightWheel.dump_state("R");
   delay(50);
 }

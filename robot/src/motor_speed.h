@@ -14,7 +14,8 @@ public:
   {
     bs_change_direction,
     bs_speed_compensation,
-    bs_fail_safe
+    bs_fail_safe,
+    bs_zero_speed
   };
   
 public:
@@ -78,6 +79,14 @@ public:
       // Serial.println("brake");
       m_motor.brake();
       m_brake_state = bs_change_direction;
+      reset_pid();
+      return;
+    }
+
+    if(m_dst_speed==0.0)
+    {
+      m_motor.brake();
+      m_brake_state = bs_zero_speed;
       reset_pid();
       return;
     }
@@ -175,6 +184,28 @@ public:
     m_motor.brake();
     m_brake_state = bs_fail_safe;
     reset_pid();
+  }
+
+  void dump_state(const String& caption)
+  {
+    float cur_speed = get_speed_meters();
+    Motor::State st = m_motor.get_state();
+
+    Serial.print(caption);
+    Serial.print(":");
+    Serial.print(" dst_speed=");
+    Serial.print(m_dst_speed);
+    Serial.print(" cur_speed=");
+    Serial.print(cur_speed);
+    Serial.print(" st=");
+    Serial.print(st);
+    Serial.print(" brake_st=");
+    Serial.print(m_brake_state);
+    Serial.print(" PIDi=");
+    Serial.print(m_pid_integral);
+    Serial.print(" PIDe=");
+    Serial.print(m_pid_prev_error);
+    Serial.println("");
   }
 
 private:
