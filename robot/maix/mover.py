@@ -20,17 +20,10 @@ def constrain(v):
 
 
 def move(y, x):
-    rw = lw = y
-    lw += x
-    rw -= x
+    y = constrain(y)
+    x = constrain(x)
 
-    lw = constrain(lw)
-    rw = constrain(rw)
-
-    lw = int(lw * 255)
-    rw = int(rw * 255)
-
-    cmd = CMD_STR.format(lw, rw)
+    cmd = CMD_STR.format(y, x)
     #print(cmd)
     serial.write_str(cmd)
 
