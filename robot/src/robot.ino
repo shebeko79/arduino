@@ -132,7 +132,7 @@ bool processDriveCommand(const char* buf)
   if(!cdiv)
     return false;
   
-  int rel_rotation=atof(cdiv + 1);
+  float rel_rotation=atof(cdiv + 1);
   rel_rotation=constrain(rel_rotation, -1.0, 1.0);
 
   drive_request.active=true;
@@ -273,7 +273,7 @@ void loop()
   failSafe();
   leftWheel.apply();
   rightWheel.apply();
-  leftWheel.dump_state("L");
-  rightWheel.dump_state("R");
+  //leftWheel.dump_state("L");
+  //rightWheel.dump_state("R");
   delay(50);
 }
