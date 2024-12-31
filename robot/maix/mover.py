@@ -15,8 +15,8 @@ def constrain(v):
     if v > 1:
         return 1
     elif v < -1:
-        return -1;
-    return v;
+        return -1
+    return v
 
 
 def move(y, x):
