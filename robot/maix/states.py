@@ -1,4 +1,4 @@
-from maix import image
+from maix import image, app
 
 import algos
 import tracker
@@ -129,7 +129,9 @@ class MainState(BaseState):
     def enter(self):
         self.buttons = [Button("Points", PointsState.state_name),
                         Button("Track", TrackInitState.state_name, len(tracker.objects) > 0),
-                        Button("Move", MoveState.state_name)]
+                        Button("Move", MoveState.state_name)
+                        , Button("Exit", ExitState.state_name)
+                        ]
 
 
 class PointsState(BaseState):
@@ -139,6 +141,13 @@ class PointsState(BaseState):
         self.buttons = [Button("Add", AddPointState.state_name),
                         Button("DelLast", DeleteLastPointState.state_name, len(tracker.objects) > 0),
                         Button("Back", MainState.state_name)]
+
+
+class ExitState(BaseState):
+    state_name = "exit"
+
+    def enter(self):
+        app.set_exit_flag(True)
 
 
 class AddPointState(BaseState):
@@ -241,3 +250,4 @@ def init():
     add_state(TrackInitState())
     add_state(TrackState())
     add_state(MoveState())
+    add_state(ExitState())

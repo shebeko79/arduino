@@ -94,6 +94,8 @@ def main_cycle():
 
         http_server.process()
 
+    http_server.shutdown()
+
 
 if __name__ == "__main__":
     main_init();

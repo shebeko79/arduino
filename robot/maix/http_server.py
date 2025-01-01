@@ -176,6 +176,13 @@ def init():
     t1.start()
 
 
+def shutdown():
+    global server
+
+    server.shutdown()
+
+
+
 def call_in_main_thread(func, *args, **kwargs):
     global delay_call
     global delay_result
