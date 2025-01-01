@@ -1,5 +1,6 @@
 
 CAM_SIZE = [640, 480]
+FOCAL_DIST = CAM_SIZE[1]
 BASE_PATH = "/root/robot"
 
 

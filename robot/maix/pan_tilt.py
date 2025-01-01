@@ -1,175 +1,193 @@
+import math
+from enum import IntEnum
 from scservo_sdk import *
 from maix import pinmap, time
 
 
-portHandler = PortHandler('/dev/ttyS2')
-packetHandler = PacketHandler(1)
+class ScServo:
 
-# Control table address
-ADDR_SCS_ID = 5
-ADDR_SCS_BAUD_RATE = 6
-ADDR_SCS_TORQUE_ENABLE = 40
-ADDR_SCS_GOAL_ACC = 41
-ADDR_SCS_GOAL_POSITION = 42
-ADDR_SCS_GOAL_SPEED = 46
-ADDR_SCS_LOCK = 48
-ADDR_SCS_PRESENT_POSITION = 56
+    ADDR_SCS_ID = 5
+    ADDR_SCS_BAUD_RATE = 6
+    ADDR_SCS_TORQUE_ENABLE = 40
+    ADDR_SCS_GOAL_POSITION = 42
+    ADDR_SCS_GOAL_SPEED = 46
+    ADDR_SCS_LOCK = 48
+    ADDR_SCS_PRESENT_POSITION = 56
+
+    SCS_MOVING_STATUS_THRESHOLD = 40
+
+    def __init__(self):
+        self.portHandler = PortHandler('/dev/ttyS2')
+        self.packetHandler = PacketHandler(1)
+
+        pinmap.set_pin_function("A28", "UART2_TX")
+        pinmap.set_pin_function("A29", "UART2_RX")
+
+        if not self.portHandler.openPort():
+            raise Exception("Failed to open the port")
+
+        if not self.portHandler.setBaudRate(500000):
+            raise Exception("Failed to change the baudrate")
+
+    def raise_tx(self, result):
+        if result != COMM_SUCCESS:
+            raise Exception(self.packetHandler.getTxRxResult(result))
+
+    def raise_rx(self, result):
+        if result != 0:
+            raise Exception(self.packetHandler.getRxPacketError(result))
+
+    def set_torque(self, scs_id, enable=True):
+        if enable:
+            trq = 1
+        else:
+            trq = 0
+
+        tx_res, rx_res = self.packetHandler.write1ByteTxRx(self.portHandler, scs_id, self.ADDR_SCS_TORQUE_ENABLE, trq)
+        self.raise_tx(tx_res)
+        self.raise_rx(rx_res)
+
+    def set_pos(self, scs_id, pos):
+        pos = int(pos)
+        tx_res, rx_res = self.packetHandler.write2ByteTxRx(self.portHandler, scs_id, self.ADDR_SCS_GOAL_POSITION, pos)
+        self.raise_tx(tx_res)
+        self.raise_rx(rx_res)
+
+    def set_speed(self, scs_id, speed):
+        tx_res, rx_res = self.packetHandler.write2ByteTxRx(self.portHandler, scs_id, self.ADDR_SCS_GOAL_SPEED, speed)
+        self.raise_tx(tx_res)
+        self.raise_rx(rx_res)
+
+    def get_pos_speed(self, scs_id):
+        pos_speed, tx_res, rx_res = self.packetHandler.read4ByteTxRx(self.portHandler, scs_id, self.ADDR_SCS_PRESENT_POSITION)
+        self.raise_tx(tx_res)
+        self.raise_rx(rx_res)
+
+        position = SCS_LOWORD(pos_speed)
+        speed = SCS_HIWORD(pos_speed)
+        return [position, speed]
+
+    def change_id(self, scs_id, new_id):
+        tx_res = self.packetHandler.write1ByteTxOnly(self.portHandler, scs_id, self.ADDR_SCS_LOCK, 0)
+        self.raise_tx(tx_res)
+
+        tx_res = self.packetHandler.write1ByteTxOnly(self.portHandler, scs_id, self.ADDR_SCS_ID, new_id)
+        self.raise_tx(tx_res)
+
+        tx_res = self.packetHandler.write1ByteTxOnly(self.portHandler, new_id, self.ADDR_SCS_LOCK, 1)
+        self.raise_tx(tx_res)
+
+    def ping(self, scs_id):
+        r = self.packetHandler.ping(self.portHandler, scs_id)
+        print(r)
+        scs_model_number, scs_comm_result, scs_error = r
+        if scs_comm_result != COMM_SUCCESS:
+            print("%s" % self.packetHandler.getTxRxResult(scs_comm_result))
+        elif scs_error != 0:
+            print("%s" % self.packetHandler.getRxPacketError(scs_error))
+        else:
+            print("[ID:%03d] ping Succeeded. SCServo model number : %d" % (scs_id, scs_model_number))
+
+    def sync_move_to(self, scs_id, goal_pos):
+        goal_pos = int(goal_pos)
+        self.set_pos(scs_id, goal_pos)
+
+        while True:
+            pos, speed = self.get_pos_speed(scs_id)
+            #print(f"{scs_id}: goal={goal_pos} current={pos} speed={speed}")
+            if not abs(goal_pos - pos) > self.SCS_MOVING_STATUS_THRESHOLD:
+                break
 
 
-SCS_MINIMUM_POSITION_VALUE = 100
-SCS_MAXIMUM_POSITION_VALUE = 4000
-SCS_MOVING_STATUS_THRESHOLD = 40
-SCS_MOVING_SPEED = 0
-SCS_MOVING_ACC = 0
+class Tilt(IntEnum):
+    BACKWARD_MAX_DOWN = 100
+    BACKWARD = 220
+    UP = 512
+    FRONT = 800
+    MAX_DOWN = 1000
+    MIN = BACKWARD_MAX_DOWN
+    MAX = MAX_DOWN
+
+
+class Pan(IntEnum):
+    MIN = 0
+    CENTER = 512
+    MAX = 1023
+
 
 PAN_ID = 1
 TILT_ID = 2
+RAD_TO_SERVO = (Tilt.FRONT - Tilt.BACKWARD) / math.pi
+
+srv: ScServo = None
 
 
-def raise_tx(result):
-    if result != COMM_SUCCESS:
-        raise Exception(packetHandler.getTxRxResult(result))
+def set_pan(pos):
+    if pos < Pan.MIN:
+        pos = Pan.MIN
+    elif pos > Pan.MAX:
+        pos = Pan.MAX
+
+    srv.set_pos(PAN_ID, pos)
 
 
-def raise_rx(result):
-    if result != 0:
-        raise Exception(packetHandler.getRxPacketError(result))
+def set_tilt(pos):
+    if pos < Tilt.MIN:
+        pos = Tilt.MIN
+    elif pos > Tilt.MAX:
+        pos = Tilt.MAX
+
+    srv.set_pos(TILT_ID, pos)
 
 
-def setup_acc(scs_id, acc=0):
-    tx_res, rx_res = packetHandler.write1ByteTxRx(portHandler, scs_id, ADDR_SCS_GOAL_ACC, acc)
-    raise_tx(tx_res)
-    raise_rx(rx_res)
+def get_pan():
+    pos, speed = srv.get_pos_speed(PAN_ID)
+    return pos
 
 
-def set_torque(scs_id, enable=True):
-    if enable:
-        trq = 1
-    else:
-        trq = 0
-
-    tx_res, rx_res = packetHandler.write1ByteTxRx(portHandler, scs_id, ADDR_SCS_TORQUE_ENABLE, trq)
-    raise_tx(tx_res)
-    raise_rx(rx_res)
+def get_tilt():
+    pos, speed = srv.get_pos_speed(TILT_ID)
+    return pos
 
 
-def set_pos(scs_id, pos):
-    tx_res, rx_res = packetHandler.write2ByteTxRx(portHandler, scs_id, ADDR_SCS_GOAL_POSITION, pos)
-    raise_tx(tx_res)
-    raise_rx(rx_res)
+def pan2angle(pos):
+    return (pos-Pan.CENTER)/RAD_TO_SERVO
 
 
-def set_speed(scs_id, speed):
-    tx_res, rx_res = packetHandler.write2ByteTxRx(portHandler, scs_id, ADDR_SCS_GOAL_SPEED, speed)
-    raise_tx(tx_res)
-    raise_rx(rx_res)
+def angle2pan(angle):
+    return angle*RAD_TO_SERVO+Pan.CENTER
 
 
-def get_pos_speed(scs_id):
-    pos_speed, tx_res, rx_res = packetHandler.read4ByteTxRx(portHandler, scs_id, ADDR_SCS_PRESENT_POSITION)
-    raise_tx(tx_res)
-    raise_rx(rx_res)
-
-    position = SCS_LOWORD(pos_speed)
-    speed = SCS_HIWORD(pos_speed)
-    return [position, speed]
+def tilt2angle(pos):
+    return (pos-Tilt.FRONT)/RAD_TO_SERVO
 
 
-def change_id(scs_id, new_id):
-    tx_res = packetHandler.write1ByteTxOnly(portHandler, scs_id, ADDR_SCS_LOCK, 0)
-    raise_tx(tx_res)
-
-    tx_res = packetHandler.write1ByteTxOnly(portHandler, scs_id, ADDR_SCS_ID, new_id)
-    raise_tx(tx_res)
-
-    tx_res = packetHandler.write1ByteTxOnly(portHandler, new_id, ADDR_SCS_LOCK, 1)
-    raise_tx(tx_res)
-
-def move_to(scs_id, goal_pos):
-    set_pos(scs_id, goal_pos)
-
-    while True:
-        pos, speed = get_pos_speed(scs_id)
-
-        print(f"{scs_id}: goal={goal_pos} current={pos} speed={speed}")
-
-        if not abs(goal_pos - pos) > SCS_MOVING_STATUS_THRESHOLD:
-            break
-
-    time.sleep(3);
+def angle2tilt(angle):
+    return angle*RAD_TO_SERVO+Tilt.FRONT
 
 
-def shake_pan():
-    scs_id = PAN_ID
-    for i in range(0, 1):
-        move_to(scs_id, 0)
-        move_to(scs_id, 512)
-        move_to(scs_id, 1023)
-        move_to(scs_id, 512)
+def set_pan_angle(angle):
+    set_pan(angle2pan(angle))
 
 
-def shake_tilt():
-    scs_id = TILT_ID
-    for i in range(0, 1):
-        move_to(scs_id, 1000)  # down
-        move_to(scs_id, 800)  # normal
-        move_to(scs_id, 512)  # up
-        move_to(scs_id, 220)  # upside-normal
-        move_to(scs_id, 100)  # down other side
-        move_to(scs_id, 220)
-        move_to(scs_id, 512)
-        move_to(scs_id, 800)
+def set_tilt_angle(angle):
+    set_tilt(angle2tilt(angle))
 
-def shake_all():
-    scs_id = PAN_ID
-    move_to(scs_id, 0)
-    shake_tilt()
-    move_to(scs_id, 512)
-    shake_tilt()
-    move_to(scs_id, 1023)
-    shake_tilt()
-    move_to(scs_id, 512)
-    shake_tilt()
 
-def ping(scs_id):
-    r = packetHandler.ping(portHandler, scs_id)
-    print(r)
-    scs_model_number, scs_comm_result, scs_error = r
-    if scs_comm_result != COMM_SUCCESS:
-        print("%s" % packetHandler.getTxRxResult(scs_comm_result))
-    elif scs_error != 0:
-        print("%s" % packetHandler.getRxPacketError(scs_error))
-    else:
-        print("[ID:%03d] ping Succeeded. SCServo model number : %d" % (scs_id, scs_model_number))
+def get_pan_angle():
+    return pan2angle(get_pan())
 
-if __name__ == "__main__":
 
-    pinmap.set_pin_function("A28", "UART2_TX")
-    pinmap.set_pin_function("A29", "UART2_RX")
+def get_tilt_angle():
+    return tilt2angle(get_tilt())
 
-    if not portHandler.openPort():
-        print("Failed to open the port")
-        quit()
 
-    if not portHandler.setBaudRate(500000):
-        raise Exception("Failed to change the baudrate")
+def init():
+    global srv
+    srv = ScServo()
 
-    #ping(PAN_ID)
-    #ping(TILT_ID)
+    srv.set_speed(PAN_ID, 500)
+    srv.set_speed(TILT_ID, 500)
 
-    set_speed(PAN_ID, 500)
-    set_speed(TILT_ID, 500)
-
-    #shake_pan()
-    #set_torque(PAN_ID, False)
-
-    #shake_tilt()
-    #move_to(TILT_ID, 800);
-    #set_torque(TILT_ID, False)
-    
-    shake_all();
-    set_torque(PAN_ID, False)
-    set_torque(TILT_ID, False)
-
-    portHandler.closePort()
-
+    set_pan(Pan.CENTER)
+    set_tilt(Tilt.FRONT)

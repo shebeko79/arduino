@@ -1,6 +1,7 @@
 from maix import camera, image, display, app, touchscreen
 import mover
 import algos
+import pan_tilt
 import tracker
 import states
 import track_utils
@@ -28,6 +29,7 @@ def main_init():
     image.load_font("sans", "/maixapp/share/font/sans.ttf", size=32)
 
     mover.init()
+    pan_tilt.init()
 
     states.init()
     states.set_state(states.MainState.state_name)
