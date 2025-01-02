@@ -94,6 +94,7 @@ def main_cycle():
 
         http_server.process()
 
+    pan_tilt.shutdown()
     http_server.shutdown()
 
 

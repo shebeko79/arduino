@@ -186,8 +186,13 @@ def init():
     global srv
     srv = ScServo()
 
-    srv.set_speed(PAN_ID, 500)
-    srv.set_speed(TILT_ID, 500)
+    srv.set_speed(PAN_ID, 100)
+    srv.set_speed(TILT_ID, 100)
 
     set_pan(Pan.CENTER)
     set_tilt(Tilt.FRONT)
+
+
+def shutdown():
+    srv.set_torque(PAN_ID, False)
+    srv.set_torque(TILT_ID, False)
