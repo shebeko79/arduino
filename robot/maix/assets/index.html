@@ -4,20 +4,31 @@
     <title>Robot</title>
     <style>
         body {
-            display: flex;
-            height: 100vh;
             margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #container {
-            display: flex;
-            align-items: flex-start;
-            padding: 8px 4px;
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
 
         #image-container {
+            width: 100%;
+            height: 100%;
             position: relative;
-            display: inline-block;
+            overflow: hidden;
+        }
+
+        #cam_img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         #rect {
@@ -27,24 +38,31 @@
             visibility: hidden;
         }
 
-        .button-container {
+        #button-container {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-direction: column; /* Stack buttons vertically */
-            margin-left: 20px; /* Space between image and buttons */
+            gap: 10px;
         }
 
-        .button-container button {
-            margin-bottom: 10px; /* Space between buttons */
-            padding: 10px 20px; /* Increase button size */
-            font-size: 16px; /* Adjust text size */
+        #button-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .button-container button:disabled {
+        #button-container button:disabled {
             background-color: lightgray;
             color: gray;
         }
     </style>
-</head><script>
+</head>
+<script>
 let currentStateName = '';
 let acceptClick = false;
 let acceptRectangle = false;
@@ -103,11 +121,11 @@ function sendClickRequest(caption) {
         body: JSON.stringify(payload)
     })
     .then(response => response.json())
-	.then(data => {
-            currentStateName = data.state_name;
-            acceptClick = data.accept_click;
-            acceptRectangle = data.accept_rectangle;
-            updateButtons(data.buttons);
+    .then(data => {
+        currentStateName = data.state_name;
+        acceptClick = data.accept_click;
+        acceptRectangle = data.accept_rectangle;
+        updateButtons(data.buttons);
     })
     .catch(error => console.error('Error sending click request:', error));
 }
@@ -150,13 +168,13 @@ function handleImageClick(event) {
             },
             body: JSON.stringify(payload)
         })
-		.then(response => response.json())
-		.then(data => {
-				currentStateName = data.state_name;
-				acceptClick = data.accept_click;
-				acceptRectangle = data.accept_rectangle;
-				updateButtons(data.buttons);
-		})
+        .then(response => response.json())
+        .then(data => {
+            currentStateName = data.state_name;
+            acceptClick = data.accept_click;
+            acceptRectangle = data.accept_rectangle;
+            updateButtons(data.buttons);
+        })
         .catch(error => console.error('Error sending click point request:', error));
     }
 }
@@ -214,13 +232,13 @@ function endRectangleSelection() {
                 },
                 body: JSON.stringify(payload)
             })
-			.then(response => response.json())
-			.then(data => {
-					currentStateName = data.state_name;
-					acceptClick = data.accept_click;
-					acceptRectangle = data.accept_rectangle;
-					updateButtons(data.buttons);
-			})
+            .then(response => response.json())
+            .then(data => {
+                currentStateName = data.state_name;
+                acceptClick = data.accept_click;
+                acceptRectangle = data.accept_rectangle;
+                updateButtons(data.buttons);
+            })
             .catch(error => console.error('Error sending rectangle request:', error));
         }
 
@@ -253,7 +271,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <body>
     <div id="container">
         <div id="image-container">
-            <img id="cam_img" src="/img" width="640" height="480" onload="setTimeout(reloadImg, 1000)"/>
+            <img id="cam_img" src="/img" onload="setTimeout(reloadImg, 1000)"/>
             <div id="rect"></div>
         </div>
         <div id="button-container" class="button-container"></div>
