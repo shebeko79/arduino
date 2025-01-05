@@ -2,6 +2,8 @@ import math
 
 from maix import nn, image
 
+import track_utils
+
 MODEL_PATH = "/root/models/nanotrack.mud"
 
 objects = []
@@ -30,6 +32,12 @@ class TrackObject:
 
 
 def add_tracker(img, rc):
+
+    rc[0] = int(rc[0]*track_utils.CAM_SIZE[0])
+    rc[1] = int(rc[1] * track_utils.CAM_SIZE[1])
+    rc[2] = int(rc[2]*track_utils.CAM_SIZE[0])
+    rc[3] = int(rc[3] * track_utils.CAM_SIZE[1])
+
     tr = TrackObject(img, rc)
     objects.append(tr)
 
@@ -49,10 +57,15 @@ def draw_trackers(img: image.Image):
         o: TrackObject = objects[i]
         r = o.r
 
-        x = int(r.x * iw / o.img_size[0])
-        y = int(r.y * ih / o.img_size[1])
-        w = int(r.w * iw / o.img_size[0])
-        h = int(r.h * ih / o.img_size[1])
+        #x = int(r.x * iw / o.img_size[0])
+        #y = int(r.y * ih / o.img_size[1])
+        #w = int(r.w * iw / o.img_size[0])
+        #h = int(r.h * ih / o.img_size[1])
+
+        x = int(o.rc[0] * iw / o.img_size[0])
+        y = int(o.rc[1] * ih / o.img_size[1])
+        w = int((o.rc[2]-o.rc[0]) * iw / o.img_size[0])
+        h = int((o.rc[3]-o.rc[1]) * ih / o.img_size[1])
 
         if o.is_locked():
             cl = hi_cl
@@ -69,6 +82,9 @@ def draw_trackers(img: image.Image):
 def hit_test(pt):
     sel = None
     sel_d = 0
+
+    pt[0] = int(pt[0]*track_utils.CAM_SIZE[0])
+    pt[1] = int(pt[1] * track_utils.CAM_SIZE[1])
 
     for o in objects:
         r = o.r

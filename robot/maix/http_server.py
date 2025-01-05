@@ -28,21 +28,25 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.req_vars = {}
 
     def process_URL(self):
-        if self.path == "/":
-            self.root()
-        elif self.path == "/state":
-            self.state()
-        elif self.path == "/img" or self.path.startswith("/img?"):
-            self.img()
-        elif self.path == "/click":
-            self.click()
-        elif self.path == "/click_point":
-            self.click_point()
-        elif self.path == "/sel_rect":
-            self.sel_rect()
-        else:
-            self.send_response(404)
-            self.send_header("Content-Length", "0")
+        try:
+            if self.path == "/":
+                self.root()
+            elif self.path == "/state":
+                self.state()
+            elif self.path == "/img" or self.path.startswith("/img?"):
+                self.img()
+            elif self.path == "/click":
+                self.click()
+            elif self.path == "/click_point":
+                self.click_point()
+            elif self.path == "/sel_rect":
+                self.sel_rect()
+            else:
+                self.send_response(404)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+        except Exception as e:
+            self.send_response_only(400, str(e))
             self.end_headers()
 
     def parse_POST(self):
@@ -133,8 +137,11 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     def click_point(self):
         state_name = self.req_vars['state_name']
-        x = int(self.req_vars['x'])
-        y = int(self.req_vars['y'])
+        x = self.req_vars['x']
+        y = self.req_vars['y']
+
+        if not (0.0 <= x <= 1.0 and 0.0 <= y <= 1.0):
+            raise Exception("Coordinates out of range")
 
         st = call_in_main_thread(click_point, state_name, x, y)
 
@@ -145,10 +152,13 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     def sel_rect(self):
         state_name = self.req_vars['state_name']
-        x1 = int(self.req_vars['x1'])
-        y1 = int(self.req_vars['y1'])
-        x2 = int(self.req_vars['x2'])
-        y2 = int(self.req_vars['y2'])
+        x1 = self.req_vars['x1']
+        y1 = self.req_vars['y1']
+        x2 = self.req_vars['x2']
+        y2 = self.req_vars['y2']
+
+        if not (0.0 <= x1 <= 1.0 and 0.0 <= y1 <= 1.0 and 0.0 <= x2 <= 1.0 and 0.0 <= y2 <= 1.0):
+            raise Exception("Coordinates out of range")
 
         st = call_in_main_thread(sel_rect, state_name, x1, y1, x2, y2)
 

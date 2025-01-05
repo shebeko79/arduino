@@ -5,7 +5,7 @@
     <style>
         body {
             margin: 0;
-            height: 100vh;
+            height: 100svh;
             overflow: hidden;
             display: flex;
             justify-content: center;
@@ -28,7 +28,7 @@
         #cam_img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
         }
 
         #rect {
@@ -68,11 +68,57 @@ let acceptClick = false;
 let acceptRectangle = false;
 let isSelecting = false;
 let startX, startY, endX, endY;
+let imageNaturalWidth = 640;
+let imageNaturalHeight = 480;
 
 function reloadImg() {
     var timestamp = new Date().getTime();
     var image = document.getElementById("cam_img");
     image.src = "/img?t=" + timestamp;
+}
+
+function updateImageNaturalSize() {
+	const image = document.getElementById("cam_img");
+	
+	if(imageNaturalWidth == image.naturalWidth ||
+	   imageNaturalHeight == image.naturalHeight ||
+	   image.naturalHeight == 0 ||
+	   image.naturalWidth == 0)
+	{
+		return;
+	}
+	
+	imageNaturalWidth = image.naturalWidth;
+	imageNaturalHeight = image.naturalHeight;
+}
+	
+function getRelativePoint(x,y) {
+	const image = document.getElementById("cam_img");
+	
+	const matrix = new DOMMatrix();
+	const elementCenter = new DOMPoint(image.clientWidth / 2.0, image.clientHeight / 2.0);
+	const imageCenter = new DOMPoint(imageNaturalWidth / 2.0, imageNaturalHeight / 2.0);
+	matrix.translateSelf(elementCenter.x - imageCenter.x, elementCenter.y - imageCenter.y);
+
+	const zoom = Math.min(image.clientWidth / imageNaturalWidth, image.clientHeight / imageNaturalHeight);
+	matrix.scaleSelf(zoom, zoom, 1.0, imageCenter.x, imageCenter.y);
+	
+	p = matrix.inverse().transformPoint(new DOMPoint(x, y));
+
+	p.x = p.x/imageNaturalWidth;
+	p.y = p.y/imageNaturalHeight;
+	
+	if(p.x<0.0)
+		p.x = 0.0;
+	else if (p.x>1.0)
+		p.x = 1.0;
+
+	if(p.y<0.0)
+		p.y = 0.0;
+	else if (p.y>1.0)
+		p.y = 1.0;
+	
+	return p;
 }
 
 function fetchState() {
@@ -152,13 +198,12 @@ function getCoordinates(event) {
 function handleImageClick(event) {
     if (acceptClick) {
         const coords = getCoordinates(event);
-        const x = coords.x;
-        const y = coords.y;
+		p = getRelativePoint(coords.x, coords.y);
 
         const payload = {
             state_name: currentStateName,
-            x: x,
-            y: y
+            x: p.x,
+            y: p.y
         };
 
         fetch('/click_point', {
@@ -224,6 +269,14 @@ function endRectangleSelection() {
                 x2: Math.max(startX, endX),
                 y2: Math.max(startY, endY)
             };
+			
+			p = getRelativePoint(payload.x1,payload.y1);
+			payload.x1 = p.x;
+			payload.y1 = p.y;
+
+			p = getRelativePoint(payload.x2,payload.y2);
+			payload.x2 = p.x;
+			payload.y2 = p.y;
 
             fetch('/sel_rect', {
                 method: 'POST',
@@ -271,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function() {
 <body>
     <div id="container">
         <div id="image-container">
-            <img id="cam_img" src="/img" onload="setTimeout(reloadImg, 1000)"/>
+            <img id="cam_img" src="/img" onload="updateImageNaturalSize();setTimeout(reloadImg, 1000)"/>
             <div id="rect"></div>
         </div>
         <div id="button-container" class="button-container"></div>

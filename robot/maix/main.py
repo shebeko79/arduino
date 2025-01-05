@@ -72,8 +72,8 @@ def main_cycle():
                 st.on_click_button(btn)
             else:
                 if st.accept_click:
-                    x = int(touch_pt[0] * CAM_SIZE[0] / disp.width())
-                    y = int(touch_pt[1] * CAM_SIZE[1] / disp.height())
+                    x = touch_pt[0] / disp.width()
+                    y = touch_pt[1] / disp.height()
                     st.on_click([x, y])
 
                 if st.accept_rectangle:
@@ -81,10 +81,10 @@ def main_cycle():
 
         if not touched and prev_touched:
             if st.accept_rectangle and start_point:
-                x1 = int(start_point[0] * CAM_SIZE[0] / disp.width())
-                y1 = int(start_point[1] * CAM_SIZE[1] / disp.height())
-                x2 = int(touch_pt[0] * CAM_SIZE[0] / disp.width())
-                y2 = int(touch_pt[1] * CAM_SIZE[1] / disp.height())
+                x1 = start_point[0] / disp.width()
+                y1 = start_point[1] / disp.height()
+                x2 = touch_pt[0] / disp.width()
+                y2 = touch_pt[1] / disp.height()
                 rc = track_utils.make_rect([x1, y1], [x2, y2])
 
                 st.on_rectangle(img, rc)
