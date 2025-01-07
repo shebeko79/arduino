@@ -111,7 +111,9 @@ class Tilt(IntEnum):
 
 class Pan(IntEnum):
     MIN = 0
+    LEFT = 224
     CENTER = 512
+    RIGHT = 800
     MAX = 1023
 
 
@@ -193,6 +195,10 @@ def init():
     set_tilt(Tilt.FRONT)
 
 
-def shutdown():
+def release():
     srv.set_torque(PAN_ID, False)
     srv.set_torque(TILT_ID, False)
+
+
+def shutdown():
+    release()

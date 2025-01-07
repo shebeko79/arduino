@@ -302,6 +302,158 @@ function endRectangleSelection() {
     }
 }
 
+function handlePanTiltKeys(key) {
+	pan = 0;
+	tilt = 0;
+	requset_name ="/move_cam";
+	cam_ang = 5/180*Math.PI;
+	
+	switch(key)
+	{
+	case  "w":
+		tilt = -cam_ang;
+		break;
+	case  "s":
+		tilt = cam_ang;
+		break;
+	case  "a":
+		pan = -cam_ang;
+		break;
+	case  "d":
+		pan = cam_ang;
+		break;
+	case  "f":
+		requset_name ="/moveto_cam";
+		pan = "CENTER";
+		tilt = "FRONT";
+		break;
+	case  "b":
+		requset_name ="/moveto_cam";
+		pan = "CENTER";
+		tilt = "BACKWARD";
+		break;
+	case  "t":
+		requset_name ="/moveto_cam";
+		pan = "CENTER";
+		tilt = "UP";
+		break;
+	case  "l":
+		requset_name ="/moveto_cam";
+		pan = "LEFT";
+		tilt = "FRONT";
+		break;
+	case  "r":
+		requset_name ="/moveto_cam";
+		pan = "RIGHT";
+		tilt = "FRONT";
+		break;
+	case  "q":
+		requset_name ="/moveto_cam";
+		pan = "MIN";
+		tilt = "CURRENT";
+		break;
+	case  "e":
+		requset_name ="/moveto_cam";
+		pan = "MAX";
+		tilt = "CURRENT";
+		break;
+	case  "z":
+		requset_name ="/moveto_cam";
+		pan = "CURRENT";
+		tilt = "MIN";
+		break;
+	case  "c":
+		requset_name ="/moveto_cam";
+		pan = "CURRENT";
+		tilt = "MAX";
+		break;
+	default:
+		return;
+	}
+
+	const payload = { pan: pan, tilt: tilt };
+
+	fetch(requset_name, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+	.then(response => {
+		if (!response.ok) {
+			console.error("Error sending move_cam request:", response.statusText);
+		}
+	})
+	.catch(error => console.error("Error sending move_cam request:", error));
+}
+
+function handleMoveKeys(key) {
+	speed = 0;
+	pan = 0;
+	
+	switch(key)
+	{
+	case  "arrowup":
+		speed = 1.0;
+		break;
+	case  "arrowdown":
+		speed = -1.0;
+		break;
+	case  "arrowleft":
+		pan = -1.0;
+		break;
+	case  "arrowright":
+		pan = 1.0;
+		break;
+	default:
+		return;
+	}
+
+	const payload = { speed: speed, pan: pan };
+
+	fetch('/move', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(payload)
+	})
+	.then(response => {
+		if (!response.ok) {
+			console.error("Error sending move_cam request:", response.statusText);
+		}
+	})
+	.catch(error => console.error("Error sending move_cam request:", error));
+}
+
+function handleKeyDown(event) {
+	key = event.key.toLowerCase();
+	
+	switch(key)
+	{
+	case  "w":
+	case  "s":
+	case  "a":
+	case  "d":
+	case  "f":
+	case  "b":
+	case  "t":
+	case  "l":
+	case  "r":
+	case  "q":
+	case  "e":
+	case  "z":
+	case  "c":
+		return handlePanTiltKeys(key);
+	case  "arrowup":
+	case  "arrowdown":
+	case  "arrowleft":
+	case  "arrowright":
+		return handleMoveKeys(key);
+	}
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     fetchState();
     setInterval(fetchState, 1000);
@@ -319,6 +471,9 @@ document.addEventListener("DOMContentLoaded", function() {
     image.addEventListener("touchstart", startRectangleSelection);
     image.addEventListener("touchmove", updateRectangle);
     image.addEventListener("touchend", endRectangleSelection);
+
+    // Key Events
+    document.addEventListener("keydown", handleKeyDown);
 });
 </script>
 <body>

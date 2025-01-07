@@ -1,6 +1,9 @@
 from maix import image
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import threading
+
+import mover
+import pan_tilt
 import states
 import json
 import track_utils
@@ -41,6 +44,12 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.click_point()
             elif self.path == "/sel_rect":
                 self.sel_rect()
+            elif self.path == "/move_cam":
+                self.move_cam()
+            elif self.path == "/moveto_cam":
+                self.moveto_cam()
+            elif self.path == "/move":
+                self.move()
             else:
                 self.send_response(404)
                 self.send_header("Content-Length", "0")
@@ -167,6 +176,39 @@ class RequestHandler(BaseHTTPRequestHandler):
             d = json.dumps(st)
         self.send_json(d)
 
+    def move_cam(self):
+        pan = self.req_vars['pan']
+        tilt = self.req_vars['tilt']
+
+        st = call_in_main_thread(move_cam, pan, tilt)
+
+        d = '{}'
+        if st:
+            d = json.dumps(st)
+        self.send_json(d)
+
+    def moveto_cam(self):
+        pan = self.req_vars['pan']
+        tilt = self.req_vars['tilt']
+
+        st = call_in_main_thread(moveto_cam, pan, tilt)
+
+        d = '{}'
+        if st:
+            d = json.dumps(st)
+        self.send_json(d)
+
+    def move(self):
+        speed = self.req_vars['speed']
+        pan = self.req_vars['pan']
+
+        st = call_in_main_thread(move, speed, pan)
+
+        d = '{}'
+        if st:
+            d = json.dumps(st)
+        self.send_json(d)
+
 
 def thread_task():
     global server
@@ -206,6 +248,11 @@ def call_in_main_thread(func, *args, **kwargs):
         res = delay_result
         delay_result = None
 
+    if isinstance(res, Exception):
+        print("call_in_main_thread() exception")
+        print(res)
+        raise res
+
     return res
 
 
@@ -217,7 +264,11 @@ def process():
     with main_th_condition:
         if delay_call:
             func, args, kwargs = delay_call
-            delay_result = func(*args, **kwargs)
+            try:
+                delay_result = func(*args, **kwargs)
+            except Exception as e:
+                delay_result = e
+
             delay_call = None
             main_th_condition.notify()
 
@@ -289,5 +340,73 @@ def sel_rect(state_name, x1, y1, x2, y2):
     if st.accept_rectangle and last_img:
         rc = track_utils.make_rect([x1, y1], [x2, y2])
         st.on_rectangle(last_img, rc)
+
+    return get_current_state()
+
+
+def move_cam(pan, tilt):
+    st = states.current_state
+    if st is None or not st.accept_user_move_cam:
+        return get_current_state()
+
+    p = pan_tilt.get_pan_angle()
+    t = pan_tilt.get_tilt_angle()
+
+    p = p + pan
+    t = t + tilt
+
+    pan_tilt.set_pan_angle(p)
+    pan_tilt.set_tilt_angle(t)
+
+    return get_current_state()
+
+
+def moveto_cam(pan, tilt):
+    st = states.current_state
+    if st is None or not st.accept_user_move_cam:
+        return get_current_state()
+
+    if not isinstance(pan, str):
+        pan = pan_tilt.angle2pan(pan)
+    elif pan.upper() == "LEFT":
+        pan = pan_tilt.Pan.LEFT
+    elif pan.upper() == "RIGHT":
+        pan = pan_tilt.Pan.RIGHT
+    elif pan.upper() == "CENTER":
+        pan = pan_tilt.Pan.CENTER
+    elif pan.upper() == "MIN":
+        pan = pan_tilt.Pan.MIN
+    elif pan.upper() == "MAX":
+        pan = pan_tilt.Pan.MAX
+    else:
+        pan = pan_tilt.get_pan()
+
+    if not isinstance(tilt, str):
+        tilt = pan_tilt.angle2tilt(tilt)
+    elif tilt.upper() == "BACKWARD":
+        tilt = pan_tilt.Tilt.BACKWARD
+    elif tilt.upper() == "UP":
+        tilt = pan_tilt.Tilt.UP
+    elif tilt.upper() == "FRONT":
+        tilt = pan_tilt.Tilt.FRONT
+    elif tilt.upper() == "MIN":
+        tilt = pan_tilt.Tilt.MIN
+    elif tilt.upper() == "MAX":
+        tilt = pan_tilt.Tilt.MAX
+    else:
+        tilt = pan_tilt.get_tilt()
+
+    pan_tilt.set_pan(pan)
+    pan_tilt.set_tilt(tilt)
+
+    return get_current_state()
+
+
+def move(speed, pan):
+    st = states.current_state
+    if st is None or not st.accept_user_move_cam:
+        return get_current_state()
+
+    mover.move(speed, pan)
 
     return get_current_state()

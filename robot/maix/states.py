@@ -1,6 +1,9 @@
+import math
+
 from maix import image, app
 
 import algos
+import pan_tilt
 import tracker
 import mover
 
@@ -22,6 +25,8 @@ class BaseState:
         self.buttons = []
         self.accept_rectangle = False
         self.accept_click = False
+        self.accept_user_move = True
+        self.accept_user_move_cam = True
 
     def draw_screen(self, cam_img: image.Image, out_size):
         img = cam_img.resize(out_size[0], out_size[1])
@@ -129,7 +134,8 @@ class MainState(BaseState):
     def enter(self):
         self.buttons = [Button("Points", PointsState.state_name),
                         Button("Track", TrackInitState.state_name, len(tracker.objects) > 0),
-                        Button("Move", MoveState.state_name)
+                        Button("Move", MoveState.state_name),
+                        Button("Pan", PanTiltState.state_name)
                         , Button("Exit", ExitState.state_name)
                         ]
 
@@ -206,6 +212,8 @@ class TrackState(BaseState):
 
     def __init__(self):
         super().__init__()
+        self.accept_user_move = False
+        self.accept_user_move_cam = False
 
     def enter(self):
         self.buttons = [Button("Stop", MainState.state_name)]
@@ -242,6 +250,53 @@ class MoveState(BaseState):
             mover.stop()
 
 
+class PanTiltState(BaseState):
+    state_name = "pan_tilt"
+    MOVE_ANGLE = 5/180.0*math.pi
+
+    def __init__(self):
+        super().__init__()
+
+    def enter(self):
+        self.buttons = [Button("U"), Button("<"), Button(">"), Button("D"),
+                        Button("F"), Button("B"), Button("T"), Button("L"), Button("R"),
+                        Button("Back", MainState.state_name)]
+
+    def leave(self):
+        pan_tilt.release()
+
+    def on_click_button(self, btn: Button):
+        if btn.state_name:
+            set_state(btn.state_name)
+        elif btn.caption == "U":
+            v = pan_tilt.get_tilt_angle()
+            pan_tilt.set_tilt_angle(v-self.MOVE_ANGLE)
+        elif btn.caption == "<":
+            v = pan_tilt.get_pan_angle()
+            pan_tilt.set_pan_angle(v-self.MOVE_ANGLE)
+        elif btn.caption == ">":
+            v = pan_tilt.get_pan_angle()
+            pan_tilt.set_pan_angle(v+self.MOVE_ANGLE)
+        elif btn.caption == "D":
+            v = pan_tilt.get_tilt_angle()
+            pan_tilt.set_tilt_angle(v+self.MOVE_ANGLE)
+        elif btn.caption == "F":
+            pan_tilt.set_pan(pan_tilt.Pan.CENTER)
+            pan_tilt.set_tilt(pan_tilt.Tilt.FRONT)
+        elif btn.caption == "B":
+            pan_tilt.set_pan(pan_tilt.Pan.CENTER)
+            pan_tilt.set_tilt(pan_tilt.Tilt.BACKWARD)
+        elif btn.caption == "T":
+            pan_tilt.set_pan(pan_tilt.Pan.CENTER)
+            pan_tilt.set_tilt(pan_tilt.Tilt.UP)
+        elif btn.caption == "L":
+            pan_tilt.set_pan(pan_tilt.Pan.LEFT)
+            pan_tilt.set_tilt(pan_tilt.Tilt.FRONT)
+        elif btn.caption == "R":
+            pan_tilt.set_pan(pan_tilt.Pan.RIGHT)
+            pan_tilt.set_tilt(pan_tilt.Tilt.FRONT)
+
+
 def init():
     add_state(MainState())
     add_state(PointsState())
@@ -250,4 +305,5 @@ def init():
     add_state(TrackInitState())
     add_state(TrackState())
     add_state(MoveState())
+    add_state(PanTiltState())
     add_state(ExitState())

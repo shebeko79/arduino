@@ -57,7 +57,7 @@ class MoveToAlgo(BaseAlgo):
         try:
             self.find_position()
             self.move_camera()
-            #self.move_robot()
+            self.move_robot()
         except Exception as e:
             print(e)
 
