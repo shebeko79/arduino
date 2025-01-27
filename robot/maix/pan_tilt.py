@@ -201,4 +201,7 @@ def release():
 
 
 def shutdown():
-    release()
+    try:
+        release()
+    except Exception as e:
+        print(e)
