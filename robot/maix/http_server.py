@@ -1,6 +1,7 @@
 from maix import image
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import threading
+from pathlib import Path
 
 import mover
 import pan_tilt
@@ -50,7 +51,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self.moveto_cam()
             elif self.path == "/move":
                 self.move()
-            else:
+            elif not self.send_file():
                 self.send_response(404)
                 self.send_header("Content-Length", "0")
                 self.end_headers()
@@ -120,6 +121,37 @@ class RequestHandler(BaseHTTPRequestHandler):
         file = open(track_utils.BASE_PATH + "/assets/index.html", 'r')
         file_content = file.read()
         self.send_html(file_content)
+
+    def send_file(self):
+        print(self.path)
+        file_path = Path(track_utils.BASE_PATH) / ("assets" + self.path)
+        print(file_path)
+
+        if not file_path.is_file():
+            return False
+
+        file = open(file_path, 'rb')
+        file_content = file.read()
+
+        ext = file_path.suffix.lower()
+        mime = "text/plain"
+
+        print(ext)
+
+        if ext == ".m3u8":
+            mime = "application/x-mpegURL"
+        elif ext == ".ts":
+            mime = "video/mp2t"
+        elif ext == ".html":
+            mime = "text/html"
+
+        self.send_response(200)
+        self.send_header("Content-type", mime)
+        self.send_header("Content-Length", str(len(file_content)))
+        self.end_headers()
+        self.wfile.write(file_content)
+
+        return True
 
     def state(self):
         st = call_in_main_thread(get_current_state)
