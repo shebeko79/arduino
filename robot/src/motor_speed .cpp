@@ -75,32 +75,90 @@ void MotorSpeed::apply()
 
 float MotorSpeed::calc_pwm(float cur_speed)
 {
-  float error = abs(m_dst_speed) - cur_speed;
-  
-  float proportional = PID_kp * error;
+  unsigned long cur_time = millis();
 
-  m_pid_integral += error;
-  float integral = PID_ki * m_pid_integral;
-  
-  float derivative = PID_kd * (error - m_pid_prev_error);
-  float res = proportional + integral + derivative;
+  float cur_delay;
+  if(!m_pid_active)
+    cur_delay = m_expected_delay;
+  else if(cur_time == m_prev_time)
+    cur_delay=1;
+  else
+    cur_delay = (cur_time - m_prev_time)/1000.0;
+    
 
-  if(abs(res) > 1.0)
+  float expected_speed = abs(m_dst_speed);
+  float cur_acceleration = (cur_speed-m_prev_speed)/cur_delay;
+  if(abs(cur_acceleration) > MAX_ACCELERATION)
   {
-    res = res>0.0? 1.0 : -1.0;
-    integral=res - proportional - derivative;
-    m_pid_integral=integral/PID_ki;
+    expected_speed = cur_speed + (cur_acceleration>0? 1:-1)*MAX_ACCELERATION*cur_delay;
+  }
+  
+
+  float constant = expected_speed/MAX_SPEED;
+  float error = expected_speed - cur_speed;
+  float res;
+
+  if(!m_pid_active)
+  {
+    res = constant;
+  }
+  else
+  {
+    float proportional = PID_kp * error;
+
+    m_pid_integral += error * cur_delay;
+    float integral = PID_ki * m_pid_integral;
+    
+    float derivative = PID_kd * (error - m_pid_prev_error) / cur_delay;
+    res = constant + proportional + integral + derivative;
+
+    if(abs(res) > 1.0)
+    {
+      res = res>0.0? 1.0 : -1.0;
+      integral=res - proportional - derivative - constant;
+      m_pid_integral=integral/PID_ki;
+    }
+
+    // Serial.print(" dst_sp=");
+    // Serial.print(m_dst_speed);
+    // Serial.print(" acc=");
+    // Serial.print(cur_acceleration);
+    // Serial.print(" exp_sp=");
+    // Serial.print(expected_speed);
+    // Serial.print(" cur_sp=");
+    // Serial.print(cur_speed);
+    // Serial.print(" err=");
+    // Serial.print(error);
+    // Serial.print(" res=");
+    // Serial.print(res);
+    // Serial.print(" PIDi=");
+    // Serial.print(m_pid_integral);
+    // Serial.print(" delay=");
+    // Serial.print(cur_delay);
+    // Serial.print(" p=");
+    // Serial.print(proportional);
+    // Serial.print(" i=");
+    // Serial.print(integral);
+    // Serial.print(" d=");
+    // Serial.print(derivative);
+    // Serial.println("");
   }
 
+  m_pid_active = true;
   m_pid_prev_error = error;
+  m_prev_speed = cur_speed;
+  m_prev_time = cur_time;
+  m_expected_delay = cur_delay;
   
   return  res;
 }
 
 void MotorSpeed::reset_pid()
 {
+  m_pid_active = false;
   m_pid_integral = 0.0;
   m_pid_prev_error = 0.0;
+  m_prev_speed = 0.0;
 }
 
 void MotorSpeed::fail_safe()

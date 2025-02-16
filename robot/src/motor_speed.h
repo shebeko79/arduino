@@ -41,12 +41,14 @@ public:
   inline float get_speed_meters()const{return m_ticks_count*KPER_SEC/WHEEL_PULSES_PER_METER;}
 
   void apply();
-  float calc_pwm(float cur_speed);
-  void reset_pid();
   
   void fail_safe();
   void dump_state(const String& caption);
 
+private:
+  float calc_pwm(float cur_speed);
+  void reset_pid();
+  
 private:
   float m_dst_speed = 0.0;
 
@@ -56,7 +58,12 @@ private:
   volatile unsigned m_periods[PERIODS_COUNT];
   volatile unsigned m_ticks_count = 0;
 
+  bool m_pid_active = 0.0;
   float m_pid_integral = 0.0;
   float m_pid_prev_error = 0.0;
+  float m_prev_speed = 0.0;
+  unsigned int m_prev_time = 0;
+  float m_expected_delay = EXPECTED_PWM_DELAY;
+  
   BrakeState m_brake_state = bs_zero_speed;
 };

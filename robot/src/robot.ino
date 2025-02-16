@@ -105,12 +105,12 @@ void processStream(T& stream, const char* caption,bool blocked)
       break;
   }
 
-  if(!blocked)
-  {
-    Serial.print(caption);
-    Serial.print(": ");
-    Serial.println((const char*)sbuf);
-  }
+  // if(!blocked)
+  // {
+  //   Serial.print(caption);
+  //   Serial.print(": ");
+  //   Serial.println((const char*)sbuf);
+  // }
 
   char* cur = (char*)sbuf;
   for(char* next = strchr(cur, '\r'); next!=nullptr;)
@@ -273,7 +273,7 @@ void loop()
   failSafe();
   leftWheel.apply();
   rightWheel.apply();
-  leftWheel.dump_state("L");
+  //leftWheel.dump_state("L");
   //rightWheel.dump_state("R");
-  delay(50);
+  delay(MAIN_CYCLE_DELAY);
 }
