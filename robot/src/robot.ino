@@ -273,7 +273,7 @@ void loop()
   failSafe();
   leftWheel.apply();
   rightWheel.apply();
-  //leftWheel.dump_state("L");
+  leftWheel.dump_state("L");
   //rightWheel.dump_state("R");
   delay(50);
 }

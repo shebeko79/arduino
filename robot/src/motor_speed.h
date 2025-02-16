@@ -12,10 +12,10 @@ public:
 
   enum BrakeState
   {
-    bs_change_direction,
-    bs_speed_compensation,
+    bs_zero_speed,
     bs_fail_safe,
-    bs_zero_speed
+    bs_change_direction,
+    bs_speed_compensation
   };
   
 public:
@@ -91,33 +91,18 @@ public:
       return;
     }
 
-    float ctl_speed=calc_pid(cur_speed);
-    if(ctl_speed<-MAX_SPEED/2)
+    float ctl_pwm=calc_pwm(cur_speed);
+    if(ctl_pwm<-0.5)
     {
       m_motor.brake();
-      m_brake_state = bs_change_direction;
-      reset_pid();
+      m_brake_state = bs_speed_compensation;
       return;
     }
 
-    ctl_speed = constrain(ctl_speed, 0.0, MAX_SPEED);
+    ctl_pwm = constrain(ctl_pwm, 0.0, 1.0);
 
-    int pwm = ctl_speed*SPEED_TO_PWM;
+    int pwm = ctl_pwm*Motor::MAX_PWM;
     pwm = constrain(pwm, 0, Motor::MAX_PWM);
-
-  
-    // Serial.print("dst_speed=");
-    // Serial.print(m_dst_speed);
-    // Serial.print(" cur_speed=");
-    // Serial.print(cur_speed);
-    // Serial.print(" st=");
-    // Serial.print(st);
-    // Serial.print(" ctl_speed=");
-    // Serial.print(ctl_speed);
-    // Serial.print(" pwm=");
-    // Serial.print(pwm);
-    // Serial.println("");
-
 
     if(m_dst_speed<0)
       m_motor.backward(pwm);
@@ -125,7 +110,7 @@ public:
       m_motor.forward(pwm);
   }
 
-  float calc_pid(float cur_speed)
+  float calc_pwm(float cur_speed)
   {
     float error = abs(m_dst_speed) - cur_speed;
     
@@ -133,39 +118,16 @@ public:
 
     m_pid_integral += error;
     float integral = PID_ki * m_pid_integral;
-    if(integral>MAX_SPEED)
-    {
-      integral=MAX_SPEED;
-      m_pid_integral=integral/PID_ki;
-    }
-    else if(integral<-MAX_SPEED)
-    {
-      integral=-MAX_SPEED; 
-      m_pid_integral=integral/PID_ki;
-    }
     
     float derivative = PID_kd * (error - m_pid_prev_error);
     float res = proportional + integral + derivative;
 
-    // Serial.print("cur_speed=");
-    // Serial.print(cur_speed);
-    // Serial.print(" dst_speed=");
-    // Serial.print(abs(m_dst_speed));
-    // Serial.print(" res=");
-    // Serial.print(res);
-    // Serial.print(" err=");
-    // Serial.print(error);
-    // Serial.print(" prev_err=");
-    // Serial.print(m_pid_prev_error);
-    // Serial.print(" pid_integral=");
-    // Serial.print(m_pid_integral);
-    // Serial.print(" i=");
-    // Serial.print(integral);
-    // Serial.print(" p=");
-    // Serial.print(proportional);
-    // Serial.print(" d=");
-    // Serial.print(derivative);
-    // Serial.println("");
+    if(abs(res) > 1.0)
+    {
+      res = res>0.0? 1.0 : -1.0;
+      integral=res - proportional - derivative;
+      m_pid_integral=integral/PID_ki;
+    }
 
     m_pid_prev_error = error;
     
@@ -219,5 +181,5 @@ private:
 
   float m_pid_integral = 0.0;
   float m_pid_prev_error = 0.0;
-  BrakeState m_brake_state = bs_speed_compensation;
+  BrakeState m_brake_state = bs_zero_speed;
 };
