@@ -10,14 +10,16 @@ const char *bluetooth_pin = "1234";
 MotorSpeed leftWheel(MotorZsx11h(12,13,0,27,true));
 MotorSpeed rightWheel(MotorZsx11h(25,26,1,32,false));
 
-unsigned long last_ms = 0;
-uint8_t sbuf[256];
+volatile unsigned long last_ms = 0;
 bool auto_cmd_blocked = false;
-
+static volatile TaskHandle_t motor_task_handle = NULL;
+uint8_t sbuf[256];
 char incomingUdpPacket[256];
 
 template<typename T>
 void processCommand(T& stream, const char* buf,bool blocked);
+
+static void motors_task(void *);
 
 BluetoothSerial SerialBT;
 #define SerialAuto Serial2
@@ -72,6 +74,8 @@ void setup()
   timerAttachInterrupt(timer0, &Timer0_ISR, true);
   timerAlarmWrite(timer0, TIMER_MS*1000, true);
   timerAlarmEnable(timer0);
+
+  xTaskCreateUniversal(motors_task, "motors", 4096, NULL, 1, (TaskHandle_t*)&motor_task_handle, CONFIG_ARDUINO_UDP_RUNNING_CORE);
 }
 
 template<typename T>
@@ -251,6 +255,22 @@ void applyDriveRequest(const DriveRequest& dr)
   rightWheel.set_speed(rspeed);
 }
 
+static void motors_task(void *)
+{
+    while(true)
+    {
+      failSafe();
+      leftWheel.apply();
+      rightWheel.apply();
+      //leftWheel.dump_state("L");
+      //rightWheel.dump_state("R");
+      delay(MAIN_CYCLE_DELAY);
+    }
+
+    motor_task_handle = NULL;
+    vTaskDelete(NULL);
+}
+
 void loop()
 {
   drive_request = DriveRequest();
@@ -270,10 +290,4 @@ void loop()
   
   processStream(SerialAuto,"S2",auto_cmd_blocked);
   applyDriveRequest(drive_request);
-  failSafe();
-  leftWheel.apply();
-  rightWheel.apply();
-  //leftWheel.dump_state("L");
-  //rightWheel.dump_state("R");
-  delay(MAIN_CYCLE_DELAY);
 }

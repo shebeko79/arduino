@@ -50,7 +50,7 @@ private:
   void reset_pid();
   
 private:
-  float m_dst_speed = 0.0;
+  volatile float m_dst_speed = 0.0;
 
   Motor m_motor;
 
