@@ -69,10 +69,10 @@ void detectCentralPoint()
     delay(50);
   }
 
-  central_minx-=10;
-  central_maxx+=10;
-  central_miny-=10;
-  central_maxy+=10;
+  central_minx-=30;
+  central_maxx+=30;
+  central_miny-=30;
+  central_maxy+=30;
 
   Serial.print("CenterX=[");
   Serial.print(central_minx);
@@ -188,7 +188,9 @@ void processJoystick()
   str+=String(vx);
   str+="\r";
 
-  Serial.println(str);
+  if(vx!=0.0 || vy!=0.0)
+    Serial.println(str);
+    
   SerialBT.print(str);
 }
 
