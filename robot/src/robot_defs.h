@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 
 constexpr int FAIL_SAFE_DELAY = 500;
 
