@@ -1,0 +1,1068 @@
+;0kg free wheel
+L: time=285560 cur_speed=0.00 PWM=0.10
+L: time=285611 cur_speed=0.02 PWM=0.10
+L: time=285660 cur_speed=0.08 PWM=0.10
+L: time=285710 cur_speed=0.14 PWM=0.10
+L: time=285760 cur_speed=0.21 PWM=0.10
+L: time=285810 cur_speed=0.28 PWM=0.10
+L: time=285860 cur_speed=0.33 PWM=0.10
+L: time=285910 cur_speed=0.40 PWM=0.10
+L: time=285960 cur_speed=0.47 PWM=0.10
+L: time=286010 cur_speed=0.53 PWM=0.10
+L: time=286060 cur_speed=0.60 PWM=0.10
+L: time=286110 cur_speed=0.65 PWM=0.10
+L: time=286160 cur_speed=0.65 PWM=0.10
+L: time=286210 cur_speed=0.65 PWM=0.10
+L: time=286260 cur_speed=0.65 PWM=0.10
+L: time=286310 cur_speed=0.65 PWM=0.10
+L: time=286360 cur_speed=0.65 PWM=0.10
+L: time=286410 cur_speed=0.65 PWM=0.10
+L: time=286460 cur_speed=0.65 PWM=0.10
+L: time=286510 cur_speed=0.65 PWM=0.10
+L: time=286560 cur_speed=0.65 PWM=0.10
+L: time=286610 cur_speed=0.63 PWM=0.10
+L: time=286660 cur_speed=0.65 PWM=0.10
+L: time=286710 cur_speed=0.65 PWM=0.10
+L: time=286760 cur_speed=0.65 PWM=0.10
+L: time=286810 cur_speed=0.65 PWM=0.10
+L: time=286860 cur_speed=0.65 PWM=0.10
+L: time=286910 cur_speed=0.63 PWM=0.10
+L: time=286960 cur_speed=0.65 PWM=0.10
+L: time=287010 cur_speed=0.65 PWM=0.10
+L: time=287060 cur_speed=0.65 PWM=0.10
+L: time=287110 cur_speed=0.65 PWM=0.10
+L: time=287160 cur_speed=0.65 PWM=0.10
+L: time=287210 cur_speed=0.65 PWM=0.10
+L: time=287260 cur_speed=0.65 PWM=0.10
+L: time=287310 cur_speed=0.65 PWM=0.10
+L: time=287360 cur_speed=0.65 PWM=0.10
+L: time=287410 cur_speed=0.65 PWM=0.10
+L: time=287460 cur_speed=0.65 PWM=0.10
+L: time=287510 cur_speed=0.63 PWM=0.10
+L: time=287560 cur_speed=0.65 PWM=0.00
+L: time=287610 cur_speed=0.63 PWM=0.00
+L: time=287660 cur_speed=0.61 PWM=0.00
+L: time=287710 cur_speed=0.60 PWM=0.00
+L: time=287760 cur_speed=0.55 PWM=0.00
+L: time=287810 cur_speed=0.51 PWM=0.00
+L: time=287860 cur_speed=0.44 PWM=0.00
+L: time=287910 cur_speed=0.37 PWM=0.00
+L: time=287960 cur_speed=0.31 PWM=0.00
+L: time=288010 cur_speed=0.24 PWM=0.00
+L: time=288060 cur_speed=0.17 PWM=0.00
+L: time=288110 cur_speed=0.12 PWM=0.00
+L: time=288160 cur_speed=0.07 PWM=0.00
+L: time=288210 cur_speed=0.03 PWM=0.00
+L: time=288260 cur_speed=0.01 PWM=0.00
+
+L: time=293461 cur_speed=0.00 PWM=0.20
+L: time=293512 cur_speed=0.02 PWM=0.20
+L: time=293562 cur_speed=0.12 PWM=0.20
+L: time=293612 cur_speed=0.22 PWM=0.20
+L: time=293662 cur_speed=0.33 PWM=0.20
+L: time=293712 cur_speed=0.46 PWM=0.20
+L: time=293762 cur_speed=0.58 PWM=0.20
+L: time=293812 cur_speed=0.69 PWM=0.20
+L: time=293862 cur_speed=0.81 PWM=0.20
+L: time=293912 cur_speed=0.92 PWM=0.20
+L: time=293962 cur_speed=1.04 PWM=0.20
+L: time=294012 cur_speed=1.13 PWM=0.20
+L: time=294062 cur_speed=1.14 PWM=0.20
+L: time=294112 cur_speed=1.14 PWM=0.20
+L: time=294162 cur_speed=1.15 PWM=0.20
+L: time=294212 cur_speed=1.15 PWM=0.20
+L: time=294262 cur_speed=1.15 PWM=0.20
+L: time=294312 cur_speed=1.15 PWM=0.20
+L: time=294362 cur_speed=1.15 PWM=0.20
+L: time=294412 cur_speed=1.15 PWM=0.20
+L: time=294462 cur_speed=1.15 PWM=0.20
+L: time=294512 cur_speed=1.15 PWM=0.20
+L: time=294562 cur_speed=1.15 PWM=0.20
+L: time=294612 cur_speed=1.15 PWM=0.20
+L: time=294662 cur_speed=1.15 PWM=0.20
+L: time=294712 cur_speed=1.15 PWM=0.20
+L: time=294762 cur_speed=1.15 PWM=0.20
+L: time=294812 cur_speed=1.15 PWM=0.20
+L: time=294862 cur_speed=1.15 PWM=0.20
+L: time=294912 cur_speed=1.15 PWM=0.20
+L: time=294962 cur_speed=1.15 PWM=0.20
+L: time=295012 cur_speed=1.15 PWM=0.20
+L: time=295062 cur_speed=1.15 PWM=0.20
+L: time=295112 cur_speed=1.15 PWM=0.20
+L: time=295162 cur_speed=1.15 PWM=0.20
+L: time=295212 cur_speed=1.15 PWM=0.20
+L: time=295262 cur_speed=1.15 PWM=0.20
+L: time=295312 cur_speed=1.15 PWM=0.20
+L: time=295362 cur_speed=1.15 PWM=0.20
+L: time=295412 cur_speed=1.15 PWM=0.20
+L: time=295462 cur_speed=1.15 PWM=0.00
+L: time=295512 cur_speed=1.14 PWM=0.00
+L: time=295562 cur_speed=1.12 PWM=0.00
+L: time=295612 cur_speed=1.09 PWM=0.00
+L: time=295662 cur_speed=1.05 PWM=0.00
+L: time=295712 cur_speed=0.98 PWM=0.00
+L: time=295762 cur_speed=0.91 PWM=0.00
+L: time=295812 cur_speed=0.83 PWM=0.00
+L: time=295862 cur_speed=0.73 PWM=0.00
+L: time=295912 cur_speed=0.62 PWM=0.00
+L: time=295962 cur_speed=0.50 PWM=0.00
+L: time=296012 cur_speed=0.39 PWM=0.00
+L: time=296062 cur_speed=0.30 PWM=0.00
+L: time=296112 cur_speed=0.22 PWM=0.00
+L: time=296162 cur_speed=0.15 PWM=0.00
+L: time=296212 cur_speed=0.09 PWM=0.00
+L: time=296262 cur_speed=0.06 PWM=0.00
+L: time=296312 cur_speed=0.02 PWM=0.00
+L: time=296362 cur_speed=0.01 PWM=0.00
+
+L: time=299913 cur_speed=0.00 PWM=0.30
+L: time=299964 cur_speed=0.02 PWM=0.30
+L: time=300014 cur_speed=0.13 PWM=0.30
+L: time=300064 cur_speed=0.28 PWM=0.30
+L: time=300114 cur_speed=0.44 PWM=0.30
+L: time=300164 cur_speed=0.61 PWM=0.30
+L: time=300214 cur_speed=0.77 PWM=0.30
+L: time=300264 cur_speed=0.93 PWM=0.30
+L: time=300314 cur_speed=1.09 PWM=0.30
+L: time=300364 cur_speed=1.27 PWM=0.30
+L: time=300414 cur_speed=1.43 PWM=0.30
+L: time=300464 cur_speed=1.57 PWM=0.30
+L: time=300514 cur_speed=1.61 PWM=0.30
+L: time=300564 cur_speed=1.64 PWM=0.30
+L: time=300614 cur_speed=1.64 PWM=0.30
+L: time=300664 cur_speed=1.63 PWM=0.30
+L: time=300714 cur_speed=1.63 PWM=0.30
+L: time=300764 cur_speed=1.64 PWM=0.30
+L: time=300814 cur_speed=1.64 PWM=0.30
+L: time=300864 cur_speed=1.63 PWM=0.30
+L: time=300913 cur_speed=1.63 PWM=0.30
+L: time=300964 cur_speed=1.64 PWM=0.30
+L: time=301014 cur_speed=1.64 PWM=0.30
+L: time=301064 cur_speed=1.63 PWM=0.30
+L: time=301114 cur_speed=1.63 PWM=0.30
+L: time=301164 cur_speed=1.64 PWM=0.30
+L: time=301214 cur_speed=1.63 PWM=0.30
+L: time=301264 cur_speed=1.63 PWM=0.30
+L: time=301314 cur_speed=1.63 PWM=0.30
+L: time=301364 cur_speed=1.64 PWM=0.30
+L: time=301414 cur_speed=1.64 PWM=0.30
+L: time=301464 cur_speed=1.63 PWM=0.30
+L: time=301514 cur_speed=1.63 PWM=0.30
+L: time=301564 cur_speed=1.64 PWM=0.30
+L: time=301614 cur_speed=1.64 PWM=0.30
+L: time=301664 cur_speed=1.63 PWM=0.30
+L: time=301714 cur_speed=1.64 PWM=0.30
+L: time=301764 cur_speed=1.64 PWM=0.30
+L: time=301814 cur_speed=1.63 PWM=0.30
+L: time=301864 cur_speed=1.63 PWM=0.30
+L: time=301913 cur_speed=1.63 PWM=0.00
+L: time=301963 cur_speed=1.63 PWM=0.00
+L: time=302013 cur_speed=1.61 PWM=0.00
+L: time=302063 cur_speed=1.57 PWM=0.00
+L: time=302113 cur_speed=1.52 PWM=0.00
+L: time=302163 cur_speed=1.46 PWM=0.00
+L: time=302213 cur_speed=1.37 PWM=0.00
+L: time=302263 cur_speed=1.28 PWM=0.00
+L: time=302313 cur_speed=1.18 PWM=0.00
+L: time=302364 cur_speed=1.06 PWM=0.00
+L: time=302413 cur_speed=0.92 PWM=0.00
+L: time=302463 cur_speed=0.80 PWM=0.00
+L: time=302513 cur_speed=0.66 PWM=0.00
+L: time=302563 cur_speed=0.53 PWM=0.00
+L: time=302613 cur_speed=0.41 PWM=0.00
+L: time=302663 cur_speed=0.32 PWM=0.00
+L: time=302713 cur_speed=0.23 PWM=0.00
+L: time=302763 cur_speed=0.16 PWM=0.00
+L: time=302813 cur_speed=0.10 PWM=0.00
+L: time=302863 cur_speed=0.06 PWM=0.00
+L: time=302913 cur_speed=0.02 PWM=0.00
+L: time=302963 cur_speed=0.01 PWM=0.00
+
+L: time=307314 cur_speed=0.00 PWM=0.40
+L: time=307364 cur_speed=0.02 PWM=0.40
+L: time=307414 cur_speed=0.13 PWM=0.40
+L: time=307464 cur_speed=0.31 PWM=0.40
+L: time=307514 cur_speed=0.52 PWM=0.40
+L: time=307564 cur_speed=0.73 PWM=0.40
+L: time=307614 cur_speed=0.95 PWM=0.40
+L: time=307664 cur_speed=1.15 PWM=0.40
+L: time=307714 cur_speed=1.37 PWM=0.40
+L: time=307764 cur_speed=1.58 PWM=0.40
+L: time=307814 cur_speed=1.79 PWM=0.40
+L: time=307864 cur_speed=1.98 PWM=0.40
+L: time=307914 cur_speed=2.07 PWM=0.40
+L: time=307964 cur_speed=2.11 PWM=0.40
+L: time=308014 cur_speed=2.11 PWM=0.40
+L: time=308064 cur_speed=2.11 PWM=0.40
+L: time=308114 cur_speed=2.11 PWM=0.40
+L: time=308164 cur_speed=2.11 PWM=0.40
+L: time=308214 cur_speed=2.10 PWM=0.40
+L: time=308264 cur_speed=2.11 PWM=0.40
+L: time=308314 cur_speed=2.11 PWM=0.40
+L: time=308364 cur_speed=2.10 PWM=0.40
+L: time=308414 cur_speed=2.11 PWM=0.40
+L: time=308464 cur_speed=2.11 PWM=0.40
+L: time=308514 cur_speed=2.11 PWM=0.40
+L: time=308564 cur_speed=2.11 PWM=0.40
+L: time=308614 cur_speed=2.10 PWM=0.40
+L: time=308664 cur_speed=2.11 PWM=0.40
+L: time=308714 cur_speed=2.11 PWM=0.40
+L: time=308764 cur_speed=2.11 PWM=0.40
+L: time=308814 cur_speed=2.11 PWM=0.40
+L: time=308864 cur_speed=2.11 PWM=0.40
+L: time=308914 cur_speed=2.11 PWM=0.40
+L: time=308964 cur_speed=2.11 PWM=0.40
+L: time=309014 cur_speed=2.10 PWM=0.40
+L: time=309064 cur_speed=2.11 PWM=0.40
+L: time=309114 cur_speed=2.11 PWM=0.40
+L: time=309164 cur_speed=2.11 PWM=0.40
+L: time=309214 cur_speed=2.11 PWM=0.40
+L: time=309264 cur_speed=2.11 PWM=0.40
+L: time=309314 cur_speed=2.11 PWM=0.00
+L: time=309364 cur_speed=2.11 PWM=0.00
+L: time=309414 cur_speed=2.07 PWM=0.00
+L: time=309464 cur_speed=2.04 PWM=0.00
+L: time=309514 cur_speed=1.99 PWM=0.00
+L: time=309564 cur_speed=1.92 PWM=0.00
+L: time=309614 cur_speed=1.84 PWM=0.00
+L: time=309664 cur_speed=1.73 PWM=0.00
+L: time=309714 cur_speed=1.63 PWM=0.00
+L: time=309764 cur_speed=1.51 PWM=0.00
+L: time=309814 cur_speed=1.36 PWM=0.00
+L: time=309864 cur_speed=1.22 PWM=0.00
+L: time=309914 cur_speed=1.07 PWM=0.00
+L: time=309964 cur_speed=0.93 PWM=0.00
+L: time=310014 cur_speed=0.78 PWM=0.00
+L: time=310064 cur_speed=0.66 PWM=0.00
+L: time=310114 cur_speed=0.53 PWM=0.00
+L: time=310164 cur_speed=0.41 PWM=0.00
+L: time=310214 cur_speed=0.32 PWM=0.00
+L: time=310264 cur_speed=0.23 PWM=0.00
+L: time=310314 cur_speed=0.16 PWM=0.00
+L: time=310364 cur_speed=0.10 PWM=0.00
+L: time=310414 cur_speed=0.06 PWM=0.00
+L: time=310464 cur_speed=0.02 PWM=0.00
+
+L: time=314765 cur_speed=0.00 PWM=0.50
+L: time=314816 cur_speed=0.02 PWM=0.50
+L: time=314866 cur_speed=0.13 PWM=0.50
+L: time=314916 cur_speed=0.33 PWM=0.50
+L: time=314965 cur_speed=0.58 PWM=0.50
+L: time=315015 cur_speed=0.83 PWM=0.50
+L: time=315065 cur_speed=1.08 PWM=0.50
+L: time=315116 cur_speed=1.34 PWM=0.50
+L: time=315165 cur_speed=1.59 PWM=0.50
+L: time=315216 cur_speed=1.84 PWM=0.50
+L: time=315266 cur_speed=2.10 PWM=0.50
+L: time=315315 cur_speed=2.33 PWM=0.50
+L: time=315365 cur_speed=2.47 PWM=0.50
+L: time=315415 cur_speed=2.52 PWM=0.50
+L: time=315465 cur_speed=2.54 PWM=0.50
+L: time=315515 cur_speed=2.54 PWM=0.50
+L: time=315565 cur_speed=2.54 PWM=0.50
+L: time=315615 cur_speed=2.54 PWM=0.50
+L: time=315665 cur_speed=2.54 PWM=0.50
+L: time=315715 cur_speed=2.52 PWM=0.50
+L: time=315765 cur_speed=2.52 PWM=0.50
+L: time=315815 cur_speed=2.52 PWM=0.50
+L: time=315865 cur_speed=2.52 PWM=0.50
+L: time=315915 cur_speed=2.52 PWM=0.50
+L: time=315965 cur_speed=2.52 PWM=0.50
+L: time=316015 cur_speed=2.52 PWM=0.50
+L: time=316065 cur_speed=2.52 PWM=0.50
+L: time=316115 cur_speed=2.52 PWM=0.50
+L: time=316165 cur_speed=2.52 PWM=0.50
+L: time=316215 cur_speed=2.52 PWM=0.50
+L: time=316265 cur_speed=2.52 PWM=0.50
+L: time=316315 cur_speed=2.52 PWM=0.50
+L: time=316365 cur_speed=2.52 PWM=0.50
+L: time=316415 cur_speed=2.52 PWM=0.50
+L: time=316465 cur_speed=2.52 PWM=0.50
+L: time=316515 cur_speed=2.54 PWM=0.50
+L: time=316565 cur_speed=2.52 PWM=0.50
+L: time=316616 cur_speed=2.52 PWM=0.50
+L: time=316665 cur_speed=2.54 PWM=0.50
+L: time=316715 cur_speed=2.54 PWM=0.50
+L: time=316765 cur_speed=2.54 PWM=0.00
+L: time=316815 cur_speed=2.52 PWM=0.00
+L: time=316865 cur_speed=2.50 PWM=0.00
+L: time=316915 cur_speed=2.47 PWM=0.00
+L: time=316965 cur_speed=2.41 PWM=0.00
+L: time=317015 cur_speed=2.34 PWM=0.00
+L: time=317065 cur_speed=2.25 PWM=0.00
+L: time=317115 cur_speed=2.14 PWM=0.00
+L: time=317165 cur_speed=2.02 PWM=0.00
+L: time=317215 cur_speed=1.89 PWM=0.00
+L: time=317265 cur_speed=1.74 PWM=0.00
+L: time=317315 cur_speed=1.58 PWM=0.00
+L: time=317365 cur_speed=1.42 PWM=0.00
+L: time=317415 cur_speed=1.27 PWM=0.00
+L: time=317465 cur_speed=1.13 PWM=0.00
+L: time=317515 cur_speed=0.98 PWM=0.00
+L: time=317565 cur_speed=0.84 PWM=0.00
+L: time=317615 cur_speed=0.69 PWM=0.00
+L: time=317665 cur_speed=0.58 PWM=0.00
+L: time=317715 cur_speed=0.46 PWM=0.00
+L: time=317765 cur_speed=0.36 PWM=0.00
+L: time=317815 cur_speed=0.27 PWM=0.00
+L: time=317865 cur_speed=0.20 PWM=0.00
+L: time=317915 cur_speed=0.13 PWM=0.00
+L: time=317965 cur_speed=0.08 PWM=0.00
+L: time=318015 cur_speed=0.05 PWM=0.00
+L: time=318065 cur_speed=0.02 PWM=0.00
+L: time=318115 cur_speed=0.02 PWM=0.00
+
+L: time=324166 cur_speed=0.00 PWM=0.60
+L: time=324217 cur_speed=0.02 PWM=0.60
+L: time=324267 cur_speed=0.13 PWM=0.60
+L: time=324316 cur_speed=0.33 PWM=0.60
+L: time=324367 cur_speed=0.61 PWM=0.60
+L: time=324417 cur_speed=0.90 PWM=0.60
+L: time=324467 cur_speed=1.20 PWM=0.60
+L: time=324516 cur_speed=1.50 PWM=0.60
+L: time=324566 cur_speed=1.79 PWM=0.60
+L: time=324617 cur_speed=2.09 PWM=0.60
+L: time=324667 cur_speed=2.39 PWM=0.60
+L: time=324717 cur_speed=2.66 PWM=0.60
+L: time=324766 cur_speed=2.85 PWM=0.60
+L: time=324816 cur_speed=2.94 PWM=0.60
+L: time=324867 cur_speed=2.96 PWM=0.60
+L: time=324917 cur_speed=2.97 PWM=0.60
+L: time=324967 cur_speed=2.96 PWM=0.60
+L: time=325017 cur_speed=2.96 PWM=0.60
+L: time=325067 cur_speed=2.96 PWM=0.60
+L: time=325117 cur_speed=2.97 PWM=0.60
+L: time=325167 cur_speed=2.96 PWM=0.60
+L: time=325216 cur_speed=2.96 PWM=0.60
+L: time=325267 cur_speed=2.96 PWM=0.60
+L: time=325317 cur_speed=2.97 PWM=0.60
+L: time=325366 cur_speed=2.96 PWM=0.60
+L: time=325417 cur_speed=2.96 PWM=0.60
+L: time=325466 cur_speed=2.96 PWM=0.60
+L: time=325516 cur_speed=2.96 PWM=0.60
+L: time=325567 cur_speed=2.96 PWM=0.60
+L: time=325616 cur_speed=2.96 PWM=0.60
+L: time=325667 cur_speed=2.97 PWM=0.60
+L: time=325717 cur_speed=2.97 PWM=0.60
+L: time=325767 cur_speed=2.96 PWM=0.60
+L: time=325817 cur_speed=2.96 PWM=0.60
+L: time=325867 cur_speed=2.96 PWM=0.60
+L: time=325917 cur_speed=2.96 PWM=0.60
+L: time=325967 cur_speed=2.96 PWM=0.60
+L: time=326017 cur_speed=2.96 PWM=0.60
+L: time=326067 cur_speed=2.96 PWM=0.60
+L: time=326116 cur_speed=2.96 PWM=0.60
+L: time=326166 cur_speed=2.96 PWM=0.00
+L: time=326216 cur_speed=2.95 PWM=0.00
+L: time=326266 cur_speed=2.93 PWM=0.00
+L: time=326316 cur_speed=2.89 PWM=0.00
+L: time=326366 cur_speed=2.84 PWM=0.00
+L: time=326416 cur_speed=2.75 PWM=0.00
+L: time=326466 cur_speed=2.66 PWM=0.00
+L: time=326516 cur_speed=2.56 PWM=0.00
+L: time=326566 cur_speed=2.42 PWM=0.00
+L: time=326616 cur_speed=2.28 PWM=0.00
+L: time=326666 cur_speed=2.13 PWM=0.00
+L: time=326716 cur_speed=1.95 PWM=0.00
+L: time=326766 cur_speed=1.80 PWM=0.00
+L: time=326816 cur_speed=1.63 PWM=0.00
+L: time=326866 cur_speed=1.48 PWM=0.00
+L: time=326916 cur_speed=1.31 PWM=0.00
+L: time=326966 cur_speed=1.16 PWM=0.00
+L: time=327016 cur_speed=1.03 PWM=0.00
+L: time=327066 cur_speed=0.89 PWM=0.00
+L: time=327116 cur_speed=0.75 PWM=0.00
+L: time=327166 cur_speed=0.62 PWM=0.00
+L: time=327216 cur_speed=0.51 PWM=0.00
+L: time=327266 cur_speed=0.39 PWM=0.00
+L: time=327316 cur_speed=0.30 PWM=0.00
+L: time=327366 cur_speed=0.22 PWM=0.00
+L: time=327416 cur_speed=0.15 PWM=0.00
+L: time=327466 cur_speed=0.10 PWM=0.00
+L: time=327516 cur_speed=0.06 PWM=0.00
+L: time=327566 cur_speed=0.02 PWM=0.00
+L: time=327616 cur_speed=0.01 PWM=0.00
+
+L: time=331117 cur_speed=0.00 PWM=0.70
+L: time=331167 cur_speed=0.01 PWM=0.70
+L: time=331217 cur_speed=0.13 PWM=0.70
+L: time=331267 cur_speed=0.33 PWM=0.70
+L: time=331317 cur_speed=0.62 PWM=0.70
+L: time=331367 cur_speed=0.96 PWM=0.70
+L: time=331417 cur_speed=1.29 PWM=0.70
+L: time=331467 cur_speed=1.63 PWM=0.70
+L: time=331517 cur_speed=1.96 PWM=0.70
+L: time=331567 cur_speed=2.29 PWM=0.70
+L: time=331617 cur_speed=2.63 PWM=0.70
+L: time=331667 cur_speed=2.95 PWM=0.70
+L: time=331717 cur_speed=3.16 PWM=0.70
+L: time=331767 cur_speed=3.26 PWM=0.70
+L: time=331817 cur_speed=3.28 PWM=0.70
+L: time=331867 cur_speed=3.30 PWM=0.70
+L: time=331917 cur_speed=3.31 PWM=0.70
+L: time=331967 cur_speed=3.31 PWM=0.70
+L: time=332017 cur_speed=3.30 PWM=0.70
+L: time=332067 cur_speed=3.30 PWM=0.70
+L: time=332117 cur_speed=3.30 PWM=0.70
+L: time=332167 cur_speed=3.31 PWM=0.70
+L: time=332217 cur_speed=3.31 PWM=0.70
+L: time=332267 cur_speed=3.30 PWM=0.70
+L: time=332317 cur_speed=3.30 PWM=0.70
+L: time=332367 cur_speed=3.30 PWM=0.70
+L: time=332417 cur_speed=3.31 PWM=0.70
+L: time=332467 cur_speed=3.31 PWM=0.70
+L: time=332517 cur_speed=3.30 PWM=0.70
+L: time=332567 cur_speed=3.30 PWM=0.70
+L: time=332617 cur_speed=3.30 PWM=0.70
+L: time=332667 cur_speed=3.31 PWM=0.70
+L: time=332717 cur_speed=3.31 PWM=0.70
+L: time=332767 cur_speed=3.30 PWM=0.70
+L: time=332817 cur_speed=3.30 PWM=0.70
+L: time=332867 cur_speed=3.30 PWM=0.70
+L: time=332917 cur_speed=3.31 PWM=0.70
+L: time=332967 cur_speed=3.31 PWM=0.70
+L: time=333017 cur_speed=3.30 PWM=0.70
+L: time=333067 cur_speed=3.30 PWM=0.70
+L: time=333117 cur_speed=3.30 PWM=0.00
+L: time=333167 cur_speed=3.30 PWM=0.00
+L: time=333217 cur_speed=3.27 PWM=0.00
+L: time=333267 cur_speed=3.23 PWM=0.00
+L: time=333317 cur_speed=3.16 PWM=0.00
+L: time=333367 cur_speed=3.08 PWM=0.00
+L: time=333417 cur_speed=2.99 PWM=0.00
+L: time=333467 cur_speed=2.87 PWM=0.00
+L: time=333517 cur_speed=2.72 PWM=0.00
+L: time=333567 cur_speed=2.58 PWM=0.00
+L: time=333617 cur_speed=2.41 PWM=0.00
+L: time=333667 cur_speed=2.25 PWM=0.00
+L: time=333717 cur_speed=2.07 PWM=0.00
+L: time=333767 cur_speed=1.90 PWM=0.00
+L: time=333817 cur_speed=1.73 PWM=0.00
+L: time=333867 cur_speed=1.59 PWM=0.00
+L: time=333917 cur_speed=1.42 PWM=0.00
+L: time=333967 cur_speed=1.28 PWM=0.00
+L: time=334017 cur_speed=1.12 PWM=0.00
+L: time=334067 cur_speed=0.98 PWM=0.00
+L: time=334117 cur_speed=0.84 PWM=0.00
+L: time=334167 cur_speed=0.70 PWM=0.00
+L: time=334217 cur_speed=0.56 PWM=0.00
+L: time=334267 cur_speed=0.45 PWM=0.00
+L: time=334317 cur_speed=0.35 PWM=0.00
+L: time=334367 cur_speed=0.25 PWM=0.00
+L: time=334417 cur_speed=0.17 PWM=0.00
+L: time=334467 cur_speed=0.12 PWM=0.00
+L: time=334517 cur_speed=0.07 PWM=0.00
+L: time=334567 cur_speed=0.03 PWM=0.00
+L: time=334617 cur_speed=0.01 PWM=0.00
+
+L: time=338522 cur_speed=0.00 PWM=0.80
+L: time=338573 cur_speed=0.02 PWM=0.80
+L: time=338623 cur_speed=0.13 PWM=0.80
+L: time=338673 cur_speed=0.33 PWM=0.80
+L: time=338723 cur_speed=0.63 PWM=0.80
+L: time=338773 cur_speed=0.99 PWM=0.80
+L: time=338823 cur_speed=1.36 PWM=0.80
+L: time=338873 cur_speed=1.74 PWM=0.80
+L: time=338923 cur_speed=2.11 PWM=0.80
+L: time=338973 cur_speed=2.49 PWM=0.80
+L: time=339023 cur_speed=2.86 PWM=0.80
+L: time=339073 cur_speed=3.22 PWM=0.80
+L: time=339122 cur_speed=3.47 PWM=0.80
+L: time=339173 cur_speed=3.63 PWM=0.80
+L: time=339223 cur_speed=3.69 PWM=0.80
+L: time=339273 cur_speed=3.71 PWM=0.80
+L: time=339323 cur_speed=3.71 PWM=0.80
+L: time=339373 cur_speed=3.71 PWM=0.80
+L: time=339423 cur_speed=3.72 PWM=0.80
+L: time=339473 cur_speed=3.71 PWM=0.80
+L: time=339523 cur_speed=3.72 PWM=0.80
+L: time=339573 cur_speed=3.71 PWM=0.80
+L: time=339623 cur_speed=3.72 PWM=0.80
+L: time=339673 cur_speed=3.71 PWM=0.80
+L: time=339723 cur_speed=3.72 PWM=0.80
+L: time=339773 cur_speed=3.71 PWM=0.80
+L: time=339823 cur_speed=3.72 PWM=0.80
+L: time=339872 cur_speed=3.71 PWM=0.80
+L: time=339923 cur_speed=3.72 PWM=0.80
+L: time=339973 cur_speed=3.71 PWM=0.80
+L: time=340023 cur_speed=3.72 PWM=0.80
+L: time=340073 cur_speed=3.71 PWM=0.80
+L: time=340123 cur_speed=3.71 PWM=0.80
+L: time=340173 cur_speed=3.71 PWM=0.80
+L: time=340223 cur_speed=3.71 PWM=0.80
+L: time=340273 cur_speed=3.71 PWM=0.80
+L: time=340323 cur_speed=3.71 PWM=0.80
+L: time=340373 cur_speed=3.71 PWM=0.80
+L: time=340422 cur_speed=3.71 PWM=0.80
+L: time=340472 cur_speed=3.71 PWM=0.80
+L: time=340522 cur_speed=3.71 PWM=0.00
+L: time=340573 cur_speed=3.71 PWM=0.00
+L: time=340623 cur_speed=3.68 PWM=0.00
+L: time=340672 cur_speed=3.64 PWM=0.00
+L: time=340723 cur_speed=3.56 PWM=0.00
+L: time=340772 cur_speed=3.48 PWM=0.00
+L: time=340822 cur_speed=3.38 PWM=0.00
+L: time=340873 cur_speed=3.26 PWM=0.00
+L: time=340923 cur_speed=3.11 PWM=0.00
+L: time=340973 cur_speed=2.96 PWM=0.00
+L: time=341023 cur_speed=2.78 PWM=0.00
+L: time=341073 cur_speed=2.59 PWM=0.00
+L: time=341123 cur_speed=2.41 PWM=0.00
+L: time=341172 cur_speed=2.25 PWM=0.00
+L: time=341222 cur_speed=2.06 PWM=0.00
+L: time=341273 cur_speed=1.90 PWM=0.00
+L: time=341323 cur_speed=1.74 PWM=0.00
+L: time=341372 cur_speed=1.58 PWM=0.00
+L: time=341423 cur_speed=1.42 PWM=0.00
+L: time=341473 cur_speed=1.28 PWM=0.00
+L: time=341523 cur_speed=1.12 PWM=0.00
+L: time=341573 cur_speed=0.99 PWM=0.00
+L: time=341623 cur_speed=0.84 PWM=0.00
+L: time=341673 cur_speed=0.71 PWM=0.00
+L: time=341722 cur_speed=0.59 PWM=0.00
+L: time=341773 cur_speed=0.47 PWM=0.00
+L: time=341823 cur_speed=0.37 PWM=0.00
+L: time=341872 cur_speed=0.28 PWM=0.00
+L: time=341922 cur_speed=0.20 PWM=0.00
+L: time=341972 cur_speed=0.14 PWM=0.00
+L: time=342023 cur_speed=0.08 PWM=0.00
+L: time=342073 cur_speed=0.05 PWM=0.00
+L: time=342122 cur_speed=0.01 PWM=0.00
+
+L: time=346473 cur_speed=0.00 PWM=0.90
+L: time=346524 cur_speed=0.02 PWM=0.90
+L: time=346574 cur_speed=0.13 PWM=0.90
+L: time=346624 cur_speed=0.33 PWM=0.90
+L: time=346674 cur_speed=0.63 PWM=0.90
+L: time=346724 cur_speed=1.01 PWM=0.90
+L: time=346774 cur_speed=1.42 PWM=0.90
+L: time=346824 cur_speed=1.82 PWM=0.90
+L: time=346874 cur_speed=2.24 PWM=0.90
+L: time=346923 cur_speed=2.65 PWM=0.90
+L: time=346974 cur_speed=3.05 PWM=0.90
+L: time=347024 cur_speed=3.45 PWM=0.90
+L: time=347074 cur_speed=3.75 PWM=0.90
+L: time=347124 cur_speed=3.94 PWM=0.90
+L: time=347174 cur_speed=4.03 PWM=0.90
+L: time=347224 cur_speed=4.08 PWM=0.90
+L: time=347274 cur_speed=4.09 PWM=0.90
+L: time=347324 cur_speed=4.09 PWM=0.90
+L: time=347374 cur_speed=4.08 PWM=0.90
+L: time=347424 cur_speed=4.09 PWM=0.90
+L: time=347474 cur_speed=4.09 PWM=0.90
+L: time=347524 cur_speed=4.09 PWM=0.90
+L: time=347574 cur_speed=4.08 PWM=0.90
+L: time=347624 cur_speed=4.09 PWM=0.90
+L: time=347673 cur_speed=4.09 PWM=0.90
+L: time=347724 cur_speed=4.09 PWM=0.90
+L: time=347774 cur_speed=4.08 PWM=0.90
+L: time=347824 cur_speed=4.09 PWM=0.90
+L: time=347874 cur_speed=4.09 PWM=0.90
+L: time=347924 cur_speed=4.09 PWM=0.90
+L: time=347974 cur_speed=4.09 PWM=0.90
+L: time=348024 cur_speed=4.09 PWM=0.90
+L: time=348074 cur_speed=4.09 PWM=0.90
+L: time=348124 cur_speed=4.08 PWM=0.90
+L: time=348174 cur_speed=4.09 PWM=0.90
+L: time=348224 cur_speed=4.09 PWM=0.90
+L: time=348274 cur_speed=4.09 PWM=0.90
+L: time=348324 cur_speed=4.08 PWM=0.90
+L: time=348374 cur_speed=4.09 PWM=0.90
+L: time=348424 cur_speed=4.09 PWM=0.90
+L: time=348473 cur_speed=4.09 PWM=0.00
+L: time=348523 cur_speed=4.08 PWM=0.00
+L: time=348573 cur_speed=4.06 PWM=0.00
+L: time=348623 cur_speed=4.01 PWM=0.00
+L: time=348673 cur_speed=3.93 PWM=0.00
+L: time=348723 cur_speed=3.84 PWM=0.00
+L: time=348773 cur_speed=3.75 PWM=0.00
+L: time=348823 cur_speed=3.61 PWM=0.00
+L: time=348873 cur_speed=3.46 PWM=0.00
+L: time=348923 cur_speed=3.30 PWM=0.00
+L: time=348973 cur_speed=3.11 PWM=0.00
+L: time=349023 cur_speed=2.93 PWM=0.00
+L: time=349073 cur_speed=2.73 PWM=0.00
+L: time=349123 cur_speed=2.55 PWM=0.00
+L: time=349173 cur_speed=2.37 PWM=0.00
+L: time=349223 cur_speed=2.19 PWM=0.00
+L: time=349273 cur_speed=2.02 PWM=0.00
+L: time=349323 cur_speed=1.84 PWM=0.00
+L: time=349373 cur_speed=1.68 PWM=0.00
+L: time=349423 cur_speed=1.53 PWM=0.00
+L: time=349474 cur_speed=1.37 PWM=0.00
+L: time=349523 cur_speed=1.22 PWM=0.00
+L: time=349574 cur_speed=1.07 PWM=0.00
+L: time=349623 cur_speed=0.93 PWM=0.00
+L: time=349674 cur_speed=0.81 PWM=0.00
+L: time=349723 cur_speed=0.66 PWM=0.00
+L: time=349773 cur_speed=0.53 PWM=0.00
+L: time=349823 cur_speed=0.41 PWM=0.00
+L: time=349874 cur_speed=0.31 PWM=0.00
+L: time=349923 cur_speed=0.23 PWM=0.00
+L: time=349973 cur_speed=0.16 PWM=0.00
+L: time=350023 cur_speed=0.09 PWM=0.00
+L: time=350073 cur_speed=0.06 PWM=0.00
+L: time=350123 cur_speed=0.02 PWM=0.00
+
+L: time=356324 cur_speed=0.00 PWM=1.00
+L: time=356375 cur_speed=0.02 PWM=1.00
+L: time=356424 cur_speed=0.13 PWM=1.00
+L: time=356475 cur_speed=0.33 PWM=1.00
+L: time=356524 cur_speed=0.65 PWM=1.00
+L: time=356574 cur_speed=1.03 PWM=1.00
+L: time=356624 cur_speed=1.44 PWM=1.00
+L: time=356674 cur_speed=1.87 PWM=1.00
+L: time=356724 cur_speed=2.29 PWM=1.00
+L: time=356774 cur_speed=2.72 PWM=1.00
+L: time=356824 cur_speed=3.16 PWM=1.00
+L: time=356874 cur_speed=3.56 PWM=1.00
+L: time=356924 cur_speed=3.87 PWM=1.00
+L: time=356974 cur_speed=4.10 PWM=1.00
+L: time=357024 cur_speed=4.22 PWM=1.00
+L: time=357074 cur_speed=4.26 PWM=1.00
+L: time=357124 cur_speed=4.28 PWM=1.00
+L: time=357174 cur_speed=4.28 PWM=1.00
+L: time=357224 cur_speed=4.28 PWM=1.00
+L: time=357274 cur_speed=4.29 PWM=1.00
+L: time=357324 cur_speed=4.29 PWM=1.00
+L: time=357374 cur_speed=4.28 PWM=1.00
+L: time=357424 cur_speed=4.29 PWM=1.00
+L: time=357474 cur_speed=4.28 PWM=1.00
+L: time=357524 cur_speed=4.28 PWM=1.00
+L: time=357574 cur_speed=4.28 PWM=1.00
+L: time=357624 cur_speed=4.29 PWM=1.00
+L: time=357674 cur_speed=4.28 PWM=1.00
+L: time=357724 cur_speed=4.29 PWM=1.00
+L: time=357774 cur_speed=4.29 PWM=1.00
+L: time=357824 cur_speed=4.28 PWM=1.00
+L: time=357874 cur_speed=4.29 PWM=1.00
+L: time=357924 cur_speed=4.29 PWM=1.00
+L: time=357974 cur_speed=4.28 PWM=1.00
+L: time=358024 cur_speed=4.28 PWM=1.00
+L: time=358074 cur_speed=4.29 PWM=1.00
+L: time=358124 cur_speed=4.28 PWM=1.00
+L: time=358174 cur_speed=4.28 PWM=1.00
+L: time=358224 cur_speed=4.29 PWM=1.00
+L: time=358274 cur_speed=4.28 PWM=1.00
+L: time=358324 cur_speed=4.28 PWM=0.00
+L: time=358374 cur_speed=4.28 PWM=0.00
+L: time=358424 cur_speed=4.24 PWM=0.00
+L: time=358474 cur_speed=4.20 PWM=0.00
+L: time=358524 cur_speed=4.13 PWM=0.00
+L: time=358574 cur_speed=4.02 PWM=0.00
+L: time=358624 cur_speed=3.92 PWM=0.00
+L: time=358674 cur_speed=3.79 PWM=0.00
+L: time=358724 cur_speed=3.63 PWM=0.00
+L: time=358774 cur_speed=3.47 PWM=0.00
+L: time=358824 cur_speed=3.28 PWM=0.00
+L: time=358874 cur_speed=3.09 PWM=0.00
+L: time=358924 cur_speed=2.89 PWM=0.00
+L: time=358974 cur_speed=2.70 PWM=0.00
+L: time=359024 cur_speed=2.51 PWM=0.00
+L: time=359074 cur_speed=2.34 PWM=0.00
+L: time=359124 cur_speed=2.17 PWM=0.00
+L: time=359174 cur_speed=2.01 PWM=0.00
+L: time=359224 cur_speed=1.82 PWM=0.00
+L: time=359274 cur_speed=1.67 PWM=0.00
+L: time=359324 cur_speed=1.51 PWM=0.00
+L: time=359374 cur_speed=1.35 PWM=0.00
+L: time=359424 cur_speed=1.20 PWM=0.00
+L: time=359474 cur_speed=1.06 PWM=0.00
+L: time=359524 cur_speed=0.92 PWM=0.00
+L: time=359574 cur_speed=0.77 PWM=0.00
+L: time=359624 cur_speed=0.65 PWM=0.00
+L: time=359674 cur_speed=0.52 PWM=0.00
+L: time=359724 cur_speed=0.40 PWM=0.00
+L: time=359774 cur_speed=0.31 PWM=0.00
+L: time=359824 cur_speed=0.23 PWM=0.00
+L: time=359874 cur_speed=0.16 PWM=0.00
+L: time=359924 cur_speed=0.10 PWM=0.00
+L: time=359974 cur_speed=0.06 PWM=0.00
+L: time=360024 cur_speed=0.02 PWM=0.00
+L: time=360074 cur_speed=0.01 PWM=0.00
+
+;8.3kg empty cart
+11:26:05.930 L: time=96008 cur_speed=0.00 PWM=0.10
+11:26:06.014 L: time=96080 cur_speed=0.01 PWM=0.10
+11:26:06.074 L: time=96152 cur_speed=0.05 PWM=0.10
+11:26:06.135 L: time=96225 cur_speed=0.10 PWM=0.10
+11:26:06.234 L: time=96324 cur_speed=0.18 PWM=0.10
+11:26:06.329 L: time=96420 cur_speed=0.28 PWM=0.10
+11:26:06.430 L: time=96517 cur_speed=0.38 PWM=0.10
+11:26:06.544 L: time=96593 cur_speed=0.44 PWM=0.10
+11:26:06.576 L: time=96650 cur_speed=0.47 PWM=0.10
+11:26:06.650 L: time=96725 cur_speed=0.50 PWM=0.10
+11:26:06.768 L: time=96790 cur_speed=0.51 PWM=0.10
+11:26:06.768 L: time=96840 cur_speed=0.52 PWM=0.10
+11:26:06.842 L: time=96915 cur_speed=0.53 PWM=0.10
+11:26:06.913 L: time=96983 cur_speed=0.54 PWM=0.10
+11:26:06.991 L: time=97055 cur_speed=0.55 PWM=0.10
+11:26:07.039 L: time=97131 cur_speed=0.56 PWM=0.10
+11:26:07.142 L: time=97228 cur_speed=0.56 PWM=0.10
+11:26:07.271 L: time=97323 cur_speed=0.56 PWM=0.10
+11:26:07.324 L: time=97395 cur_speed=0.58 PWM=0.10
+11:26:07.396 L: time=97467 cur_speed=0.56 PWM=0.10
+11:26:07.506 L: time=97539 cur_speed=0.56 PWM=0.10
+11:26:07.528 L: time=97620 cur_speed=0.56 PWM=0.10
+11:26:07.648 L: time=97716 cur_speed=0.56 PWM=0.10
+11:26:07.693 L: time=97784 cur_speed=0.56 PWM=0.10
+11:26:07.811 L: time=97876 cur_speed=0.58 PWM=0.10
+11:26:07.889 L: time=97934 cur_speed=0.58 PWM=0.10
+11:26:07.920 L: time=97991 cur_speed=0.58 PWM=0.10
+11:26:07.993 L: time=98063 cur_speed=0.59 PWM=0.00
+11:26:08.049 L: time=98136 cur_speed=0.58 PWM=0.00
+11:26:08.124 L: time=98215 cur_speed=0.58 PWM=0.00
+11:26:08.217 L: time=98304 cur_speed=0.53 PWM=0.00
+11:26:08.318 L: time=98402 cur_speed=0.51 PWM=0.00
+11:26:08.397 L: time=98478 cur_speed=0.47 PWM=0.00
+11:26:08.498 L: time=98568 cur_speed=0.43 PWM=0.00
+11:26:08.548 L: time=98634 cur_speed=0.39 PWM=0.00
+11:26:08.643 L: time=98733 cur_speed=0.33 PWM=0.00
+11:26:08.738 L: time=98829 cur_speed=0.28 PWM=0.00
+11:26:08.850 L: time=98918 cur_speed=0.22 PWM=0.00
+11:26:08.920 L: time=98985 cur_speed=0.18 PWM=0.00
+11:26:08.970 L: time=99058 cur_speed=0.14 PWM=0.00
+11:26:09.068 L: time=99156 cur_speed=0.09 PWM=0.00
+11:26:09.167 L: time=99254 cur_speed=0.06 PWM=0.00
+11:26:09.253 L: time=99326 cur_speed=0.03 PWM=0.00
+11:26:09.296 L: time=99386 cur_speed=0.02 PWM=0.00
+
+11:29:11.984 L: time=282066 cur_speed=0.00 PWM=0.20
+11:29:12.050 L: time=282138 cur_speed=0.02 PWM=0.20
+11:29:12.130 L: time=282210 cur_speed=0.10 PWM=0.20
+11:29:12.196 L: time=282286 cur_speed=0.21 PWM=0.20
+11:29:12.344 L: time=282366 cur_speed=0.32 PWM=0.20
+11:29:12.357 L: time=282425 cur_speed=0.40 PWM=0.20
+11:29:12.400 L: time=282491 cur_speed=0.51 PWM=0.20
+11:29:12.512 L: time=282587 cur_speed=0.69 PWM=0.20
+11:29:12.586 L: time=282653 cur_speed=0.80 PWM=0.20
+11:29:12.646 L: time=282725 cur_speed=0.83 PWM=0.20
+11:29:12.716 L: time=282797 cur_speed=0.89 PWM=0.20
+11:29:12.772 L: time=282860 cur_speed=0.92 PWM=0.20
+11:29:12.865 L: time=282934 cur_speed=0.96 PWM=0.20
+11:29:12.919 L: time=283006 cur_speed=0.99 PWM=0.20
+11:29:13.008 L: time=283083 cur_speed=1.03 PWM=0.20
+11:29:13.069 L: time=283155 cur_speed=1.03 PWM=0.20
+11:29:13.194 L: time=283248 cur_speed=1.04 PWM=0.20
+11:29:13.252 L: time=283307 cur_speed=1.04 PWM=0.20
+11:29:13.285 L: time=283365 cur_speed=1.04 PWM=0.20
+11:29:13.373 L: time=283461 cur_speed=1.05 PWM=0.20
+11:29:13.471 L: time=283556 cur_speed=1.05 PWM=0.20
+11:29:13.577 L: time=283651 cur_speed=1.06 PWM=0.20
+11:29:13.637 L: time=283716 cur_speed=1.05 PWM=0.20
+11:29:13.705 L: time=283778 cur_speed=1.05 PWM=0.20
+11:29:13.768 L: time=283850 cur_speed=1.06 PWM=0.20
+11:29:13.852 L: time=283926 cur_speed=1.05 PWM=0.20
+11:29:13.934 L: time=284002 cur_speed=1.06 PWM=0.20
+11:29:13.993 L: time=284074 cur_speed=1.04 PWM=0.00
+11:29:14.083 L: time=284171 cur_speed=1.05 PWM=0.00
+11:29:14.182 L: time=284268 cur_speed=1.03 PWM=0.00
+11:29:14.278 L: time=284366 cur_speed=0.99 PWM=0.00
+11:29:14.380 L: time=284464 cur_speed=0.96 PWM=0.00
+11:29:14.507 L: time=284563 cur_speed=0.91 PWM=0.00
+11:29:14.561 L: time=284628 cur_speed=0.86 PWM=0.00
+11:29:14.607 L: time=284688 cur_speed=0.83 PWM=0.00
+11:29:14.709 L: time=284785 cur_speed=0.76 PWM=0.00
+11:29:14.774 L: time=284851 cur_speed=0.74 PWM=0.00
+11:29:14.859 L: time=284947 cur_speed=0.68 PWM=0.00
+11:29:14.938 L: time=285014 cur_speed=0.63 PWM=0.00
+11:29:15.008 L: time=285074 cur_speed=0.60 PWM=0.00
+11:29:15.071 L: time=285146 cur_speed=0.55 PWM=0.00
+11:29:15.135 L: time=285218 cur_speed=0.52 PWM=0.00
+11:29:15.224 L: time=285291 cur_speed=0.47 PWM=0.00
+11:29:15.286 L: time=285363 cur_speed=0.44 PWM=0.00
+11:29:15.372 L: time=285459 cur_speed=0.38 PWM=0.00
+11:29:15.474 L: time=285556 cur_speed=0.31 PWM=0.00
+11:29:15.565 L: time=285652 cur_speed=0.25 PWM=0.00
+11:29:15.666 L: time=285749 cur_speed=0.21 PWM=0.00
+11:29:15.758 L: time=285846 cur_speed=0.15 PWM=0.00
+11:29:15.874 L: time=285939 cur_speed=0.10 PWM=0.00
+11:29:15.916 L: time=285999 cur_speed=0.08 PWM=0.00
+11:29:15.998 L: time=286071 cur_speed=0.05 PWM=0.00
+11:29:16.077 L: time=286144 cur_speed=0.03 PWM=0.00
+11:29:16.137 L: time=286216 cur_speed=0.01 PWM=0.00
+
+;18.8kg cart+10.5kg
+11:32:43.920 L: time=493991 cur_speed=0.00 PWM=0.10
+11:32:43.999 L: time=494063 cur_speed=0.01 PWM=0.10
+11:32:44.061 L: time=494135 cur_speed=0.03 PWM=0.10
+11:32:44.145 L: time=494207 cur_speed=0.06 PWM=0.10
+11:32:44.198 L: time=494279 cur_speed=0.09 PWM=0.10
+11:32:44.290 L: time=494377 cur_speed=0.15 PWM=0.10
+11:32:44.394 L: time=494477 cur_speed=0.23 PWM=0.10
+11:32:44.496 L: time=494575 cur_speed=0.29 PWM=0.10
+11:32:44.576 L: time=494663 cur_speed=0.33 PWM=0.10
+11:32:44.654 L: time=494736 cur_speed=0.35 PWM=0.10
+11:32:44.750 L: time=494835 cur_speed=0.38 PWM=0.10
+11:32:44.853 L: time=494933 cur_speed=0.41 PWM=0.10
+11:32:44.949 L: time=495032 cur_speed=0.43 PWM=0.10
+11:32:45.030 L: time=495119 cur_speed=0.44 PWM=0.10
+11:32:45.107 L: time=495192 cur_speed=0.46 PWM=0.10
+11:32:45.232 L: time=495291 cur_speed=0.46 PWM=0.10
+11:32:45.271 L: time=495360 cur_speed=0.46 PWM=0.10
+11:32:45.350 L: time=495433 cur_speed=0.47 PWM=0.10
+11:32:45.461 L: time=495526 cur_speed=0.47 PWM=0.10
+11:32:45.530 L: time=495593 cur_speed=0.47 PWM=0.10
+11:32:45.584 L: time=495666 cur_speed=0.47 PWM=0.10
+11:32:45.678 L: time=495765 cur_speed=0.48 PWM=0.10
+11:32:45.778 L: time=495864 cur_speed=0.48 PWM=0.10
+11:32:45.871 L: time=495935 cur_speed=0.48 PWM=0.10
+11:32:45.917 L: time=495995 cur_speed=0.48 PWM=0.00
+11:32:46.028 L: time=496088 cur_speed=0.48 PWM=0.00
+11:32:46.108 L: time=496147 cur_speed=0.47 PWM=0.00
+11:32:46.144 L: time=496204 cur_speed=0.46 PWM=0.00
+11:32:46.199 L: time=496276 cur_speed=0.45 PWM=0.00
+11:32:46.288 L: time=496375 cur_speed=0.44 PWM=0.00
+11:32:46.356 L: time=496444 cur_speed=0.40 PWM=0.00
+11:32:46.443 L: time=496517 cur_speed=0.37 PWM=0.00
+11:32:46.507 L: time=496593 cur_speed=0.33 PWM=0.00
+11:32:46.600 L: time=496686 cur_speed=0.29 PWM=0.00
+11:32:46.705 L: time=496781 cur_speed=0.25 PWM=0.00
+11:32:46.793 L: time=496878 cur_speed=0.21 PWM=0.00
+11:32:46.884 L: time=496963 cur_speed=0.18 PWM=0.00
+11:32:46.980 L: time=497060 cur_speed=0.13 PWM=0.00
+11:32:47.080 L: time=497155 cur_speed=0.10 PWM=0.00
+11:32:47.192 L: time=497219 cur_speed=0.07 PWM=0.00
+11:32:47.193 L: time=497280 cur_speed=0.06 PWM=0.00
+11:32:47.307 L: time=497377 cur_speed=0.03 PWM=0.00
+11:32:47.373 L: time=497442 cur_speed=0.02 PWM=0.00
+11:32:47.426 L: time=497501 cur_speed=0.01 PWM=0.00
+
+11:34:24.728 L: time=594808 cur_speed=0.00 PWM=0.20
+11:34:24.822 L: time=594905 cur_speed=0.03 PWM=0.20
+11:34:24.937 L: time=594999 cur_speed=0.13 PWM=0.20
+11:34:24.987 L: time=595073 cur_speed=0.18 PWM=0.20
+11:34:25.085 L: time=595148 cur_speed=0.25 PWM=0.20
+11:34:25.158 L: time=595219 cur_speed=0.33 PWM=0.20
+11:34:25.239 L: time=595283 cur_speed=0.41 PWM=0.20
+11:34:25.272 L: time=595340 cur_speed=0.48 PWM=0.20
+11:34:25.345 L: time=595413 cur_speed=0.54 PWM=0.20
+11:34:25.404 L: time=595485 cur_speed=0.59 PWM=0.20
+11:34:25.490 L: time=595560 cur_speed=0.63 PWM=0.20
+11:34:25.565 L: time=595635 cur_speed=0.69 PWM=0.20
+11:34:25.640 L: time=595710 cur_speed=0.76 PWM=0.20
+11:34:25.718 L: time=595782 cur_speed=0.80 PWM=0.20
+11:34:25.779 L: time=595854 cur_speed=0.82 PWM=0.20
+11:34:25.864 L: time=595926 cur_speed=0.84 PWM=0.20
+11:34:25.920 L: time=595998 cur_speed=0.88 PWM=0.20
+11:34:26.008 L: time=596070 cur_speed=0.90 PWM=0.20
+11:34:26.057 L: time=596143 cur_speed=0.91 PWM=0.20
+11:34:26.156 L: time=596241 cur_speed=0.92 PWM=0.20
+11:34:26.256 L: time=596338 cur_speed=0.95 PWM=0.20
+11:34:26.351 L: time=596436 cur_speed=0.95 PWM=0.20
+11:34:26.437 L: time=596501 cur_speed=0.96 PWM=0.20
+11:34:26.498 L: time=596561 cur_speed=0.96 PWM=0.20
+11:34:26.594 L: time=596626 cur_speed=0.98 PWM=0.20
+11:34:26.598 L: time=596687 cur_speed=0.97 PWM=0.20
+11:34:26.697 L: time=596763 cur_speed=0.98 PWM=0.20
+11:34:26.758 L: time=596835 cur_speed=0.96 PWM=0.00
+11:34:26.844 L: time=596906 cur_speed=0.97 PWM=0.00
+11:34:26.902 L: time=596978 cur_speed=0.97 PWM=0.00
+11:34:26.985 L: time=597050 cur_speed=0.96 PWM=0.00
+11:34:27.041 L: time=597122 cur_speed=0.95 PWM=0.00
+11:34:27.111 L: time=597196 cur_speed=0.91 PWM=0.00
+11:34:27.205 L: time=597286 cur_speed=0.89 PWM=0.00
+11:34:27.285 L: time=597352 cur_speed=0.86 PWM=0.00
+11:34:27.360 L: time=597424 cur_speed=0.82 PWM=0.00
+11:34:27.418 L: time=597496 cur_speed=0.80 PWM=0.00
+11:34:27.502 L: time=597568 cur_speed=0.76 PWM=0.00
+11:34:27.557 L: time=597640 cur_speed=0.73 PWM=0.00
+11:34:27.644 L: time=597716 cur_speed=0.70 PWM=0.00
+11:34:27.706 L: time=597788 cur_speed=0.67 PWM=0.00
+11:34:27.827 L: time=597851 cur_speed=0.63 PWM=0.00
+11:34:27.832 L: time=597919 cur_speed=0.61 PWM=0.00
+11:34:27.947 L: time=597985 cur_speed=0.59 PWM=0.00
+11:34:27.967 L: time=598042 cur_speed=0.56 PWM=0.00
+11:34:28.078 L: time=598138 cur_speed=0.51 PWM=0.00
+11:34:28.132 L: time=598204 cur_speed=0.48 PWM=0.00
+11:34:28.191 L: time=598277 cur_speed=0.45 PWM=0.00
+11:34:28.293 L: time=598375 cur_speed=0.39 PWM=0.00
+11:34:28.397 L: time=598473 cur_speed=0.36 PWM=0.00
+11:34:28.487 L: time=598570 cur_speed=0.32 PWM=0.00
+11:34:28.575 L: time=598654 cur_speed=0.28 PWM=0.00
+11:34:28.680 L: time=598743 cur_speed=0.24 PWM=0.00
+11:34:28.727 L: time=598809 cur_speed=0.21 PWM=0.00
+11:34:28.822 L: time=598908 cur_speed=0.16 PWM=0.00
+11:34:28.917 L: time=599004 cur_speed=0.13 PWM=0.00
+11:34:29.021 L: time=599101 cur_speed=0.08 PWM=0.00
+11:34:29.102 L: time=599187 cur_speed=0.05 PWM=0.00
+11:34:29.182 L: time=599260 cur_speed=0.03 PWM=0.00
+11:34:29.260 L: time=599337 cur_speed=0.01 PWM=0.00
+
+;94.5kg cart+86.2kg
+11:36:21.643 L: time=711704 cur_speed=0.00 PWM=0.10
+11:36:21.693 L: time=711779 cur_speed=0.00 PWM=0.10
+11:36:21.780 L: time=711857 cur_speed=0.00 PWM=0.10
+11:36:21.874 L: time=711955 cur_speed=0.00 PWM=0.10
+11:36:21.975 L: time=712054 cur_speed=0.00 PWM=0.10
+11:36:22.072 L: time=712152 cur_speed=0.00 PWM=0.10
+11:36:22.171 L: time=712249 cur_speed=0.00 PWM=0.10
+11:36:22.267 L: time=712321 cur_speed=0.00 PWM=0.10
+11:36:22.321 L: time=712391 cur_speed=0.00 PWM=0.10
+11:36:22.420 L: time=712482 cur_speed=0.00 PWM=0.10
+11:36:22.488 L: time=712548 cur_speed=0.00 PWM=0.10
+11:36:22.538 L: time=712623 cur_speed=0.00 PWM=0.10
+11:36:22.639 L: time=712718 cur_speed=0.00 PWM=0.10
+11:36:22.754 L: time=712813 cur_speed=0.00 PWM=0.10
+11:36:22.805 L: time=712885 cur_speed=0.00 PWM=0.10
+11:36:22.901 L: time=712985 cur_speed=0.00 PWM=0.10
+11:36:22.969 L: time=713056 cur_speed=0.00 PWM=0.10
+11:36:23.095 L: time=713154 cur_speed=0.00 PWM=0.10
+11:36:23.142 L: time=713220 cur_speed=0.00 PWM=0.10
+11:36:23.239 L: time=713319 cur_speed=0.00 PWM=0.10
+11:36:23.339 L: time=713418 cur_speed=0.00 PWM=0.10
+11:36:23.434 L: time=713517 cur_speed=0.01 PWM=0.10
+11:36:23.518 L: time=713605 cur_speed=0.01 PWM=0.10
+11:36:23.608 L: time=713676 cur_speed=0.01 PWM=0.00
+11:36:23.653 L: time=713737 cur_speed=0.02 PWM=0.00
+11:36:23.755 L: time=713836 cur_speed=0.02 PWM=0.00
+11:36:23.839 L: time=713920 cur_speed=0.02 PWM=0.00
+11:36:23.920 L: time=713996 cur_speed=0.01 PWM=0.00
+11:36:24.012 L: time=714093 cur_speed=0.01 PWM=0.00
+11:36:24.096 L: time=714177 cur_speed=0.01 PWM=0.00
+
+11:37:14.553 L: time=764625 cur_speed=0.00 PWM=0.20
+11:37:14.653 L: time=764715 cur_speed=0.01 PWM=0.20
+11:37:14.698 L: time=764782 cur_speed=0.01 PWM=0.20
+11:37:14.797 L: time=764881 cur_speed=0.01 PWM=0.20
+11:37:14.881 L: time=764967 cur_speed=0.30 PWM=0.20
+11:37:14.983 L: time=765066 cur_speed=0.30 PWM=0.20
+11:37:15.066 L: time=765153 cur_speed=0.33 PWM=0.20
+11:37:15.169 L: time=765252 cur_speed=0.32 PWM=0.20
+11:37:15.264 L: time=765348 cur_speed=0.38 PWM=0.20
+11:37:15.386 L: time=765414 cur_speed=0.38 PWM=0.20
+11:37:15.389 L: time=765475 cur_speed=0.10 PWM=0.20
+11:37:15.491 L: time=765574 cur_speed=0.10 PWM=0.20
+11:37:15.595 L: time=765672 cur_speed=0.20 PWM=0.20
+11:37:15.688 L: time=765770 cur_speed=0.21 PWM=0.20
+11:37:15.791 L: time=765869 cur_speed=0.23 PWM=0.20
+11:37:15.888 L: time=765967 cur_speed=0.27 PWM=0.20
+11:37:15.970 L: time=766050 cur_speed=0.28 PWM=0.20
+11:37:16.079 L: time=766140 cur_speed=0.22 PWM=0.20
+11:37:16.125 L: time=766206 cur_speed=0.24 PWM=0.20
+11:37:16.233 L: time=766296 cur_speed=0.21 PWM=0.20
+11:37:16.279 L: time=766364 cur_speed=0.22 PWM=0.20
+11:37:16.362 L: time=766438 cur_speed=0.25 PWM=0.20
+11:37:16.454 L: time=766534 cur_speed=0.27 PWM=0.20
+11:37:16.538 L: time=766617 cur_speed=0.24 PWM=0.00
+11:37:16.635 L: time=766716 cur_speed=0.22 PWM=0.00
+11:37:16.748 L: time=766790 cur_speed=0.18 PWM=0.00
+11:37:16.766 L: time=766849 cur_speed=0.18 PWM=0.00
+11:37:16.888 L: time=766945 cur_speed=0.12 PWM=0.00
+11:37:16.933 L: time=767012 cur_speed=0.09 PWM=0.00
+11:37:17.028 L: time=767110 cur_speed=0.06 PWM=0.00
+11:37:17.112 L: time=767198 cur_speed=0.03 PWM=0.00
+11:37:17.213 L: time=767294 cur_speed=0.02 PWM=0.00
+11:37:17.326 L: time=767389 cur_speed=0.01 PWM=0.00
+
+11:37:55.743 L: time=805807 cur_speed=0.00 PWM=0.30
+11:37:55.802 L: time=805887 cur_speed=0.13 PWM=0.30
+11:37:55.862 L: time=805948 cur_speed=0.13 PWM=0.30
+11:37:55.944 L: time=806020 cur_speed=0.18 PWM=0.30
+11:37:56.009 L: time=806082 cur_speed=0.27 PWM=0.30
+11:37:56.108 L: time=806171 cur_speed=0.33 PWM=0.30
+11:37:56.155 L: time=806238 cur_speed=0.38 PWM=0.30
+11:37:56.277 L: time=806335 cur_speed=0.44 PWM=0.30
+11:37:56.322 L: time=806401 cur_speed=0.36 PWM=0.30
+11:37:56.417 L: time=806500 cur_speed=0.43 PWM=0.30
+11:37:56.521 L: time=806598 cur_speed=0.35 PWM=0.30
+11:37:56.591 L: time=806678 cur_speed=0.32 PWM=0.30
+11:37:56.697 L: time=806776 cur_speed=0.32 PWM=0.30
+11:37:56.803 L: time=806861 cur_speed=0.30 PWM=0.30
+11:37:56.854 L: time=806933 cur_speed=0.31 PWM=0.30
+11:37:56.959 L: time=807023 cur_speed=0.32 PWM=0.30
+11:37:57.007 L: time=807090 cur_speed=0.33 PWM=0.30
+11:37:57.113 L: time=807187 cur_speed=0.36 PWM=0.30
+11:37:57.198 L: time=807282 cur_speed=0.38 PWM=0.30
+11:37:57.299 L: time=807380 cur_speed=0.40 PWM=0.30
+11:37:57.402 L: time=807478 cur_speed=0.43 PWM=0.30
+11:37:57.473 L: time=807558 cur_speed=0.45 PWM=0.30
+11:37:57.581 L: time=807656 cur_speed=0.46 PWM=0.30
+11:37:57.660 L: time=807746 cur_speed=0.47 PWM=0.30
+11:37:57.762 L: time=807844 cur_speed=0.50 PWM=0.00
+11:37:57.853 L: time=807939 cur_speed=0.48 PWM=0.00
+11:37:57.965 L: time=808028 cur_speed=0.50 PWM=0.00
+11:37:58.036 L: time=808094 cur_speed=0.48 PWM=0.00
+11:37:58.090 L: time=808166 cur_speed=0.47 PWM=0.00
+11:37:58.193 L: time=808256 cur_speed=0.45 PWM=0.00
+11:37:58.240 L: time=808323 cur_speed=0.44 PWM=0.00
+11:37:58.355 L: time=808421 cur_speed=0.41 PWM=0.00
+11:37:58.426 L: time=808486 cur_speed=0.39 PWM=0.00
+11:37:58.481 L: time=808545 cur_speed=0.37 PWM=0.00
+11:37:58.549 L: time=808608 cur_speed=0.35 PWM=0.00
+11:37:58.606 L: time=808665 cur_speed=0.32 PWM=0.00
+11:37:58.664 L: time=808736 cur_speed=0.30 PWM=0.00
+11:37:58.749 L: time=808832 cur_speed=0.28 PWM=0.00
+11:37:58.836 L: time=808899 cur_speed=0.25 PWM=0.00
+11:37:58.895 L: time=808970 cur_speed=0.23 PWM=0.00
+11:37:59.003 L: time=809066 cur_speed=0.21 PWM=0.00
+11:37:59.060 L: time=809132 cur_speed=0.18 PWM=0.00
+11:37:59.144 L: time=809227 cur_speed=0.16 PWM=0.00
+11:37:59.244 L: time=809324 cur_speed=0.13 PWM=0.00
+11:37:59.361 L: time=809421 cur_speed=0.09 PWM=0.00
+11:37:59.414 L: time=809487 cur_speed=0.08 PWM=0.00
+11:37:59.493 L: time=809562 cur_speed=0.06 PWM=0.00
+11:37:59.553 L: time=809634 cur_speed=0.05 PWM=0.00
+11:37:59.640 L: time=809710 cur_speed=0.05 PWM=0.00
+11:37:59.718 L: time=809782 cur_speed=0.03 PWM=0.00
+11:37:59.828 L: time=809845 cur_speed=0.02 PWM=0.00
+11:37:59.829 L: time=809901 cur_speed=0.02 PWM=0.00
+11:37:59.880 L: time=809964 cur_speed=0.02 PWM=0.00
+11:38:00.001 L: time=810063 cur_speed=0.01 PWM=0.00
+11:38:00.058 L: time=810129 cur_speed=0.01 PWM=0.00
+
+11:39:03.979 L: time=874059 cur_speed=0.00 PWM=0.40
+11:39:04.067 L: time=874147 cur_speed=0.01 PWM=0.40
+11:39:04.163 L: time=874245 cur_speed=0.08 PWM=0.40
+11:39:04.262 L: time=874344 cur_speed=0.16 PWM=0.40
+11:39:04.358 L: time=874440 cur_speed=0.24 PWM=0.40
+11:39:04.440 L: time=874504 cur_speed=0.28 PWM=0.40
+11:39:04.516 L: time=874576 cur_speed=0.31 PWM=0.40
+11:39:04.570 L: time=874648 cur_speed=0.37 PWM=0.40
+11:39:04.655 L: time=874722 cur_speed=0.38 PWM=0.40
+11:39:04.736 L: time=874794 cur_speed=0.37 PWM=0.40
+11:39:04.820 L: time=874865 cur_speed=0.36 PWM=0.40
+11:39:04.861 L: time=874924 cur_speed=0.37 PWM=0.40
+11:39:04.905 L: time=874984 cur_speed=0.37 PWM=0.40
+11:39:05.002 L: time=875085 cur_speed=0.40 PWM=0.40
+11:39:05.120 L: time=875183 cur_speed=0.44 PWM=0.40
+11:39:05.235 L: time=875248 cur_speed=0.44 PWM=0.40
+11:39:05.236 L: time=875304 cur_speed=0.46 PWM=0.40
+11:39:05.303 L: time=875364 cur_speed=0.48 PWM=0.40
+11:39:05.357 L: time=875436 cur_speed=0.51 PWM=0.40
+11:39:05.443 L: time=875512 cur_speed=0.53 PWM=0.40
+11:39:05.522 L: time=875584 cur_speed=0.55 PWM=0.40
+11:39:05.576 L: time=875656 cur_speed=0.58 PWM=0.40
+11:39:05.666 L: time=875730 cur_speed=0.61 PWM=0.40
+11:39:05.725 L: time=875802 cur_speed=0.62 PWM=0.40
+11:39:05.817 L: time=875899 cur_speed=0.65 PWM=0.40
+11:39:05.914 L: time=875985 cur_speed=0.67 PWM=0.40
+11:39:05.993 L: time=876060 cur_speed=0.69 PWM=0.00
+11:39:06.051 L: time=876135 cur_speed=0.71 PWM=0.00
+11:39:06.168 L: time=876226 cur_speed=0.70 PWM=0.00
+11:39:06.227 L: time=876292 cur_speed=0.70 PWM=0.00
+11:39:06.284 L: time=876364 cur_speed=0.68 PWM=0.00
+11:39:06.381 L: time=876464 cur_speed=0.67 PWM=0.00
+11:39:06.498 L: time=876562 cur_speed=0.63 PWM=0.00
+11:39:06.590 L: time=876626 cur_speed=0.60 PWM=0.00
+11:39:06.623 L: time=876683 cur_speed=0.58 PWM=0.00
+11:39:06.679 L: time=876755 cur_speed=0.54 PWM=0.00
+11:39:06.763 L: time=876829 cur_speed=0.52 PWM=0.00
+11:39:06.823 L: time=876901 cur_speed=0.50 PWM=0.00
+11:39:06.920 L: time=877001 cur_speed=0.46 PWM=0.00
+11:39:07.029 L: time=877100 cur_speed=0.43 PWM=0.00
+11:39:07.114 L: time=877197 cur_speed=0.39 PWM=0.00
+11:39:07.221 L: time=877296 cur_speed=0.36 PWM=0.00
+11:39:07.336 L: time=877394 cur_speed=0.32 PWM=0.00
+11:39:07.377 L: time=877463 cur_speed=0.31 PWM=0.00
+11:39:07.469 L: time=877534 cur_speed=0.28 PWM=0.00
+11:39:07.523 L: time=877608 cur_speed=0.25 PWM=0.00
+11:39:07.624 L: time=877706 cur_speed=0.21 PWM=0.00
+11:39:07.745 L: time=877800 cur_speed=0.18 PWM=0.00
+11:39:07.794 L: time=877872 cur_speed=0.16 PWM=0.00
+11:39:07.891 L: time=877971 cur_speed=0.13 PWM=0.00
+11:39:07.988 L: time=878054 cur_speed=0.09 PWM=0.00
+11:39:08.069 L: time=878126 cur_speed=0.07 PWM=0.00
+11:39:08.118 L: time=878198 cur_speed=0.05 PWM=0.00
+11:39:08.230 L: time=878292 cur_speed=0.02 PWM=0.00
+11:39:08.286 L: time=878358 cur_speed=0.01 PWM=0.00
