@@ -43,7 +43,7 @@ public:
   void apply();
   
   void fail_safe();
-  void dump_state(const String& caption);
+  void dump_state(const String& caption, Stream& stream);
 
 private:
   float calc_pwm(float cur_speed);
@@ -58,12 +58,11 @@ private:
   volatile unsigned m_periods[PERIODS_COUNT];
   volatile unsigned m_ticks_count = 0;
 
-  bool m_pid_active = 0.0;
-  float m_pid_integral = 0.0;
-  float m_pid_prev_error = 0.0;
-  float m_prev_speed = 0.0;
-  unsigned int m_prev_time = 0;
-  float m_expected_delay = EXPECTED_PWM_DELAY;
+  unsigned m_prev_steps=0;
+  float m_prev_speed=0.0;
+  unsigned long m_prev_time=0;
+  float m_speed2pwm = 1.0/MAX_SPEED;
+  float m_prev_pwm=0.0;
   
   BrakeState m_brake_state = bs_zero_speed;
 };

@@ -262,8 +262,8 @@ static void motors_task(void *)
       failSafe();
       leftWheel.apply();
       rightWheel.apply();
-      //leftWheel.dump_state("L");
-      //rightWheel.dump_state("R");
+      leftWheel.dump_state("L", SerialBT);
+      //rightWheel.dump_state("R", SerialBT);
       delay(MAIN_CYCLE_DELAY);
     }
 
