@@ -46,7 +46,7 @@ public:
   void dump_state(const String& caption, Stream& stream);
 
 private:
-  float calc_pwm(float cur_speed);
+  float calc_pwm(float cur_speed, bool &is_brake);
   void reset_pid();
   
 private:
@@ -61,6 +61,7 @@ private:
   unsigned m_prev_steps=0;
   float m_prev_speed=0.0;
   unsigned long m_prev_time=0;
+  float m_prev_acc = 0.0;
   float m_speed2pwm = 1.0/MAX_SPEED;
   float m_prev_pwm=0.0;
   
