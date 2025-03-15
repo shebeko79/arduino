@@ -81,6 +81,7 @@ float MotorSpeed::calc_pwm(float cur_speed, bool &is_brake)
   float cur_acc = 0.0;
 
   float res;
+  float kick = 0.0;
 
   if(m_prev_steps < 2)
   {
@@ -101,77 +102,52 @@ float MotorSpeed::calc_pwm(float cur_speed, bool &is_brake)
 
     res = m_prev_pwm;
 
-    if(cur_acc*dx<0.0)
+    if(cur_acc*dx<0.0 || cur_acc*dx<CLOSE_TO_ZERO_ACCELERATION)
     {
       res = m_prev_pwm+(dst_speed-cur_speed)*speed_correction;
-    }
-    else if(cur_acc*dx<CLOSE_TO_ZERO_ACCELERATION && abs(m_prev_acc)<CLOSE_TO_ZERO_ACCELERATION && (dst_speed-cur_speed)*dx>CLOSE_TO_ZERO_SPEED_DIFF)
-    {
-      if(cur_speed==0)
-        res = m_prev_pwm+(0.1-cur_speed)*speed_correction;
-      else
-      {
-        m_speed2pwm=(m_speed2pwm + m_prev_pwm/cur_speed)/2.0;
-        res = m_speed2pwm*dst_speed;
-
-        if(m_speed2pwm<MIN_SPEED2PWM)
-        {
-          m_speed2pwm=MIN_SPEED2PWM;
-          res = m_prev_pwm+(dst_speed-cur_speed)*speed_correction;
-        }
-        else if(m_speed2pwm>MAX_SPEED2PWM)
-        {
-          m_speed2pwm=MAX_SPEED2PWM;
-          res = m_speed2pwm*dst_speed;
-        }
-
-        if(res>1.0)
-        {
-          res = 1.0;
-          m_speed2pwm = res/dst_speed;
-        }
-      }
     }
 
     if(dx>0)
     {
       if(m_prev_acc == 0.0 && cur_acc==0.0 && cur_speed == 0.0 && dst_speed>CLOSE_TO_ZERO_SPEED_DIFF)
-        res += KICK_PWM_CORRECTION;
+         kick = KICK_PWM_CORRECTION;
     }
     else
     {
       if(cur_acc>CLOSE_TO_ZERO_ACCELERATION && (cur_speed-dst_speed)>BREAK_MAX_SPEED_DIFF_WITH_ACCELERATION || (cur_speed-dst_speed)>BREAK_MAX_SPEED_DIFF)
       {
         is_brake=true;
-        res -= KICK_PWM_CORRECTION;
-        Serial.println("break");
+        res -= BREAK_PWM_CORRECTION;
       }
     }
 
     res = constrain(res, 0.0, 1.0);
     
 
-    Serial.print(" dst_sp=");
-    Serial.print(m_dst_speed,4);
-    Serial.print(" cur_sp=");
-    Serial.print(cur_speed,4);
-    Serial.print(" acc=");
-    Serial.print(cur_acc,4);
-    Serial.print(" prev_acc=");
-    Serial.print(m_prev_acc,4);
-    Serial.print(" new_pwm=");
-    Serial.print(res,4);
-    Serial.print(" prev_pwm=");
-    Serial.print(m_prev_pwm,4);
-    Serial.print(" speed2pwm=");
-    Serial.print(m_speed2pwm,4);
-    Serial.println("");
+    // Serial.print(" dst_sp=");
+    // Serial.print(m_dst_speed,4);
+    // Serial.print(" cur_sp=");
+    // Serial.print(cur_speed,4);
+    // Serial.print(" acc=");
+    // Serial.print(cur_acc,4);
+    // Serial.print(" prev_acc=");
+    // Serial.print(m_prev_acc,4);
+    // Serial.print(" new_pwm=");
+    // Serial.print(res,4);
+    // Serial.print(" prev_pwm=");
+    // Serial.print(m_prev_pwm,4);
+    // Serial.print(" speed2pwm=");
+    // Serial.print(m_speed2pwm,4);
+    // Serial.println("");
   }
 
   m_prev_speed=cur_speed;
   m_prev_acc = cur_acc;
   m_prev_time=cur_time;
   m_prev_pwm = res;
+
+  res += kick;
+  res = constrain(res, 0.0, 1.0);
   
   return  res;
 }
@@ -182,7 +158,6 @@ void MotorSpeed::reset_pid()
   m_prev_speed = 0.0;
   m_prev_time = 0;
   m_prev_acc = 0.0;
-  m_speed2pwm = 1.0/MAX_SPEED;
   m_prev_pwm = 0.0;
 }
 

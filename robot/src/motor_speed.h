@@ -62,7 +62,7 @@ private:
   float m_prev_speed=0.0;
   unsigned long m_prev_time=0;
   float m_prev_acc = 0.0;
-  float m_speed2pwm = 1.0/MAX_SPEED;
+  static constexpr float m_speed2pwm = 1.0/MAX_SPEED;
   float m_prev_pwm=0.0;
   
   BrakeState m_brake_state = bs_zero_speed;

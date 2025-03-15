@@ -1,7 +1,7 @@
 #pragma once
 #include <math.h>
 
-constexpr int FAIL_SAFE_DELAY = 5000;
+constexpr int FAIL_SAFE_DELAY = 500;
 
 constexpr float WHEEL_PULSES_PER_ROTATION=90.0;
 constexpr float WHEEL_DIAMETER=6.5*0.0254; //meters
@@ -17,8 +17,7 @@ constexpr float DOWN_SPEED_CORRECTION = 0.03;
 constexpr float BREAK_MAX_SPEED_DIFF = 1.0;
 constexpr float BREAK_MAX_SPEED_DIFF_WITH_ACCELERATION = 0.5;
 constexpr float KICK_PWM_CORRECTION = 0.1;
-constexpr float MIN_SPEED2PWM = 1.0/MAX_SPEED/4;
-constexpr float MAX_SPEED2PWM = 1.0/MAX_SPEED*16;
+constexpr float BREAK_PWM_CORRECTION = 0.2;
 constexpr unsigned long MAIN_CYCLE_DELAY = 50;
 constexpr float EXPECTED_PWM_DELAY = MAIN_CYCLE_DELAY/1000.0;
 
