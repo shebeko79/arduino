@@ -8,6 +8,9 @@ class ScServo:
 
     ADDR_SCS_ID = 5
     ADDR_SCS_BAUD_RATE = 6
+    ADDR_SCS_CW_INSENSITIVE_ZONE = 26
+    ADDR_SCS_CCW_INSENSITIVE_ZONE = 27
+    ADDR_SCS_HYSTERESIS_LOOP = 28
     ADDR_SCS_TORQUE_ENABLE = 40
     ADDR_SCS_GOAL_POSITION = 42
     ADDR_SCS_GOAL_SPEED = 46
@@ -55,6 +58,21 @@ class ScServo:
 
     def set_speed(self, scs_id, speed):
         tx_res, rx_res = self.packetHandler.write2ByteTxRx(self.portHandler, scs_id, self.ADDR_SCS_GOAL_SPEED, speed)
+        self.raise_tx(tx_res)
+        self.raise_rx(rx_res)
+
+    def set_cw_insensitive_zone(self, scs_id, val):
+        tx_res, rx_res = self.packetHandler.write1ByteTxRx(self.portHandler, scs_id, self.ADDR_SCS_CW_INSENSITIVE_ZONE, val)
+        self.raise_tx(tx_res)
+        self.raise_rx(rx_res)
+
+    def set_ccw_insensitive_zone(self, scs_id, val):
+        tx_res, rx_res = self.packetHandler.write1ByteTxRx(self.portHandler, scs_id, self.ADDR_SCS_CCW_INSENSITIVE_ZONE, val)
+        self.raise_tx(tx_res)
+        self.raise_rx(rx_res)
+
+    def set_hysteresis_loop(self, scs_id, val):
+        tx_res, rx_res = self.packetHandler.write1ByteTxRx(self.portHandler, scs_id, self.ADDR_SCS_HYSTERESIS_LOOP, val)
         self.raise_tx(tx_res)
         self.raise_rx(rx_res)
 
@@ -188,8 +206,16 @@ def init():
     global srv
     srv = ScServo()
 
-    srv.set_speed(PAN_ID, 100)
-    srv.set_speed(TILT_ID, 100)
+    srv.set_cw_insensitive_zone(PAN_ID, 2)
+    srv.set_ccw_insensitive_zone(PAN_ID, 2)
+    srv.set_hysteresis_loop(PAN_ID, 2)
+
+    srv.set_cw_insensitive_zone(TILT_ID, 2)
+    srv.set_ccw_insensitive_zone(TILT_ID, 2)
+    srv.set_hysteresis_loop(TILT_ID, 2)
+
+    srv.set_speed(PAN_ID, 500)
+    srv.set_speed(TILT_ID, 500)
 
     set_pan(Pan.CENTER)
     set_tilt(Tilt.FRONT)
