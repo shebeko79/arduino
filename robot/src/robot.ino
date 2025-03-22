@@ -24,8 +24,8 @@ static void motors_task(void *);
 BluetoothSerial SerialBT;
 #define SerialAuto Serial2
 
-hw_timer_t *timer0 = nullptr;
-unsigned timer0_count=0;
+hw_timer_t *speed_timer = nullptr;
+unsigned speed_timer_count=0;
 
 float relative_max_speed = RELATIVE_MAX_SPEED;
 
@@ -39,11 +39,11 @@ struct DriveRequest
 DriveRequest drive_request;
 
 
-void IRAM_ATTR Timer0_ISR()
+void IRAM_ATTR SpeedTimer_ISR()
 {
-  ++timer0_count;
-  leftWheel.timer_isr(timer0_count);
-  rightWheel.timer_isr(timer0_count);
+  ++speed_timer_count;
+  leftWheel.timer_isr(speed_timer_count);
+  rightWheel.timer_isr(speed_timer_count);
 }
 
 void IRAM_ATTR left_tick_isr()
@@ -70,10 +70,10 @@ void setup()
   attachInterrupt(digitalPinToInterrupt(14), left_tick_isr, CHANGE);
   attachInterrupt(digitalPinToInterrupt(33), right_tick_isr, CHANGE);
 
-  timer0 = timerBegin(0, 80, true);
-  timerAttachInterrupt(timer0, &Timer0_ISR, true);
-  timerAlarmWrite(timer0, TIMER_MS*1000, true);
-  timerAlarmEnable(timer0);
+  speed_timer = timerBegin(0, 80, true);
+  timerAttachInterrupt(speed_timer, &SpeedTimer_ISR, true);
+  timerAlarmWrite(speed_timer, TIMER_MS*1000, true);
+  timerAlarmEnable(speed_timer);
 
   xTaskCreateUniversal(motors_task, "motors", 4096, NULL, 1, (TaskHandle_t*)&motor_task_handle, CONFIG_ARDUINO_UDP_RUNNING_CORE);
 }
