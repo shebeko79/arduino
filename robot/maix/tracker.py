@@ -6,6 +6,9 @@ import track_utils
 
 MODEL_PATH = "/root/models/nanotrack.mud"
 
+room_model = nn.YOLO11(model="/root/models/yolo11n_320_room.mud")
+room_objects = []
+
 objects = []
 
 
@@ -78,6 +81,24 @@ def draw_trackers(img: image.Image):
         font_size = image.string_size(cap)
         img.draw_string(x, y - font_size[1] - 2, cap, cl)
 
+    for o in room_objects:
+        x = int(o.x * iw / room_model.input_width())
+        y = int(o.y * ih / room_model.input_height())
+        w = int(o.w * iw / room_model.input_width())
+        h = int(o.h * ih / room_model.input_height())
+
+        if o.score > 0.8:
+            cl = hi_cl
+        else:
+            cl = gray_cl
+
+        img.draw_rect(x, y, w, h, cl, 2)
+        cap = room_model.labels[o.class_id]
+        print(f'{room_model.labels[o.class_id]}: {o.score:.2f}')
+
+        font_size = image.string_size(cap)
+        img.draw_string(x, y - font_size[1] - 2, cap, cl)
+
 
 def hit_test(pt):
     sel = None
@@ -102,5 +123,16 @@ def hit_test(pt):
 
 
 def track(img: image.Image):
+    global room_objects
+
     for o in objects:
         o.track(img)
+
+    room_img = img
+    if room_img.width() != room_model.input_width() or room_img.height() != room_model.input_height():
+        room_img = img.resize(room_model.input_width(), room_model.input_height())
+
+    room_img = room_img.to_format(image.Format.FMT_RGB888)
+
+    room_objects = room_model.detect(room_img, conf_th=0.5, iou_th=0.45)
+    #print(f'room={room_img.width()},{room_img.height()} room_objects.len={len(room_objects)}')
