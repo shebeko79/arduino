@@ -53,6 +53,13 @@ class MoveToAlgo(BaseAlgo):
         if f < max_fit:
             self.fit = f
 
+    def start(self):
+        self.tr.start_track()
+
+    def stop(self):
+        super().stop()
+        self.tr.stop_track()
+
     def process(self):
         try:
             self.find_position()

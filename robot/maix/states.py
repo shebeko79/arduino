@@ -133,10 +133,10 @@ class MainState(BaseState):
 
     def enter(self):
         self.buttons = [Button("Points", PointsState.state_name),
-                        Button("Track", TrackInitState.state_name, tracker.count() > 0),
+                        Button("Track", TrackInitState.state_name),
                         Button("Move", MoveState.state_name),
                         Button("Pan", PanTiltState.state_name)
-                        , Button("Exit", ExitState.state_name)
+                        #, Button("Exit", ExitState.state_name)
                         ]
 
 
@@ -197,9 +197,6 @@ class TrackInitState(BaseState):
 
     def enter(self):
         self.buttons = [Button("Back", MainState.state_name)]
-        trackers = tracker.trackers()
-        if len(trackers) == 1:
-            self.move_to(trackers[0])
 
     def on_click(self, pt):
         tr = tracker.hit_test(pt)

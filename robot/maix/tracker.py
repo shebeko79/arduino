@@ -1,5 +1,4 @@
 import math
-
 from maix import nn, image
 
 import track_utils
@@ -8,6 +7,8 @@ NANO_MODEL_PATH = "/root/models/nanotrack.mud"
 
 room_model = nn.YOLO11(model="/root/models/yolo11n_320_room.mud")
 room_objects = []
+room_trackers = []
+YOLO_LOCKED = 0.8
 
 nanotrack_objects = []
 
@@ -23,6 +24,11 @@ class TrackObject:
     def size(self):
         return [0, 0]
 
+    def start_track(self):
+        pass
+
+    def stop_track(self):
+        pass
 
 class NanoTrackObject(TrackObject):
 
@@ -44,6 +50,62 @@ class NanoTrackObject(TrackObject):
 
     def size(self):
         return [self.r.w, self.r.h]
+
+
+class YoloTrackObject(TrackObject):
+
+    def __init__(self, obj: nn.Object):
+        self.class_id = obj.class_id
+        self.x = obj.x
+        self.y = obj.y
+        self.w = obj.w
+        self.h = obj.h
+        self.score = obj.score
+
+    def track(self, objects):
+        sel = None
+        sel_d = 0.0
+        for o in objects:
+            if o.class_id != self.class_id:
+                continue
+
+            dx = self.x - o.x
+            dy = self.y - o.y
+            d = dx*dx + dy*dy
+
+            if sel is None or d < sel_d:
+                sel = o
+                sel_d = d
+
+        if sel:
+            self.update(sel)
+        else:
+            self.score = 0.0
+
+    def update(self, obj: nn.Object):
+        self.x = obj.x
+        self.y = obj.y
+        self.w = obj.w
+        self.h = obj.h
+        self.score = obj.score
+
+    def is_locked(self):
+        return self.score > YOLO_LOCKED
+
+    def center(self):
+        return [(self.x+self.w/2)/room_model.input_width()*track_utils.CAM_SIZE[0],
+                (self.y+self.h/2)/room_model.input_height()*track_utils.CAM_SIZE[1]]
+
+    def size(self):
+        return [self.w/room_model.input_width()*track_utils.CAM_SIZE[0],
+                self.h/room_model.input_height()*track_utils.CAM_SIZE[1]]
+
+    def start_track(self):
+        room_trackers.append(self)
+
+    def stop_track(self):
+        room_trackers.remove(self)
+        print(f'{room_trackers=}')
 
 
 def add_nanotracker(img, rc):
@@ -92,14 +154,14 @@ def draw_trackers(img: image.Image):
         w = int(o.w * iw / room_model.input_width())
         h = int(o.h * ih / room_model.input_height())
 
-        if o.score > 0.8:
+        if o.score > YOLO_LOCKED:
             cl = hi_cl
         else:
             cl = gray_cl
 
         img.draw_rect(x, y, w, h, cl, 2)
         cap = room_model.labels[o.class_id]
-        print(f'{room_model.labels[o.class_id]}: {o.score:.2f}')
+        #print(f'{room_model.labels[o.class_id]}: {o.score:.2f}')
 
         font_size = image.string_size(cap)
         img.draw_string(x, y - font_size[1] - 2, cap, cl)
@@ -109,26 +171,43 @@ def hit_test(pt):
     sel = None
     sel_d = 0
 
-    pt[0] = int(pt[0] * track_utils.CAM_SIZE[0])
-    pt[1] = int(pt[1] * track_utils.CAM_SIZE[1])
+    ptx = int(pt[0] * track_utils.CAM_SIZE[0])
+    pty = int(pt[1] * track_utils.CAM_SIZE[1])
 
     for o in nanotrack_objects:
         r = o.r
-        if r.x < pt[0] < r.x + r.w and r.y < pt[1] < r.y + r.h:
+        if r.x < ptx < r.x + r.w and r.y < pty < r.y + r.h:
             c = o.center()
-            dx = c[0] - pt[0]
-            dy = c[1] - pt[1]
-            d = math.sqrt(dx * dx + dy * dy)
+            dx = c[0] - ptx
+            dy = c[1] - pty
+            d = dx * dx + dy * dy
 
             if not sel or d < sel_d:
                 sel = o
                 sel_d = d
 
-    return sel
+    if sel:
+        return sel
 
+    for o in room_objects:
+        x = o.x / room_model.input_width()
+        y = o.y / room_model.input_height()
+        w = o.w / room_model.input_width()
+        h = o.h / room_model.input_height()
 
-def count():
-    return len(nanotrack_objects)
+        if x < pt[0] < x + w and y < pt[1] < y + h:
+            dx = x - pt[0]
+            dy = y - pt[1]
+            d = dx * dx + dy * dy
+
+            if not sel or d < sel_d:
+                sel = o
+                sel_d = d
+
+    if sel is None:
+        return sel
+
+    return YoloTrackObject(sel)
 
 
 def nanotrack_count():
@@ -138,11 +217,6 @@ def nanotrack_count():
 def remove_lastnanotrack():
     if len(nanotrack_objects) > 0:
         nanotrack_objects.objects.pop()
-
-
-def trackers():
-    return nanotrack_objects
-
 
 
 def track(img: image.Image):
@@ -158,4 +232,5 @@ def track(img: image.Image):
         room_img = img.resize(room_model.input_width(), room_model.input_height())
 
     room_objects = room_model.detect(room_img, conf_th=0.5, iou_th=0.45)
-    print(f'{room_objects=}')
+    for tr in room_trackers:
+        tr.track(room_objects)

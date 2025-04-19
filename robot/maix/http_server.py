@@ -257,6 +257,7 @@ def init():
     main_th_lock = threading.Lock()
     main_th_condition = threading.Condition(lock=main_th_lock)
     t1 = threading.Thread(target=thread_task)
+    t1.daemon = True
     t1.start()
 
 
