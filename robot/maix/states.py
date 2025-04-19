@@ -133,7 +133,7 @@ class MainState(BaseState):
 
     def enter(self):
         self.buttons = [Button("Points", PointsState.state_name),
-                        Button("Track", TrackInitState.state_name, len(tracker.objects) > 0),
+                        Button("Track", TrackInitState.state_name, tracker.count() > 0),
                         Button("Move", MoveState.state_name),
                         Button("Pan", PanTiltState.state_name)
                         , Button("Exit", ExitState.state_name)
@@ -145,7 +145,7 @@ class PointsState(BaseState):
 
     def enter(self):
         self.buttons = [Button("Add", AddPointState.state_name),
-                        Button("DelLast", DeleteLastPointState.state_name, len(tracker.objects) > 0),
+                        Button("DelLast", DeleteLastPointState.state_name, tracker.nanotrack_count() > 0),
                         Button("Back", MainState.state_name)]
 
 
@@ -170,7 +170,7 @@ class AddPointState(BaseState):
         if rc[2]-rc[0] == 0 or rc[3] - rc[1] == 0:
             return
 
-        tracker.add_tracker(cam_img, rc)
+        tracker.add_nanotracker(cam_img, rc)
         set_state(PointsState.state_name)
 
 
@@ -178,8 +178,7 @@ class DeleteLastPointState(BaseState):
     state_name = "delete_last_point"
 
     def enter(self):
-        if len(tracker.objects) > 0:
-            tracker.objects.pop()
+        tracker.remove_lastnanotrack()
         set_state(PointsState.state_name)
 
 
@@ -198,8 +197,9 @@ class TrackInitState(BaseState):
 
     def enter(self):
         self.buttons = [Button("Back", MainState.state_name)]
-        if len(tracker.objects) == 1:
-            self.move_to(tracker.objects[0])
+        trackers = tracker.trackers()
+        if len(trackers) == 1:
+            self.move_to(trackers[0])
 
     def on_click(self, pt):
         tr = tracker.hit_test(pt)
