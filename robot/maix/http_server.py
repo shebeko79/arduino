@@ -333,6 +333,8 @@ def get_current_state():
         cur_state['state_name'] = st.state_name
         cur_state['accept_click'] = st.accept_click
         cur_state['accept_rectangle'] = st.accept_rectangle
+        cur_state['rectangle_cap'] = st.rectangle_cap
+        cur_state['click_cap'] = st.click_cap
 
         buttons = []
         for b in st.buttons:

@@ -18,6 +18,18 @@
             height: 100%;
         }
 
+        #mode-caption {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            background-color: rgba(255,255,255,0.8);
+            padding: 6px 12px;
+            border-radius: 6px;
+	    }
+
         #image-container {
             width: 100%;
             height: 100%;
@@ -66,6 +78,8 @@
 let currentStateName = '';
 let acceptClick = false;
 let acceptRectangle = false;
+let clickCaption = "";
+let rectangleCaption = "";
 let isSelecting = false;
 let startX, startY, endX, endY;
 let imageNaturalWidth = 640;
@@ -121,14 +135,21 @@ function getRelativePoint(x,y) {
 	return p;
 }
 
+function acceptState(data) {
+	currentStateName = data.state_name;
+	acceptClick = data.accept_click;
+	acceptRectangle = data.accept_rectangle;
+	clickCaption = data.click_cap;
+	rectangleCaption = data.rectangle_cap;
+	updateButtons(data.buttons);
+	updateModeCaption();
+}
+
 function fetchState() {
     fetch('/state')
         .then(response => response.json())
         .then(data => {
-            currentStateName = data.state_name;
-            acceptClick = data.accept_click;
-            acceptRectangle = data.accept_rectangle;
-            updateButtons(data.buttons);
+			acceptState(data);
         })
         .catch(error => console.error('Error fetching state:', error));
 }
@@ -153,12 +174,25 @@ function updateButtons(buttons) {
     });
 }
 
+function updateModeCaption() {
+    const captionDiv = document.getElementById("mode-caption");
+    if (acceptClick) {
+        captionDiv.innerText = clickCaption;
+        captionDiv.style.display = "block";
+    } else if (acceptRectangle) {
+        captionDiv.innerText = rectangleCaption;
+        captionDiv.style.display = "block";
+    } else {
+        captionDiv.style.display = "none";
+    }
+}
+
 function sendClickRequest(caption) {
     const payload = {
         state_name: currentStateName,
         caption: caption
     };
-
+	
     fetch('/click', {
         method: 'POST',
         headers: {
@@ -168,10 +202,7 @@ function sendClickRequest(caption) {
     })
     .then(response => response.json())
     .then(data => {
-        currentStateName = data.state_name;
-        acceptClick = data.accept_click;
-        acceptRectangle = data.accept_rectangle;
-        updateButtons(data.buttons);
+	    acceptState(data);
     })
     .catch(error => console.error('Error sending click request:', error));
 }
@@ -215,10 +246,7 @@ function handleImageClick(event) {
         })
         .then(response => response.json())
         .then(data => {
-            currentStateName = data.state_name;
-            acceptClick = data.accept_click;
-            acceptRectangle = data.accept_rectangle;
-            updateButtons(data.buttons);
+		    acceptState(data);
         })
         .catch(error => console.error('Error sending click point request:', error));
     }
@@ -287,10 +315,7 @@ function endRectangleSelection() {
             })
             .then(response => response.json())
             .then(data => {
-                currentStateName = data.state_name;
-                acceptClick = data.accept_click;
-                acceptRectangle = data.accept_rectangle;
-                updateButtons(data.buttons);
+			    acceptState(data);
             })
             .catch(error => console.error('Error sending rectangle request:', error));
         }
@@ -483,6 +508,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <div id="rect"></div>
         </div>
         <div id="button-container" class="button-container"></div>
+        <div id="mode-caption"></div>
     </div>
 </body>
 </html>
