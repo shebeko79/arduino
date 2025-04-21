@@ -94,7 +94,7 @@ function reloadImg() {
 function updateImageNaturalSize() {
 	const image = document.getElementById("cam_img");
 	
-	if(imageNaturalWidth == image.naturalWidth ||
+	if(imageNaturalWidth == image.naturalWidth &&
 	   imageNaturalHeight == image.naturalHeight ||
 	   image.naturalHeight == 0 ||
 	   image.naturalWidth == 0)
