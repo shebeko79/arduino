@@ -19,6 +19,7 @@ class BaseState:
     state_name = "base"
 
     rectangle_cap = "Select rectangle"
+    click_cap = "Select tracker"
     rectangle_color = image.Color.from_rgb(255, 0, 0)
 
     def __init__(self):
@@ -32,11 +33,14 @@ class BaseState:
         img = cam_img.resize(out_size[0], out_size[1])
 
         if self.accept_rectangle:
-            rectangle_cap_size = image.string_size(self.rectangle_cap);
-            img.draw_string(2, img.height() - rectangle_cap_size[1] * 2, self.rectangle_cap,
+            img.draw_string(2, 4, self.rectangle_cap,
                             self.rectangle_color, 1.5)
         else:
             tracker.draw_trackers(img)
+
+        if self.accept_click:
+            img.draw_string(2, 4, self.click_cap,
+                            self.rectangle_color, 1.5)
 
         self.draw_buttons(img)
 
@@ -275,6 +279,7 @@ class MoveToSelectFitState(TrackInitState):
         self.accept_rectangle = True
         self.do_move = True
         self.continues = False
+        self.rectangle_cap = "Draw fit size"
 
     def enter(self):
         self.buttons = [Button("Back", MainState.state_name)]
