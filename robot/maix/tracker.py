@@ -5,9 +5,9 @@ import track_utils
 
 NANO_MODEL_PATH = "/root/models/nanotrack.mud"
 
-room_model = nn.YOLO11(model="/root/models/yolo11n_320_room.mud")
-room_objects = []
-room_trackers = []
+yolo_model = nn.YOLO11(model="/root/models/yolo11n_320_room.mud")
+yolo_objects = []
+yolo_trackers = []
 YOLO_LOCKED = 0.8
 
 nanotrack_objects = []
@@ -93,18 +93,18 @@ class YoloTrackObject(TrackObject):
         return self.score > YOLO_LOCKED
 
     def center(self):
-        return [(self.x+self.w/2)/room_model.input_width()*track_utils.CAM_SIZE[0],
-                (self.y+self.h/2)/room_model.input_height()*track_utils.CAM_SIZE[1]]
+        return [(self.x+self.w/2)/yolo_model.input_width()*track_utils.CAM_SIZE[0],
+                (self.y+self.h/2)/yolo_model.input_height()*track_utils.CAM_SIZE[1]]
 
     def size(self):
-        return [self.w/room_model.input_width()*track_utils.CAM_SIZE[0],
-                self.h/room_model.input_height()*track_utils.CAM_SIZE[1]]
+        return [self.w/yolo_model.input_width()*track_utils.CAM_SIZE[0],
+                self.h/yolo_model.input_height()*track_utils.CAM_SIZE[1]]
 
     def start_track(self):
-        room_trackers.append(self)
+        yolo_trackers.append(self)
 
     def stop_track(self):
-        room_trackers.remove(self)
+        yolo_trackers.remove(self)
 
 
 def add_nanotracker(img, rc):
@@ -151,11 +151,11 @@ def draw_trackers(img: image.Image):
         font_size = image.string_size(cap)
         img.draw_string(x, y - font_size[1] - 2, cap, cl)
 
-    for o in room_objects:
-        x = int(o.x * iw / room_model.input_width())
-        y = int(o.y * ih / room_model.input_height())
-        w = int(o.w * iw / room_model.input_width())
-        h = int(o.h * ih / room_model.input_height())
+    for o in yolo_objects:
+        x = int(o.x * iw / yolo_model.input_width())
+        y = int(o.y * ih / yolo_model.input_height())
+        w = int(o.w * iw / yolo_model.input_width())
+        h = int(o.h * ih / yolo_model.input_height())
 
         if o.score > YOLO_LOCKED:
             cl = hi_cl
@@ -163,8 +163,8 @@ def draw_trackers(img: image.Image):
             cl = gray_cl
 
         img.draw_rect(x, y, w, h, cl, 2)
-        cap = room_model.labels[o.class_id]
-        #print(f'{room_model.labels[o.class_id]}: {o.score:.2f}')
+        cap = yolo_model.labels[o.class_id]
+        #print(f'{yolo_model.labels[o.class_id]}: {o.score:.2f}')
 
         font_size = image.string_size(cap)
         img.draw_string(x, y - font_size[1] - 2, cap, cl)
@@ -192,11 +192,11 @@ def hit_test(pt):
     if sel:
         return sel
 
-    for o in room_objects:
-        x = o.x / room_model.input_width()
-        y = o.y / room_model.input_height()
-        w = o.w / room_model.input_width()
-        h = o.h / room_model.input_height()
+    for o in yolo_objects:
+        x = o.x / yolo_model.input_width()
+        y = o.y / yolo_model.input_height()
+        w = o.w / yolo_model.input_width()
+        h = o.h / yolo_model.input_height()
 
         if x < pt[0] < x + w and y < pt[1] < y + h:
             dx = x - pt[0]
@@ -223,7 +223,7 @@ def remove_lastnanotrack():
 
 
 def track(img: image.Image):
-    global room_objects
+    global yolo_objects
 
     if len(nanotrack_objects) > 0:
         nano_img = img
@@ -233,9 +233,9 @@ def track(img: image.Image):
             o.track(nano_img)
 
     room_img = img
-    if room_img.width() != room_model.input_width() or room_img.height() != room_model.input_height():
-        room_img = img.resize(room_model.input_width(), room_model.input_height())
+    if room_img.width() != yolo_model.input_width() or room_img.height() != yolo_model.input_height():
+        room_img = img.resize(yolo_model.input_width(), yolo_model.input_height())
 
-    room_objects = room_model.detect(room_img, conf_th=0.5, iou_th=0.45)
-    for tr in room_trackers:
-        tr.track(room_objects)
+    yolo_objects = yolo_model.detect(room_img, conf_th=0.5, iou_th=0.45)
+    for tr in yolo_trackers:
+        tr.track(yolo_objects)
