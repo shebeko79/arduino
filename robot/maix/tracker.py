@@ -2,6 +2,7 @@ import math
 from maix import nn, image
 
 import track_utils
+from track_utils import CAM_SIZE
 
 NANO_MODEL_PATH = "/root/models/nanotrack.mud"
 
@@ -93,12 +94,12 @@ class YoloTrackObject(TrackObject):
         return self.score > YOLO_LOCKED
 
     def center(self):
-        return [(self.x+self.w/2)/yolo_model.input_width()*track_utils.CAM_SIZE[0],
-                (self.y+self.h/2)/yolo_model.input_height()*track_utils.CAM_SIZE[1]]
+        return [(self.x+self.w/2)/yolo_model.input_width()*CAM_SIZE[0],
+                (self.y+self.h/2)/yolo_model.input_height()*CAM_SIZE[1]]
 
     def size(self):
-        return [self.w/yolo_model.input_width()*track_utils.CAM_SIZE[0],
-                self.h/yolo_model.input_height()*track_utils.CAM_SIZE[1]]
+        return [self.w/yolo_model.input_width()*CAM_SIZE[0],
+                self.h/yolo_model.input_height()*CAM_SIZE[1]]
 
     def start_track(self):
         yolo_trackers.append(self)
@@ -108,10 +109,10 @@ class YoloTrackObject(TrackObject):
 
 
 def add_nanotracker(img, rc):
-    rc[0] = int(rc[0] * track_utils.CAM_SIZE[0])
-    rc[1] = int(rc[1] * track_utils.CAM_SIZE[1])
-    rc[2] = int(rc[2] * track_utils.CAM_SIZE[0])
-    rc[3] = int(rc[3] * track_utils.CAM_SIZE[1])
+    rc[0] = int(rc[0] * CAM_SIZE[0])
+    rc[1] = int(rc[1] * CAM_SIZE[1])
+    rc[2] = int(rc[2] * CAM_SIZE[0])
+    rc[3] = int(rc[3] * CAM_SIZE[1])
 
     nano_img = img
     if nano_img.format() != image.Format.FMT_BGR888:
@@ -135,10 +136,10 @@ def draw_trackers(img: image.Image):
         o: TrackObject = nanotrack_objects[i]
         r = o.r
 
-        x = int(o.rc[0] * iw / o.img_size[0])
-        y = int(o.rc[1] * ih / o.img_size[1])
-        w = int((o.rc[2] - o.rc[0]) * iw / o.img_size[0])
-        h = int((o.rc[3] - o.rc[1]) * ih / o.img_size[1])
+        x = int(r.x * iw / CAM_SIZE[0])
+        y = int(r.y * ih / CAM_SIZE[1])
+        w = int(r.w * iw / CAM_SIZE[0])
+        h = int(r.h * ih / CAM_SIZE[1])
 
         if o.is_locked():
             cl = hi_cl
@@ -174,8 +175,8 @@ def hit_test(pt):
     sel = None
     sel_d = 0
 
-    ptx = int(pt[0] * track_utils.CAM_SIZE[0])
-    pty = int(pt[1] * track_utils.CAM_SIZE[1])
+    ptx = int(pt[0] * CAM_SIZE[0])
+    pty = int(pt[1] * CAM_SIZE[1])
 
     for o in nanotrack_objects:
         r = o.r
