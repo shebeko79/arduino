@@ -48,6 +48,9 @@ class BaseState:
     def leave(self):
         pass
 
+    def process(self):
+        pass
+
     def on_click(self, pt):
         pass
 
@@ -133,7 +136,7 @@ class MainState(BaseState):
 
     def enter(self):
         self.buttons = [Button("Points", PointsState.state_name),
-                        Button("Track", TrackInitState.state_name),
+                        Button("Track", TrackSelectState.state_name),
                         Button("Move", MoveState.state_name),
                         Button("Pan", PanTiltState.state_name)
                         #, Button("Exit", ExitState.state_name)
@@ -182,16 +185,30 @@ class DeleteLastPointState(BaseState):
         set_state(PointsState.state_name)
 
 
+class TrackSelectState(BaseState):
+    state_name = "track_select"
+
+    def enter(self):
+        self.buttons = [Button("Pan", TrackInitState.state_name),
+                        Button("MoveTo", MoveToSelectTrackerState.state_name),
+                        Button("Follow", FollowInitState.state_name),
+                        Button("Back", MainState.state_name)
+                        ]
+
+
 class TrackInitState(BaseState):
     state_name = "track_init"
 
     def __init__(self):
         super().__init__()
         self.accept_click = True
+        self.fit = None
+        self.do_pan = True
+        self.do_move = False
+        self.continues = True
 
-    @staticmethod
-    def move_to(tr):
-        alg = algos.MoveToAlgo(tr)
+    def move_to(self, tr):
+        alg = algos.MoveToAlgo(tr, self.fit, self.do_pan, self.do_move, self.continues)
         algos.set_algo(alg)
         set_state(TrackState.state_name)
 
@@ -202,6 +219,14 @@ class TrackInitState(BaseState):
         tr = tracker.hit_test(pt)
         if tr:
             self.move_to(tr)
+
+
+class FollowInitState(TrackInitState):
+    state_name = "follow_init"
+
+    def __init__(self):
+        super().__init__()
+        self.do_move = True
 
 
 class TrackState(BaseState):
@@ -217,6 +242,62 @@ class TrackState(BaseState):
 
     def leave(self):
         algos.set_algo(None)
+
+    def process(self):
+        if algos.current_algo is None or algos.current_algo.is_stopped():
+            set_state(MainState.state_name)
+
+
+class MoveToSelectTrackerState(BaseState):
+    state_name = "move_to_select_tracker"
+
+    def __init__(self):
+        super().__init__()
+        self.accept_click = True
+
+    def enter(self):
+        self.buttons = [Button("Back", MainState.state_name)]
+
+    def on_click(self, pt):
+        tr = tracker.hit_test(pt)
+        if tr:
+            MoveToSelectFitState.tr = tr
+            set_state(MoveToSelectFitState.state_name)
+
+
+class MoveToSelectFitState(TrackInitState):
+    state_name = "move_to_select_fit"
+    tr = None
+
+    def __init__(self):
+        super().__init__()
+        self.accept_click = False
+        self.accept_rectangle = True
+        self.do_move = True
+        self.continues = False
+
+    def enter(self):
+        self.buttons = [Button("Back", MainState.state_name)]
+
+    def on_rectangle(self, cam_img: image.Image, rc):
+        w = abs(rc[2] - rc[0])
+        h = abs(rc[3] - rc[1])
+
+        if w == 0 or h == 0:
+            return
+
+        fit = max(w, h)
+        if fit > 1.0:
+            fit = 1.0
+
+        tr_fit = algos.get_fit(self.tr)
+
+        if fit > tr_fit:
+            self.fit = True
+            self.move_to(self.tr)
+
+    def leave(self):
+        MoveToSelectFitState.tr = None
 
 
 class MoveState(BaseState):
@@ -299,8 +380,12 @@ def init():
     add_state(PointsState())
     add_state(AddPointState())
     add_state(DeleteLastPointState())
+    add_state(TrackSelectState())
     add_state(TrackInitState())
+    add_state(FollowInitState())
     add_state(TrackState())
+    add_state(MoveToSelectTrackerState())
+    add_state(MoveToSelectFitState())
     add_state(MoveState())
     add_state(PanTiltState())
     add_state(ExitState())

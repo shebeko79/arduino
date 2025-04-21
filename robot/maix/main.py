@@ -46,6 +46,11 @@ def main_cycle():
         if not st:
             break
 
+        st.process()
+        st = states.current_state
+        if not st:
+            break
+
         img = cam.read()
 
         tracker.track(img)
@@ -99,5 +104,5 @@ def main_cycle():
 
 
 if __name__ == "__main__":
-    main_init();
-    main_cycle();
+    main_init()
+    main_cycle()

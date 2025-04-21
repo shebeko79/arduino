@@ -8,14 +8,23 @@ from track_utils import CAM_SIZE
 
 
 class BaseAlgo:
+
+    def __init__(self):
+        self.stopped = False
+
     def process(self):
         pass
 
     def start(self):
+        self.stopped = False
         pass
 
     def stop(self):
+        self.stopped = True
         mover.stop()
+
+    def is_stopped(self):
+        return self.stopped
 
 
 current_algo: BaseAlgo = None
@@ -26,7 +35,7 @@ def process():
         current_algo.process()
 
 
-def set_algo(algo:BaseAlgo):
+def set_algo(algo: BaseAlgo):
     global current_algo
 
     if current_algo:
@@ -38,22 +47,28 @@ def set_algo(algo:BaseAlgo):
         algo.start()
 
 
+def get_fit(tr):
+    sz = tr.size()
+    return max(sz[0]/CAM_SIZE[0], sz[1]/CAM_SIZE[1])
+
+
 class MoveToAlgo(BaseAlgo):
 
-    def __init__(self, tr: tracker.TrackObject, max_fit=0.75):
+    def __init__(self, tr: tracker.TrackObject, fit, do_pan, do_move, continues):
         self.tr = tr
-        self.fit = max_fit
+        self.fit = fit
         self.ax = 0.0
         self.ay = 0.0
         self.cur_fit = 0.0
+        self.do_pan = do_pan
+        self.do_move = do_move
+        self.continues = continues
 
-        sz = self.tr.size()
-        f = max(sz[0]/CAM_SIZE[0], sz[1]/CAM_SIZE[1])
-        f *= 2
-        if f < max_fit:
-            self.fit = f
+        if self.fit is None:
+            self.fit = get_fit(self.tr)
 
     def start(self):
+        super().start()
         self.tr.start_track()
 
     def stop(self):
@@ -62,9 +77,16 @@ class MoveToAlgo(BaseAlgo):
 
     def process(self):
         try:
+            if self.is_stopped():
+                return
+
             self.find_position()
-            self.move_camera()
-            self.move_robot()
+
+            if self.do_pan:
+                self.move_camera()
+
+            if self.do_move:
+                self.move_robot()
         except Exception as e:
             print(e)
 
@@ -73,9 +95,8 @@ class MoveToAlgo(BaseAlgo):
             return
 
         ct = self.tr.center()
-        sz = self.tr.size()
 
-        self.cur_fit = max(sz[0]/CAM_SIZE[0], sz[1]/CAM_SIZE[1])
+        self.cur_fit = get_fit(self.tr)
 
         x = ct[0]-CAM_SIZE[0]/2
         y = ct[1]-CAM_SIZE[1]/2
@@ -115,10 +136,10 @@ class MoveToAlgo(BaseAlgo):
         turn = self.ax/math.pi*4
 
         d = self.cur_fit/self.fit
-        if d > 1.05:
-            speed = -1.0
-        elif d < 0.96:
+        if d < 0.8:
             speed = 1.0
+        elif d < 1.0:
+            speed = 0.5
         else:
             speed = 0
 
@@ -127,4 +148,7 @@ class MoveToAlgo(BaseAlgo):
         print(f"V=({self.ax/math.pi*180:.2f};{self.ay/math.pi*180:.2f}) turn={turn:.2f} speed={speed:.2f} d={d:2f}")
 
         mover.move(speed, turn)
+
+        if speed == 0 and not self.continues:
+            self.stop()
 

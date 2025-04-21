@@ -105,7 +105,6 @@ class YoloTrackObject(TrackObject):
 
     def stop_track(self):
         room_trackers.remove(self)
-        print(f'{room_trackers=}')
 
 
 def add_nanotracker(img, rc):
@@ -114,7 +113,11 @@ def add_nanotracker(img, rc):
     rc[2] = int(rc[2] * track_utils.CAM_SIZE[0])
     rc[3] = int(rc[3] * track_utils.CAM_SIZE[1])
 
-    tr = NanoTrackObject(img, rc)
+    nano_img = img
+    if nano_img.format() != image.Format.FMT_BGR888:
+        nano_img = nano_img.to_format(image.Format.FMT_BGR888)
+
+    tr = NanoTrackObject(nano_img, rc)
     nanotrack_objects.append(tr)
 
 
@@ -216,14 +219,16 @@ def nanotrack_count():
 
 def remove_lastnanotrack():
     if len(nanotrack_objects) > 0:
-        nanotrack_objects.objects.pop()
+        nanotrack_objects.pop()
 
 
 def track(img: image.Image):
     global room_objects
 
     if len(nanotrack_objects) > 0:
-        nano_img = img.to_format(image.Format.FMT_BGR888)
+        nano_img = img
+        if nano_img.format() != image.Format.FMT_BGR888:
+            nano_img = nano_img.to_format(image.Format.FMT_BGR888)
         for o in nanotrack_objects:
             o.track(nano_img)
 
