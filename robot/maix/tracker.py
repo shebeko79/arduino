@@ -105,7 +105,8 @@ class YoloTrackObject(TrackObject):
         yolo_trackers.append(self)
 
     def stop_track(self):
-        yolo_trackers.remove(self)
+        if self in yolo_trackers:
+            yolo_trackers.remove(self)
 
 
 def add_nanotracker(img, rc):

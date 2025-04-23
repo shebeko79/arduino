@@ -193,7 +193,7 @@ class TrackSelectState(BaseState):
     state_name = "track_select"
 
     def enter(self):
-        self.buttons = [Button("Pan", TrackInitState.state_name),
+        self.buttons = [Button("PanTo", TrackInitState.state_name),
                         Button("MoveTo", MoveToSelectTrackerState.state_name),
                         Button("Follow", FollowInitState.state_name),
                         Button("Back", MainState.state_name)
@@ -298,7 +298,7 @@ class MoveToSelectFitState(TrackInitState):
         tr_fit = algos.get_fit(self.tr)
 
         if fit > tr_fit:
-            self.fit = True
+            self.fit = fit
             self.move_to(self.tr)
 
     def leave(self):

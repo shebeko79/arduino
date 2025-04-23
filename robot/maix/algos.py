@@ -110,7 +110,7 @@ class MoveToAlgo(BaseAlgo):
         self.ax = lax + cam_ax
         self.ay = lay + cam_ay
 
-        print(f"img_pos=({x};{y}) img_ang=({lax/math.pi*180:.2f};{lay/math.pi*180:.2f}) cam_ang=({cam_ax/math.pi*180:.2f};{cam_ay/math.pi*180:.2f}) V=({self.ax/math.pi*180:.2f};{self.ay/math.pi*180:.2f})")
+        #print(f"img_pos=({x};{y}) img_ang=({lax/math.pi*180:.2f};{lay/math.pi*180:.2f}) cam_ang=({cam_ax/math.pi*180:.2f};{cam_ay/math.pi*180:.2f}) V=({self.ax/math.pi*180:.2f};{self.ay/math.pi*180:.2f})")
 
     def move_camera(self):
         if not self.tr.is_locked():
@@ -145,7 +145,7 @@ class MoveToAlgo(BaseAlgo):
 
         speed = speed*math.cos(self.ax)
 
-        print(f"V=({self.ax/math.pi*180:.2f};{self.ay/math.pi*180:.2f}) turn={turn:.2f} speed={speed:.2f} d={d:2f}")
+        print(f"V=({self.ax/math.pi*180:.2f};{self.ay/math.pi*180:.2f}) turn={turn:.2f} speed={speed:.2f} d={d:2f} cur_fit={self.cur_fit} target_fit={self.fit}")
 
         mover.move(speed, turn)
 
