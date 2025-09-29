@@ -5,3 +5,4 @@
 .vscode/ipch
 __pycache__
 .ipynb_checkpoints
+ffmpeg.exe
