@@ -150,7 +150,7 @@ bool modemInit()
 
   modemSendCommand(F("AT+CNACT=0,0"));
   readAnswer(modem_answer,sizeof(modem_answer));
-
+#if 0
   modemSendCommand(F("AT+CGNAPN"));
 
   if(!modemEnsureAnswer(F("\r\n+CGNAPN: 1,\""),6000))
@@ -172,8 +172,12 @@ bool modemInit()
 
   if(!modemSendOkCommand(cmd.c_str()))
     return false;
+#endif  
 
-  if(!modemSendOkCommand(F("AT+CNACT=0,2"),6000))
+  if(!modemSendOkCommand(F("AT+CNCFG=0,1,\"iot\"")))
+    return false;
+
+  if(!modemSendOkCommand(F("AT+CNACT=0,2"),12000))
     return false;
 
   //Don't check result. Hopes context will be active later
@@ -191,6 +195,9 @@ bool modemInit()
   if(!modemSendOkCommand(F("AT+SHCONF=\"URL\",\"https://api.telegram.org\"")))
     return false;
     
+  if(!modemSendOkCommand(F("AT+CSSLCFG=\"sni\",1,\"api.telegram.org\"")))
+    return false;
+
   if(!modemSendOkCommand(F("AT+SHCONF=\"BODYLEN\",1024")))
     return false;
     
@@ -205,7 +212,7 @@ bool isendPacket(const String& message, char* buf, unsigned long buf_len)
   if(!modemSendOkCommand(F("AT+SHCHEAD")))
     return false;
 
-  Modem.print("AT+SHREQ=\"/");
+  Modem.print(F("AT+SHREQ=\"/"));
   Modem.print(message);
   Modem.print("\",1");
   Modem.write(13);
@@ -276,8 +283,11 @@ bool sendPacket(const String& message, char* buf, unsigned long buf_len)
     
   if(!modemSendOkCommand(F("AT+SHCONN"),120000))
   {
+    Debug.println(F("connection error"));
     return false;
   }
+
+  Debug.println(F("do send"));
 
   bool ret=isendPacket(message,buf,buf_len);
   
