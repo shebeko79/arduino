@@ -26,11 +26,11 @@ void sendLocation(double lat, double lon, bool do_update)
   if(do_update && locationMessageId!= 0)
   {
     telegram_request=botStr;
-    telegram_request+="editMessageLiveLocation?chat_id="CHAT_ID"&latitude=";
+    telegram_request+=F("editMessageLiveLocation?chat_id="CHAT_ID"&latitude=");
     telegram_request+= String(lat,6);
-    telegram_request+= "&longitude=";
+    telegram_request+= F("&longitude=");
     telegram_request+= String(lon,6);
-    telegram_request+= "&message_id=";
+    telegram_request+= F("&message_id=");
     telegram_request+= String(locationMessageId);
 
     sendPacket(telegram_request, telegram_answer,sizeof(telegram_answer));
@@ -42,11 +42,13 @@ void sendLocation(double lat, double lon, bool do_update)
   }
 
   telegram_request=botStr;
-  telegram_request+="sendLocation?chat_id="CHAT_ID"&latitude=";
+  telegram_request+=F("sendLocation?chat_id="CHAT_ID"&latitude=");
   telegram_request+= String(lat,6);
-  telegram_request+= "&longitude=";
+  telegram_request+= F("&longitude=");
   telegram_request+= String(lon,6);
-  telegram_request+= "&live_period=1800";
+  sendPacket(telegram_request, telegram_answer,sizeof(telegram_answer));
+
+  telegram_request+= F("&live_period=1800");
   sendPacket(telegram_request, telegram_answer,sizeof(telegram_answer));
 
   pStr = strstr(telegram_answer, idStr);
